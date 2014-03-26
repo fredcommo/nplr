@@ -1,11 +1,33 @@
-nplm <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=0.25,
-                    npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
+## METHODS FOR EXTRACTING INFORMATION FROM THE nplm CLASS
+setMethod("getX", "nplm", function(object) return(object@x))
+setMethod("getY", "nplm", function(object) return(object@y))
+setMethod("getYProp", "nplm", function(object) return(object@yProp))
+setMethod("getFitValues", "nplm", function(object) return(object@yFit))
+setMethod("getXcurve", "nplm", function(object) return(object@xCurve))
+setMethod("getYcurve", "nplm", function(object) return(object@yCurve))
+setMethod("getInflexion", "nplm", function(object) return(object@inflPoint))
+setMethod("getPar", "nplm", function(object){return(list(npar=object@npars, params=object@pars))})
+setMethod('getGoodness', 'nplm', function(object) return(object@goodness))
+setMethod('getStdErr', 'nplm', function(object) return(object@stdErr))
+setMethod("getAUC", "nplm", function(object) return(object@AUC))
+
+## IS IT OK TO RE-ORDER THESE ESTIMATES? SEEMS LIKE THIS MAY CAUSE CONFUSION AND/OR PROBLEMS DOWNSTREAM
+setMethod('getEstimates', 'nplm', function(object){
+  estim <- object@estimates
+  return(estim[order(estim$Prop, decreasing = TRUE),])
+})
+
+
+
+## MAIN nplm FUNCION
+nplogistic <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=0.25,
+                       npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
   
   method <- match.arg(method)
   
   if(is.numeric(npars) & (npars<2 | npars>5))
     stop("\nThe number of parameters (npars) has to be in {2, 5}, or 'all'!\n")
-    
+  
   if(any(is.na(x) | is.na(y))){
     NAs <- union(which(is.na(x)), which(is.na(y)))
     x <- x[-NAs]
@@ -15,7 +37,7 @@ nplm <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=0.25,
   x <- sort(x)
   
   if(useLog) x <- log10(x)
-  object <- .nplmObj(x=x, y=y, useLog=useLog, LPweight=LPweight)
+  object <- new("nplm", x=x, y=y, useLog=useLog, LPweight=LPweight)
   
   if(!isProp){
     object@yProp <- .survProp(y, T0, Ctrl)
@@ -47,7 +69,7 @@ nplm <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=0.25,
   newY <- nPL(bottom, top, xmid, scal, s, newX)
   yFit <- nPL(bottom, top, xmid, scal, s, x)
   perf <- .getPerf(y, yFit)
-    
+  
   # Compute simulations to estimate the IC50 conf. interval
   pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
   targets <- seq(.1, .9, by = .1)
@@ -57,7 +79,7 @@ nplm <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=0.25,
   
   # Inflexion point coordinates
   infl <- .inflPoint(pars)
-
+  
   object@npars <- npars
   object@pars <- pars
   object@yFit <- yFit
@@ -70,6 +92,6 @@ nplm <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=0.25,
   object@AUC <- data.frame(trapezoide = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
   object@nPL <- nPL
   object@SCE <- .sce
-
+  
   return(object)
-  }
+}

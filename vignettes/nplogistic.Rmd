@@ -1,0 +1,14 @@
+%\VignetteEngine{knitr::knitr}
+# nplogistic Vignette
+### **AUTHORS**: _Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
+
+```{r, include=FALSE, eval=TRUE}
+require(nplogistic)
+```
+
+## Overview
+A description of the package, including examples and common uses of these methods.
+
+```{r}
+sessionInfo()
+```

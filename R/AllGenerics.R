@@ -1,0 +1,13 @@
+## SET GENERICS
+setGeneric("getX", function(object) standardGeneric("getX"))
+setGeneric("getY", function(object) standardGeneric("getY"))
+setGeneric("getYProp", function(object) standardGeneric("getYProp"))
+setGeneric("getFitValues", function(object) standardGeneric("getFitValues"))
+setGeneric("getXcurve", function(object) standardGeneric("getXcurve"))
+setGeneric("getYcurve", function(object) standardGeneric("getYcurve"))
+setGeneric("getPar", function(object) standardGeneric("getPar"))
+setGeneric("getInflexion", function(object) standardGeneric("getInflexion"))
+setGeneric("getGoodness", function(object) standardGeneric("getGoodness"))
+setGeneric("getStdErr", function(object) standardGeneric("getStdErr"))
+setGeneric("getEstimates", function(object) standardGeneric("getEstimates"))
+setGeneric("getAUC", function(object) standardGeneric("getAUC"))
