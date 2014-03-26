@@ -1,7 +1,6 @@
 ## SET GENERICS
 setGeneric("getX", function(object) standardGeneric("getX"))
 setGeneric("getY", function(object) standardGeneric("getY"))
-setGeneric("getYProp", function(object) standardGeneric("getYProp"))
 setGeneric("getFitValues", function(object) standardGeneric("getFitValues"))
 setGeneric("getXcurve", function(object) standardGeneric("getXcurve"))
 setGeneric("getYcurve", function(object) standardGeneric("getYcurve"))

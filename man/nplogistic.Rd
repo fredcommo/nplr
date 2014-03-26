@@ -2,13 +2,13 @@
 \alias{nplogistic}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-NP Logistic Regression
+  Function to compute n-parameter logistic regression
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-nplogistic(x, y, T0 = NA, Ctrl = NA, isProp = TRUE, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw", "Y2", "pw"), B = 10000, ...)
+nplogistic(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw", "Y2", "pw"), B = 10000, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,15 +17,6 @@ nplogistic(x, y, T0 = NA, Ctrl = NA, isProp = TRUE, useLog = TRUE, LPweight = 0.
 }
   \item{y}{
 %%     ~~Describe \code{y} here~~
-}
-  \item{T0}{
-%%     ~~Describe \code{T0} here~~
-}
-  \item{Ctrl}{
-%%     ~~Describe \code{Ctrl} here~~
-}
-  \item{isProp}{
-%%     ~~Describe \code{isProp} here~~
 }
   \item{useLog}{
 %%     ~~Describe \code{useLog} here~~
@@ -77,13 +68,12 @@ nplogistic(x, y, T0 = NA, Ctrl = NA, isProp = TRUE, useLog = TRUE, LPweight = 0.
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (x, y, T0 = NA, Ctrl = NA, isProp = TRUE, useLog = TRUE, 
-    LPweight = 0.25, npars = "all", method = c("res", "sdw", 
-        "gw", "Y2", "pw"), B = 10000, ...) 
+function (x, y, useLog = TRUE, LPweight = 0.25, npars = "all", 
+    method = c("res", "sdw", "gw", "Y2", "pw"), B = 10000, ...) 
 {
     method <- match.arg(method)
     if (is.numeric(npars) & (npars < 2 | npars > 5)) 
-        stop("\nThe number of parameters (npars) has to be in {2, 5}, or 'all'!\n")
+        stop("\nThe number of parameters (npars) has to be in [2, 5], or 'all'!\n")
     if (any(is.na(x) | is.na(y))) {
         NAs <- union(which(is.na(x)), which(is.na(y)))
         x <- x[-NAs]
@@ -91,15 +81,14 @@ function (x, y, T0 = NA, Ctrl = NA, isProp = TRUE, useLog = TRUE,
     }
     y <- y[order(x)]
     x <- sort(x)
+    pp <- sum(y < 0 | y > 1)/length(y)
+    if (pp > 0.2) {
+        warning(paste(round(pp * 100, 2), "\% of your y values fall outside the range [0, 1] - any results output may not be representative.", 
+            sep = ""))
+    }
     if (useLog) 
         x <- log10(x)
     object <- new("nplm", x = x, y = y, useLog = useLog, LPweight = LPweight)
-    if (!isProp) {
-        object@yProp <- .survProp(y, T0, Ctrl)
-    }
-    else {
-        object@yProp <- y
-    }
     weights <- rep(1, length(y))
     .sce <- .chooseSCE(method)
     if (npars == "all") {
@@ -122,7 +111,7 @@ function (x, y, T0 = NA, Ctrl = NA, isProp = TRUE, useLog = TRUE,
     perf <- .getPerf(y, yFit)
     pars <- cbind.data.frame(bottom = bottom, top = top, xmid = xmid, 
         scal = scal, s = s)
-    targets <- seq(0.1, 0.9, by = 0.1)
+    targets <- seq(0.9, 0.1, by = -0.1)
     estimates <- lapply(targets, function(target) {
         .estimateRange(target, perf$stdErr, pars, B, object@useLog)
     })

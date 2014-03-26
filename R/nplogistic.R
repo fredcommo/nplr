@@ -1,7 +1,6 @@
 ## METHODS FOR EXTRACTING INFORMATION FROM THE nplm CLASS
 setMethod("getX", "nplm", function(object) return(object@x))
 setMethod("getY", "nplm", function(object) return(object@y))
-setMethod("getYProp", "nplm", function(object) return(object@yProp))
 setMethod("getFitValues", "nplm", function(object) return(object@yFit))
 setMethod("getXcurve", "nplm", function(object) return(object@xCurve))
 setMethod("getYcurve", "nplm", function(object) return(object@yCurve))
@@ -10,23 +9,17 @@ setMethod("getPar", "nplm", function(object){return(list(npar=object@npars, para
 setMethod('getGoodness', 'nplm', function(object) return(object@goodness))
 setMethod('getStdErr', 'nplm', function(object) return(object@stdErr))
 setMethod("getAUC", "nplm", function(object) return(object@AUC))
-
-## IS IT OK TO RE-ORDER THESE ESTIMATES? SEEMS LIKE THIS MAY CAUSE CONFUSION AND/OR PROBLEMS DOWNSTREAM
-setMethod('getEstimates', 'nplm', function(object){
-  estim <- object@estimates
-  return(estim[order(estim$Prop, decreasing = TRUE),])
-})
-
+setMethod('getEstimates', 'nplm', function(object) return(object@estimates))
 
 
 ## MAIN nplm FUNCION
-nplogistic <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=0.25,
+nplogistic <- function(x, y, useLog=TRUE, LPweight=0.25,
                        npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
   
   method <- match.arg(method)
   
   if(is.numeric(npars) & (npars<2 | npars>5))
-    stop("\nThe number of parameters (npars) has to be in {2, 5}, or 'all'!\n")
+    stop("\nThe number of parameters (npars) has to be in [2, 5], or 'all'!\n")
   
   if(any(is.na(x) | is.na(y))){
     NAs <- union(which(is.na(x)), which(is.na(y)))
@@ -36,14 +29,13 @@ nplogistic <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=
   y <- y[order(x)]
   x <- sort(x)
   
+  pp <- sum(y<0 | y>1)/length(y)
+  if(pp > .2){
+    warning(paste(round(pp*100, 2), "% of your y values fall outside the range [0, 1] - any results output may not be representative.", sep=""))
+  }
+  
   if(useLog) x <- log10(x)
   object <- new("nplm", x=x, y=y, useLog=useLog, LPweight=LPweight)
-  
-  if(!isProp){
-    object@yProp <- .survProp(y, T0, Ctrl)
-  } else {
-    object@yProp <- y
-  }
   
   weights <- rep(1, length(y))
   .sce <- .chooseSCE(method)
@@ -72,7 +64,7 @@ nplogistic <- function(x, y, T0=NA, Ctrl=NA, isProp=TRUE, useLog=TRUE, LPweight=
   
   # Compute simulations to estimate the IC50 conf. interval
   pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
-  targets <- seq(.1, .9, by = .1)
+  targets <- seq(.9, .1, by = -.1)
   estimates <- lapply(targets, function(target){.estimateRange(target, perf$stdErr, pars, B, object@useLog)})
   estimates <- cbind.data.frame(Resp = targets, do.call(rbind, estimates))
   colnames(estimates) <- c('Prop', 'xmin', 'x', 'xmax')

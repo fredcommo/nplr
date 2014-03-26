@@ -2,15 +2,14 @@
 setClass(
   Class='nplm', 
   representation(
-    x='vector', 
-    y='vector', 
+    x='numeric', 
+    y='numeric', 
     useLog='logical',
-    yProp='vector', 
     npars='numeric', 
     LPweight='numeric',
-    yFit='vector', 
-    xCurve='vector', 
-    yCurve='vector',
+    yFit='numeric', 
+    xCurve='numeric', 
+    yCurve='numeric',
     inflPoint='data.frame', 
     goodness='numeric', 
     stdErr='numeric',
@@ -22,20 +21,19 @@ setClass(
   
   prototype = prototype(
     useLog = TRUE,
-    yProp = NA,
     npars = 0,
     LPweight = 0,
-    yFit = NA,
-    xCurve=NA, 
-    yCurve=NA, 
-    inflPoint=data.frame(), 
-    goodness=0, 
-    stdErr=0, 
-    pars=data.frame(),
-    estimates=data.frame(), 
-    AUC=data.frame(), 
-    nPL=NULL, 
-    SCE=NULL)
+    yFit = numeric(),
+    xCurve = numeric(), 
+    yCurve = numeric(), 
+    inflPoint = data.frame(), 
+    goodness = 0, 
+    stdErr = 0, 
+    pars = data.frame(),
+    estimates = data.frame(), 
+    AUC = data.frame(), 
+    nPL = NULL, 
+    SCE = NULL)
 )
 
 ## SHOW METHOD FOR THIS CLASS
@@ -49,7 +47,10 @@ setMethod(
     cat("Goodness of fit:", getGoodness(object), "\n")
     cat("Standard error:", getStdErr(object), "\n")
     cat("\n")
-    cat("Estimated values:\n")
-    show(getEstimates(object))
+    if(nrow(object@estimates) > 0){
+      ee <- getEstimates(object)
+      cat("Estimated values:\n")
+      show(getEstimates(object))
+    }
   }
 )
