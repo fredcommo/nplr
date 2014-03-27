@@ -29,10 +29,10 @@ nplogistic <- function(x, y, useLog=TRUE, LPweight=0.25,
   y <- y[order(x)]
   x <- sort(x)
   
-  pp <- sum(y<0 | y>1)/length(y)
-  if(pp > .2){
-    warning(paste(round(pp*100, 2), "% of your y values fall outside the range [0, 1] - any results output may not be representative.", sep=""))
-  }
+#   pp <- sum(y<0 | y>1)/length(y)
+#   if(pp > .2){
+#     warning(paste(round(pp*100, 2), "% of your y values fall outside the range [0, 1] - any results output may not be representative.", sep=""))
+#   }
   
   if(useLog) x <- log10(x)
   object <- new("nplm", x=x, y=y, useLog=useLog, LPweight=LPweight)
@@ -64,10 +64,10 @@ nplogistic <- function(x, y, useLog=TRUE, LPweight=0.25,
   
   # Compute simulations to estimate the IC50 conf. interval
   pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
-  targets <- seq(.9, .1, by = -.1)
+  targets <- unique(yFit)
   estimates <- lapply(targets, function(target){.estimateRange(target, perf$stdErr, pars, B, object@useLog)})
   estimates <- cbind.data.frame(Resp = targets, do.call(rbind, estimates))
-  colnames(estimates) <- c('Prop', 'xmin', 'x', 'xmax')
+  colnames(estimates) <- c('y', 'xmin', 'x', 'xmax')
   
   # Inflexion point coordinates
   infl <- .inflPoint(pars)
