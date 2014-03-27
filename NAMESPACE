@@ -1,0 +1,33 @@
+## IMPORTS FROM OTHER PACKAGES
+importFrom(stats, nlm)
+importFrom(stats, predict)
+importFrom(graphics, plot)
+
+## EXPORT S3 FUNCTIONS
+export(
+  nplogistic,
+  convertToProp
+)
+
+## EXPORT METHODS
+exportMethods(
+  getAUC,
+  getEstimates,
+  getFitValues,
+  getGoodness,
+  getInflexion,
+  getPar,
+  getStdErr,
+  getX,
+  getXcurve,
+  getY,
+  getYcurve,
+  predict,
+  plot
+)
+
+
+## EXPORT CLASSES
+exportClasses(
+  nplm
+)

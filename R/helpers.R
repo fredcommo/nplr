@@ -1,4 +1,4 @@
-# model5P <- function(x, y, sd=NULL, W.coef=0.25, Plot=FALSE, Title="", Xlab="", Ylab="", pCol = "indianred2", lCol = "royalblue3", Sub = "Weighted 5P logistic regr.", ...){
+## HELPER FUNCTIONS (ALL INTERNAL TO THE PACKAGE)
 .nPL5 <- function(bottom, top, xmid, scal, s,  X){
   yfit <- bottom+(top-bottom)/(1+10^((xmid-X)*scal))^s
   return(yfit)
@@ -68,12 +68,6 @@
   residuals <- (yobs - ytheo)^2
   return(sum(residuals/abs(ytheo)))
 }
-.survProp <- function(y, T0 = NA, Ctrl = NA){
-  if(is.na(Ctrl)) Ctrl <- max(y, na.rm = TRUE)
-  if(is.na(T0))
-    return(y/Ctrl)
-  else return((y-T0)/(Ctrl-T0))
-}
 .chooseSCE <- function(method){
   switch(method,
          sdw = {.sce <- .sdWeight},
@@ -81,7 +75,7 @@
          Y2 = {.sce <- .Y2},
          pw = {.sce <- .poissonWeight},
          gw = {.sce <- .generalWeight}
-    )
+  )
   return(.sce)
 }
 .chooseModel <- function(npars){
@@ -181,20 +175,13 @@
   return(list(lo = lo, hi = hi))
 }
 .invModel <- function(pars, target){
-#   if(any(target>=pars$top))
-#     target[target>=pars$top] <- pars$top - abs(pars$top*.01)
-#   if(any(target<pars$bottom))
-#     target[target<=pars$bottom] <- pars$bottom + abs(pars$bottom*.01)
   return(pars$xmid - 1/pars$scal*log10(((pars$top - pars$bottom)/(target - pars$bottom))^(1/pars$s)-1))
 }
 .estimateRange <- function(target, stdErr, pars, B, useLog){
-#  target <- pars$bottom + (pars$top - pars$bottom)*target
   Xtarget = .invModel(pars, target)
   if(is.na(Xtarget)) Dmin <- D <- Dmax <- NA
   else{
-#    S <- sqrt(target*(1-target)/24)
     Ytmp <- target + rnorm(B, 0, stdErr)
-#    Ytmp <- target + rnorm(B, 0, S)
     if(any(Ytmp<=pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<=pars$bottom)]
     if(any(Ytmp>=pars$top)) Ytmp <- Ytmp[-which(Ytmp>=pars$top)]
     Q <- quantile(Ytmp, probs=c(.05, .95), na.rm=T)
