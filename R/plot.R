@@ -31,7 +31,7 @@ setMethod(
     }
     
     if(showIC){
-      bounds <- .IClm(getStdErr(object), getY(object), getFitValues(object), newy)
+      bounds <- .confInt(getStdErr(object), getY(object), getFitValues(object), newy)
       xx <- c(newx, rev(newx))
       yy <- c(bounds$lo, rev(bounds$hi))
       polygon(xx, yy, border = NA, col = rgb(.8,.8,.8,.4))
