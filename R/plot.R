@@ -2,7 +2,7 @@ setMethod(
   f = "plot", 
   signature = "nplm",
   definition = function(object, x=NA, y=NA, pcol="aquamarine1", lcol="red3", cex=1.5,
-                        showTarget=.5, showGOF=TRUE, showIC=TRUE, showInfl=FALSE, B=1e4, unit='',
+                        showTarget=.5, showGOF=TRUE, showCI=TRUE, showInfl=FALSE, B=1e4, unit='',
                         Title=NA, xlab='Log10(Drug[c])', ylab='Survival',...){
     op <- par(no.readonly = TRUE)
     par(las = 1, cex.axis = 1.5, cex.lab = 1.75, mar = c(6.5, 5.5, 4, 2), mgp = c(3.5, 1, 0))
@@ -24,13 +24,13 @@ setMethod(
     if(!(!showTarget)){
       stdErr <- getStdErr(object)
       estim <- .estimateRange(showTarget, stdErr, getPar(object)$params, B, object@useLog)
-      legend1 <- sprintf("IC%d : %s%s", showTarget*100, format(estim[2], scientific=TRUE), unit)
+      legend1 <- sprintf("CI%d : %s%s", showTarget*100, format(estim[2], scientific=TRUE), unit)
       legend2 <- sprintf("[%s, %s]", format(estim[1], scientific=TRUE), format(estim[3], scientific=TRUE))
       legend(ifelse(newy[length(newy)]<newy[1], 'bottomleft', 'topleft'),
              legend = c(legend1, legend2), cex = 1.5, text.col = 'steelblue4', bty = 'n')
     }
     
-    if(showIC){
+    if(showCI){
       bounds <- .confInt(getStdErr(object), getY(object), getFitValues(object), newy)
       xx <- c(newx, rev(newx))
       yy <- c(bounds$lo, rev(bounds$hi))
