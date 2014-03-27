@@ -165,13 +165,13 @@
   fy <- y[2:(n-1)]*rep(c(4, 2), (n-2)/2)
   return(dx/3*(f1 + sum(fy) + fn))
 }
-.IClm <- function(stdErr, yobs, yfit, newy){
+.confInt <- function(stdErr, yobs, yfit, newy){
   n <- length(yobs)
   ybar <- mean(yobs, na.rm = TRUE)
   t <- qt(.975, n-2)
-  IC <- t*stdErr*sqrt((1/n+(newy - ybar)^2/sum((newy - ybar)^2)))
-  lo <- newy - IC
-  hi <- newy + IC
+  ci <- t*stdErr*sqrt((1/n+(newy - ybar)^2/sum((newy - ybar)^2)))
+  lo <- newy - ci
+  hi <- newy + ci
   return(list(lo = lo, hi = hi))
 }
 .invModel <- function(pars, target){
