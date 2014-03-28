@@ -1,4 +1,4 @@
-\name{nplmAccessors}
+\name{nplrAccessors}
 \docType{methods}
 \alias{getAUC}
 \alias{getEstimates}
@@ -13,15 +13,15 @@
 \alias{getYcurve}
 \alias{getYProp}
 
-\title{ \code{\link{nplm}} accessor functions }
+\title{ \code{\link{nplr}} accessor functions }
 
 \description{
-  Methods for extracting information from objects of class \code{\link{nplm}}. Each of the below methods are simply convenience functions which extract the corresponding slots (as the name of each method suggests) from the object of class \code{\link{nplm}}.
+  Methods for extracting information from objects of class \code{\link{nplr}}. Each of the below methods are simply convenience functions which extract the corresponding slots (as the name of each method suggests) from the object of class \code{\link{nplr}}.
 }
 
 \section{Methods}{
   \describe{
-    \item{\code{signature(object = "nplm")}}{
+    \item{\code{signature(object = "nplr")}}{
       getAUC(object)
       getEstimates(object)
       getFitValues(object)
@@ -39,5 +39,5 @@
 }
 
 \seealso{
-  \code{\link{nplogistic}}, \code{\link{nplm}}
+  \code{\link{nplogistic}}, \code{\link{nplr}}
 }

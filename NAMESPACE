@@ -5,7 +5,7 @@ importFrom(graphics, plot)
 
 ## EXPORT S3 FUNCTIONS
 export(
-  nplogistic,
+  nplr,
   convertToProp
 )
 
@@ -29,5 +29,5 @@ exportMethods(
 
 ## EXPORT CLASSES
 exportClasses(
-  nplm
+  nplr
 )

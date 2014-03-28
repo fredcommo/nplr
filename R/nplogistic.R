@@ -1,19 +1,19 @@
-## METHODS FOR EXTRACTING INFORMATION FROM THE nplm CLASS
-setMethod("getX", "nplm", function(object) return(object@x))
-setMethod("getY", "nplm", function(object) return(object@y))
-setMethod("getFitValues", "nplm", function(object) return(object@yFit))
-setMethod("getXcurve", "nplm", function(object) return(object@xCurve))
-setMethod("getYcurve", "nplm", function(object) return(object@yCurve))
-setMethod("getInflexion", "nplm", function(object) return(object@inflPoint))
-setMethod("getPar", "nplm", function(object){return(list(npar=object@npars, params=object@pars))})
-setMethod('getGoodness', 'nplm', function(object) return(object@goodness))
-setMethod('getStdErr', 'nplm', function(object) return(object@stdErr))
-setMethod("getAUC", "nplm", function(object) return(object@AUC))
-setMethod('getEstimates', 'nplm', function(object) return(object@estimates))
+## METHODS FOR EXTRACTING INFORMATION FROM THE nplr CLASS
+setMethod("getX", "nplr", function(object) return(object@x))
+setMethod("getY", "nplr", function(object) return(object@y))
+setMethod("getFitValues", "nplr", function(object) return(object@yFit))
+setMethod("getXcurve", "nplr", function(object) return(object@xCurve))
+setMethod("getYcurve", "nplr", function(object) return(object@yCurve))
+setMethod("getInflexion", "nplr", function(object) return(object@inflPoint))
+setMethod("getPar", "nplr", function(object){return(list(npar=object@npars, params=object@pars))})
+setMethod('getGoodness', 'nplr', function(object) return(object@goodness))
+setMethod('getStdErr', 'nplr', function(object) return(object@stdErr))
+setMethod("getAUC", "nplr", function(object) return(object@AUC))
+setMethod('getEstimates', 'nplr', function(object) return(object@estimates))
 
 
-## MAIN nplm FUNCION
-nplogistic <- function(x, y, useLog=TRUE, LPweight=0.25,
+## MAIN nplr FUNCION
+nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
                        npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
   
   method <- match.arg(method)
@@ -35,7 +35,7 @@ nplogistic <- function(x, y, useLog=TRUE, LPweight=0.25,
 #   }
   
   if(useLog) x <- log10(x)
-  object <- new("nplm", x=x, y=y, useLog=useLog, LPweight=LPweight)
+  object <- new("nplr", x=x, y=y, useLog=useLog, LPweight=LPweight)
   
   weights <- rep(1, length(y))
   .sce <- .chooseSCE(method)

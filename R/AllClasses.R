@@ -1,6 +1,6 @@
-## DEFINE NPLM CLASS
+## DEFINE nplr CLASS
 setClass(
-  Class='nplm', 
+  Class='nplr', 
   representation(
     x='numeric', 
     y='numeric', 
@@ -39,9 +39,9 @@ setClass(
 ## SHOW METHOD FOR THIS CLASS
 setMethod(
   f = 'show', 
-  signature = 'nplm',
+  signature = 'nplr',
   definition = function(object){
-    cat("Instance of class nplm\n")
+    cat("Instance of class nplr\n")
     cat("\n")
     cat(sprintf("%s-P logistic model\n", object@npars))
     cat("Goodness of fit:", getGoodness(object), "\n")
