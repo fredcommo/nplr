@@ -1,6 +1,6 @@
 setMethod(
   f = "predict", 
-  signature = "nplm", 
+  signature = "nplr", 
   definition = function(object, targets, B=1e4){
     pars <- getPar(object)
     if(any(targets<=pars$params$bottom)){

@@ -1,6 +1,6 @@
 setMethod(
   f = "plot", 
-  signature = "nplm",
+  signature = "nplr",
   definition = function(object, x=NA, y=NA, pcol="aquamarine1", lcol="red3", cex=1.5,
                         showTarget=.5, showGOF=TRUE, showCI=TRUE, showInfl=FALSE, B=1e4, unit='',
                         Title=NA, xlab='Log10(Drug[c])', ylab='Survival',...){
