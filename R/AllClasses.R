@@ -44,6 +44,8 @@ setMethod(
     cat("Instance of class nplr\n")
     cat("\n")
     cat(sprintf("%s-P logistic model\n", object@npars))
+    cat("Bottom asymptote:", getPar(object)$params$bottom, "\n")
+    cat("Top asymptote:", getPar(object)$params$top, "\n")
     cat("Goodness of fit:", getGoodness(object), "\n")
     cat("Standard error:", getStdErr(object), "\n")
     cat("\n")
