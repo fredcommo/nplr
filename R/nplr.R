@@ -14,11 +14,7 @@ setMethod('getEstimates', 'nplr', function(object) return(object@estimates))
 
 ## MAIN nplr FUNCION
 nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
-<<<<<<< Updated upstream
                        npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
-=======
-                 npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
->>>>>>> Stashed changes
   
   method <- match.arg(method)
   
