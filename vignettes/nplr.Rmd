@@ -1,9 +1,9 @@
 %\VignetteEngine{knitr::knitr}
-# nplogistic Vignette
+# nplr Vignette
 ### **AUTHORS**: _Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
 
 ```{r, include=FALSE, eval=TRUE}
-require(nplogistic)
+require(nplr)
 ```
 
 ## Overview
