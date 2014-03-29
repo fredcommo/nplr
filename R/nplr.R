@@ -14,7 +14,11 @@ setMethod('getEstimates', 'nplr', function(object) return(object@estimates))
 
 ## MAIN nplr FUNCION
 nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
+<<<<<<< Updated upstream
                        npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
+=======
+                 npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
+>>>>>>> Stashed changes
   
   method <- match.arg(method)
   
@@ -29,10 +33,13 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   y <- y[order(x)]
   x <- sort(x)
   
-#   pp <- sum(y<0 | y>1)/length(y)
-#   if(pp > .2){
-#     warning(paste(round(pp*100, 2), "% of your y values fall outside the range [0, 1] - any results output may not be representative.", sep=""))
-#   }
+  pp <- sum(y<0 | y>1)/length(y)
+  if(pp > .2){
+    warningtext <- "% of your y values fall outside the range [0, 1]"
+    warning(call.=FALSE, sprintf("%s%s", round(pp*100, 2), warningtext), immediate.=TRUE)
+    message("\t- any results output may not be representative.")
+    message("\t- be sure you are using y-values as proportions.")
+  }
   
   if(useLog) x <- log10(x)
   object <- new("nplr", x=x, y=y, useLog=useLog, LPweight=LPweight)
@@ -64,7 +71,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   
   # Compute simulations to estimate the IC50 conf. interval
   pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
-  targets <- unique(yFit)
+  targets <- seq(.9, .1, by=(-.1))
   estimates <- lapply(targets, function(target){.estimateRange(target, perf$stdErr, pars, B, object@useLog)})
   estimates <- cbind.data.frame(Resp = targets, do.call(rbind, estimates))
   colnames(estimates) <- c('y', 'xmin', 'x', 'xmax')

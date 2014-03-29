@@ -24,7 +24,7 @@ setMethod(
     if(!(!showTarget)){
       stdErr <- getStdErr(object)
       estim <- .estimateRange(showTarget, stdErr, getPar(object)$params, B, object@useLog)
-      legend1 <- sprintf("CI%d : %s%s", showTarget*100, format(estim[2], scientific=TRUE), unit)
+      legend1 <- sprintf("IC%d : %s%s", showTarget*100, format(estim[2], scientific=TRUE), unit)
       legend2 <- sprintf("[%s, %s]", format(estim[1], scientific=TRUE), format(estim[3], scientific=TRUE))
       legend(ifelse(newy[length(newy)]<newy[1], 'bottomleft', 'topleft'),
              legend = c(legend1, legend2), cex = 1.5, text.col = 'steelblue4', bty = 'n')
@@ -42,9 +42,9 @@ setMethod(
     
     lines(newy ~ newx, col=lcol, lwd=4)
     if(object@LPweight != 0){
-      Sub = sprintf("Weighted %s-P logistic regr. (DoseResp package, version v.1)", object@npars)
+      Sub = sprintf("Weighted %s-P logistic regr. (nplogistic package, version: 0.1)", object@npars)
     } else{ 
-      Sub = sprintf("Non-weighted %s-P logistic regr. (DoseResp package, version v.1)", object@npars)
+      Sub = sprintf("Non-weighted %s-P logistic regr. (nplogistic package, version: 0.1)", object@npars)
     }
     title (main = Title, sub = Sub, cex.sub = .75)
     par(op)
