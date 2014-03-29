@@ -182,8 +182,8 @@
   if(is.na(Xtarget)) Dmin <- D <- Dmax <- NA
   else{
     Ytmp <- target + rnorm(B, 0, stdErr)
-    if(any(Ytmp<=pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<=pars$bottom)]
-    if(any(Ytmp>=pars$top)) Ytmp <- Ytmp[-which(Ytmp>=pars$top)]
+    if(any(Ytmp<pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<pars$bottom)]
+    if(any(Ytmp>pars$top)) Ytmp <- Ytmp[-which(Ytmp>pars$top)]
     Q <- quantile(Ytmp, probs=c(.05, .95), na.rm=T)
     estimates <- .invModel(pars, c(Q[1], target, Q[2]))
     if(useLog) estimates <- 10^estimates
