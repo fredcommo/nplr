@@ -34,25 +34,9 @@
   s <- pars[5]
   ytheo <- nPL(bottom, top, xmid, scal, s, x)
   residuals <- (yobs - ytheo)^2
-
   v <- as.numeric(by(yobs, x, var, na.rm=TRUE))
   v <- ifelse(is.na(v), 1, v)
   Weights <- rep(v, times=table(x))
-
-#   Weights <- sapply(unique(x), function(xi){
-#     var(yobs[x==xi], na.rm=TRUE)
-#   })  
-#   Weights <- rep(Weights, times=table(x))
-
-  # quickest method
-#   Weights <- lapply(unique(x), function(xi){
-#     nrep <- sum(x==xi)
-#     v <- 1
-#     if(nrep>1) v <- var(yobs[x==xi], na.rm=TRUE)
-#     rep(v, nrep)
-#   })  
-#   Weights <- do.call(c, Weights)
-
   return(sum(residuals/Weights))
 }
 .generalWeight <- function(pars, x, yobs, Weights, wcoef, nPL){
@@ -111,7 +95,6 @@
   z[z<=0] <- 0.05; z[z>=1] <- 0.95
   lz <- log(z/(1-z))
   scal <- coef(lm(lz~x))[2]
-#  scal <- coef(lm(x~lz))[2]
   return(as.numeric(scal))
 }
 .initPars <- function(x, y, npars){
