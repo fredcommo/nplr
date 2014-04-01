@@ -34,9 +34,26 @@
   s <- pars[5]
   ytheo <- nPL(bottom, top, xmid, scal, s, x)
   residuals <- (yobs - ytheo)^2
-  Weights <- as.numeric(by(yobs, x, sd))
-  Weights <- rep(Weights, length(x)/length(unique(x)))
-  return(sum(residuals/Weights^2))
+
+  v <- as.numeric(by(yobs, x, var, na.rm=TRUE))
+  v <- ifelse(is.na(v), 1, v)
+  Weights <- rep(v, times=table(x))
+
+#   Weights <- sapply(unique(x), function(xi){
+#     var(yobs[x==xi], na.rm=TRUE)
+#   })  
+#   Weights <- rep(Weights, times=table(x))
+
+  # quickest method
+#   Weights <- lapply(unique(x), function(xi){
+#     nrep <- sum(x==xi)
+#     v <- 1
+#     if(nrep>1) v <- var(yobs[x==xi], na.rm=TRUE)
+#     rep(v, nrep)
+#   })  
+#   Weights <- do.call(c, Weights)
+
+  return(sum(residuals/Weights))
 }
 .generalWeight <- function(pars, x, yobs, Weights, wcoef, nPL){
   bottom <- pars[1]
@@ -70,11 +87,11 @@
 }
 .chooseSCE <- function(method){
   switch(method,
-         sdw = {.sce <- .sdWeight},
          res = {.sce <- .wsqRes},
+         sdw = {.sce <- .sdWeight},
+         gw = {.sce <- .generalWeight},
          Y2 = {.sce <- .Y2},
-         pw = {.sce <- .poissonWeight},
-         gw = {.sce <- .generalWeight}
+         pw = {.sce <- .poissonWeight}
   )
   return(.sce)
 }
@@ -88,17 +105,18 @@
   return(nPL)
 }
 .estimScal <- function(x, y){
-  bottom <- min(y, na.rm=TRUE); top <- max(y, na.rm=TRUE)
+  bottom <- as.numeric(quantile(y, .025, na.rm=TRUE))
+  top <- as.numeric(quantile(y, .975, na.rm=TRUE))
   z <- (y - bottom)/(top - bottom)
-  z[z==0] <- 0.05; z[z==1] <- 0.95
+  z[z<=0] <- 0.05; z[z>=1] <- 0.95
   lz <- log(z/(1-z))
-  scal <- coef(lm(x ~ lz))[2]
-  if(scal>1) scal <- 1/scal
+  scal <- coef(lm(lz~x))[2]
+#  scal <- coef(lm(x~lz))[2]
   return(as.numeric(scal))
 }
 .initPars <- function(x, y, npars){
-  if(npars<4) bottom <- 0 else bottom = min(y, na.rm=TRUE)
-  if(npars<3) top <-1 else top = max(y, na.rm=TRUE)
+  if(npars<4) bottom <- 0 else bottom <- quantile(y, .05,na.rm=TRUE)
+  if(npars<3) top <-1 else top <- quantile(y, .95,na.rm=TRUE)
   xmid = (max(x)+min(x))/2
   scal <- .estimScal(x, y)
   return(c(bottom, top, xmid, scal, s=1))
@@ -129,8 +147,8 @@
   stdErr <- sqrt(1/(length(yfit)-2)*sum((yfit-y)^2))
   return(cbind.data.frame(goodness=goodness, stdErr=stdErr, p=p))
 }
-.testAll <- function(.sce, x, y, weights, LPweight){
-  cat("Testing pars\n")
+.testAll <- function(.sce, x, y, weights, LPweight, silent){
+  if(!silent) cat("Testing pars\n")
   err <- sapply(1, function(p){
     test2 <- try(nlm(f=.sce, p=.initPars(x, y, 2), x=x, yobs=y, Weights=weights, wcoef=LPweight, .nPL2), silent=TRUE)
     test3 <- try(nlm(f=.sce, p=.initPars(x, y, 3), x=x, yobs=y, Weights=weights, wcoef=LPweight, .nPL3), silent=TRUE)
