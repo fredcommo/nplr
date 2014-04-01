@@ -69,6 +69,8 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   newX <- seq(min(x), max(x), length=200)
   newY <- nPL(bottom, top, xmid, scal, s, newX)
   yFit <- nPL(bottom, top, xmid, scal, s, x)
+  if(length(unique(yFit))==1)
+    stop("nplr failed and returned constant fitted values. Your data may not be appropriate for such model.")
   perf <- .getPerf(y, yFit)
   
   # Compute simulations to estimate the IC50 conf. interval
