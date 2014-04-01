@@ -14,9 +14,14 @@ setMethod('getEstimates', 'nplr', function(object) return(object@estimates))
 
 ## MAIN nplr FUNCION
 nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
-                       npars="all", method=c("res", "sdw", "gw", "Y2", "pw"), B=1e4,...){
+                 npars="all", method=c("res", "sdw", "gw", "Y2", "pw"),
+                 B=1e4, silent=FALSE,...){
   
+  minrep <- min(table(x), na.rm=TRUE)
   method <- match.arg(method)
+  if(method=="sdw" & minrep<2)
+    warning("\nOne (or more) points have no replicates. The 'sdw' method may not be appropriate.\n",
+            call.=FALSE, immediate.=TRUE)
   
   if(is.numeric(npars) & (npars<2 | npars>5))
     stop("\nThe number of parameters (npars) has to be in [2, 5], or 'all'!\n")
@@ -30,7 +35,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   x <- sort(x)
   
   pp <- sum(y<0 | y>1)/length(y)
-  if(pp > .2){
+  if(pp > .2 & !silent){
     warningtext <- "% of your y values fall outside the range [0, 1]"
     warning(call.=FALSE, sprintf("%s%s", round(pp*100, 2), warningtext), immediate.=TRUE)
     message("\t- any results output may not be representative.")
@@ -44,8 +49,9 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   .sce <- .chooseSCE(method)
   
   if(npars=="all"){
-    npars <- .testAll(.sce, x, y, weights, LPweight)
-    cat(sprintf("%s-Parameters model seems to have better performance.\n", npars))
+    npars <- .testAll(.sce, x, y, weights, LPweight, silent)
+    if(!silent)
+      cat(sprintf("%s-Parameters model seems to have better performance.\n", npars))
   }
   
   nPL <- .chooseModel(npars)
