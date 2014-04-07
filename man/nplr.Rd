@@ -90,8 +90,11 @@ Bot 10, 290–300.
 
 Giraldo J, Vivas NM, Vila E, Badia A. Assessing the (a)symmetry of
 concentration-effect curves: empirical versus mechanistic models. Pharmacol Ther.
-2002 Jul;95(1):21-45. PubMed PMID: 12163126.
+2002 Jul;95(1):21-45.
 
+Motulsky HJ, Brown RE. Detecting outliers when fitting data with nonlinear
+regression - a new method based on robust nonlinear regression and the false
+discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
 %% ~put references to the literature/web site here ~
 }
 \author{
