@@ -23,7 +23,7 @@ nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw
   \item{useLog}{ Logical. Should x-values be transformed to \eqn{log10(x)}. Default is \code{TRUE}.
 %%     ~~Describe \code{useLog} here~~
 }
-  \item{LPweight}{a coefficient to adjust the weights. \code{LPweight = 0} will compute a non-weighted np-logistic regression.
+  \item{LPweight}{a coefficient to adjust the weights. \eqn{LPweight = 0} will compute a non-weighted np-logistic regression.
 %%     ~~Describe \code{LPweight} here~~
 }
   \item{npars}{ a numeric value (or \code{"all"}) to specify the number of parameters to use in the model. If \code{"all"} the logistic model will be tested with 2 to 5 parameters, and the best option will be returned. See \code{Details}
@@ -44,7 +44,7 @@ The n-parameter logistic regression is of the form:
 \deqn{
 y = B + (T - B)/[1 + 10^(b*(xmid - x))]^s
 }
-Where \code{B} and \code{T} are the bottom and top asymptotes, respectively, \code{b} and \code{c} are the Hill slope and the x-coordinate at the inflexion point, respectively, and s is an asymetric coefficient.
+Where \code{B} and \code{T} are the bottom and top asymptotes, respectively, \code{b} and \code{xmid} are the Hill slope and the x-coordinate at the inflexion point, respectively, and s is an asymetric coefficient.
 This equation is sometimes refered to as a 5-parameter logistic regression, or the Richards equation.
 
 When specifying \code{npars = 4}, the \code{s} parameter is forced to be \code{1}, and the corresponding model is a 4-parameter logistic regression, symetrical around its inflexion point.
@@ -58,9 +58,9 @@ The following methods can be called in the function in order to reduce the effec
 
 The residuals-weights (method \code{"res"}) computes the sum of squared errors as:
 \deqn{
-  err(Y) = \Sigma (Yobs - Yfit)^[ 2.(1 - c) ]
+  err(Y) = \Sigma (Yobs - Yfit)^[ 2.(1 - LPweight) ]
 }
-where \code{yobs}, \code{yfit}, and \code{c} are the observed values, the fitted values and a weight-adjustment coefficient such that \eqn{0 \le c < 1}, respectively. Best results are generally obtained by setting \eqn{c = 0.25} (default value), while setting \eqn{c = 0} results in computing a non-weighted sum of squared errors.
+where \code{yobs}, \code{yfit}, and \code{LPweight} are the observed values, the fitted values and a weight-adjustment coefficient such that \eqn{0 \le LPweight < 1}, respectively. Best results are generally obtained by setting \eqn{LPweight = 0.25} (default value), while setting \eqn{LPweight = 0} results in computing a non-weighted sum of squared errors.
 
 The standard-weights method (\code{"sdw"}) computes the sum of squared errors as:
 \deqn{
@@ -70,9 +70,9 @@ where \eqn{\sigma(Yobs)} is the vector of the within-replicates standard deviati
 
 The general-weights method (\code{"gw"}) computes the sum of squared errors as:
 \deqn{
-  err(Y) = \Sigma [ (Yobs - Yfit)^2/Yobs^c ]
+  err(Y) = \Sigma [ (Yobs - Yfit)^2/Yobs^LPweight ]
 }
-where \code{yobs}, \code{yfit}, and \code{c} are the observed values, the fitted values and a weight-adjustment coefficient, respectively. As for the residuals-weights method, setting \eqn{c = 0} results in computing a non-weighted sum of squared errors.
+where \code{yobs}, \code{yfit}, and \code{LPweight} are the observed values, the fitted values and a weight-adjustment coefficient, respectively. As for the residuals-weights method, setting \eqn{LPweight = 0} results in computing a non-weighted sum of squared errors.
 
 %%  ~~ If necessary, more details than the description above ~~
 }
