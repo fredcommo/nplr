@@ -39,5 +39,5 @@
 }
 
 \seealso{
-  \code{\link{nplogistic}}, \code{\link{nplr}}
+  \code{\link{nplr}}
 }
