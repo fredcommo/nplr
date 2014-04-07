@@ -51,7 +51,7 @@ In typical cell viability experiments, responses to drug concentrations should b
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link{nplr}}
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
