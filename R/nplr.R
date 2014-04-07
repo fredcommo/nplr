@@ -17,6 +17,9 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
                  npars="all", method=c("res", "sdw", "gw", "Y2", "pw"),
                  B=1e4, silent=FALSE,...){
   
+  if(length(x)!=length(y))
+    stop("x and y lengths differ.\n")
+  
   minrep <- min(table(x), na.rm=TRUE)
   method <- match.arg(method)
   if(method=="sdw" & minrep<2)
@@ -30,6 +33,9 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     NAs <- union(which(is.na(x)), which(is.na(y)))
     x <- x[-NAs]
     y <- y[-NAs]
+    warning(call.=FALSE,
+            sprintf("%s point(s) has(ve) been removed for missingness.\n", length(NAs)),
+            immediate.=TRUE)
   }
   y <- y[order(x)]
   x <- sort(x)
@@ -39,7 +45,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     warningtext <- "% of your y values fall outside the range [0, 1]"
     warning(call.=FALSE, sprintf("%s%s", round(pp*100, 2), warningtext), immediate.=TRUE)
     message("\t- any results output may not be representative.")
-    message("\t- be sure you are using y-values as proportions.")
+    message("\t- be sure you are using y-values as proportions.\n")
   }
   
   if(useLog) x <- log10(x)
