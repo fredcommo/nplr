@@ -20,14 +20,14 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   if(length(x)!=length(y))
     stop("x and y lengths differ.\n")
   
+  if(is.numeric(npars) & (npars<2 | npars>5))
+    stop("\nThe number of parameters (npars) has to be in [2, 5], or 'all'!\n")
+  
   minrep <- min(table(x), na.rm=TRUE)
   method <- match.arg(method)
   if(method=="sdw" & minrep<2)
     warning("\nOne (or more) points have no replicates. The 'sdw' method may not be appropriate.\n",
             call.=FALSE, immediate.=TRUE)
-  
-  if(is.numeric(npars) & (npars<2 | npars>5))
-    stop("\nThe number of parameters (npars) has to be in [2, 5], or 'all'!\n")
   
   if(any(is.na(x) | is.na(y))){
     NAs <- union(which(is.na(x)), which(is.na(y)))
