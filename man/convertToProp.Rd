@@ -5,27 +5,32 @@
   Function to convert a y vector to proportions
 }
 \description{
+Convert a y-vector of values to proportions, given a minimun and a maximun value (optional).
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-convertToProp(y, T0 = NA, Ctrl = NA)
+convertToProp(y, T0 = NULL, Ctrl = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{y}{
+  \item{y}{ a vector of values (responses to x).
 %%     ~~Describe \code{y} here~~
 }
-  \item{T0}{
+  \item{T0}{ the minimal value to consider. It should be the \code{time zero} measurement value in case of cell viability. If NULL (default), \code{min(y)} wil be used. See \code{Details}.
 %%     ~~Describe \code{T0} here~~
 }
-  \item{Ctrl}{
+  \item{Ctrl}{ the maximal value to consider. It should be the untreated condition measurement value in case of cell viability. If NULL (default), \code{max(y)} wil be used. See \code{Details}.
 %%     ~~Describe \code{Ctrl} here~~
 }
 }
 \details{
+In typical cell viability experiments, responses to drug concentrations should be estimated with respect to a \code{time zero (T0)} value and a untreated condition value \code{(Ctrl)}, as described in [1].
+
+\deqn{}{ prop(y) = (y - T0)/(Ctrl - T0) }
+
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{
+\value{ a vector of values.
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -33,6 +38,7 @@ convertToProp(y, T0 = NA, Ctrl = NA)
 %% ...
 }
 \references{
+1 - \url{http://dtp.nci.nih.gov/branches/btb/ivclsp.html}
 %% ~put references to the literature/web site here ~
 }
 \author{
