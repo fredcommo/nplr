@@ -1,6 +1,5 @@
 \name{nplr}
 \alias{nplr}
-\alias{convertToProp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   Function to compute n-parameters logistic regression.
@@ -107,7 +106,7 @@ discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link{nplr}}
 }
 \examples{
 }
