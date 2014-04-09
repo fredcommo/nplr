@@ -114,7 +114,7 @@
 .testAll <- function(.sce, x, y, .weight, LPweight, silent){
   if(!silent) cat("Testing pars\n")
   err <- sapply(1, function(p){
-    test2 <- try(nlm(f=.sce, p=.initPars(x, y, 2), x=x, yobs=y, .weight=.weight, LPweight=LPweight, nPL=.nPL2), silent=TRUE)
+    test2 <- try(nlm(f=.sce, p=.initPars(x, y, 2), x=x, yobs=y, .weight, LPweight, .nPL2), silent=TRUE)
     test3 <- try(nlm(f=.sce, p=.initPars(x, y, 3), x=x, yobs=y, .weight, LPweight, .nPL3), silent=TRUE)
     test4 <- try(nlm(f=.sce, p=.initPars(x, y, 4), x=x, yobs=y, .weight, LPweight, .nPL4), silent=TRUE)
     test5 <- try(nlm(f=.sce, p=.initPars(x, y, 5), x=x, yobs=y, .weight, LPweight, .nPL5), silent=TRUE)
