@@ -52,17 +52,17 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   object <- new("nplr", x=x, y=y, useLog=useLog, LPweight=LPweight)
   
   weights <- rep(1, length(y))
-  .sce <- .chooseSCE(method)
+  .weight <- .chooseWeight(method)
   
   if(npars=="all"){
-    npars <- .testAll(.sce, x, y, weights, LPweight, silent)
+    npars <- .testAll(.sce, x, y, .weight, LPweight, silent)
     if(!silent)
       cat(sprintf("%s-Parameters model seems to have better performance.\n", npars))
   }
   
   nPL <- .chooseModel(npars)
   inits <- .initPars(x, y, npars)
-  best <- nlm(f=.sce, p=inits, x=x, yobs=y, Weights=weights, wcoef=LPweight, nPL)
+  best <- nlm(f=.sce, p=inits, x=x, yobs=y, .weight, LPweight, nPL)
   
   # Best estimates
   bottom <- best$estimate[1]
@@ -77,7 +77,8 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   yFit <- nPL(bottom, top, xmid, scal, s, x)
   if(length(unique(yFit))==1)
     stop("nplr failed and returned constant fitted values. Your data may not be appropriate for such model.")
-  perf <- .getPerf(y, yFit)
+  w <- .weight(x, y, yFit, LPweight)
+  perf <- .getPerf(y, yFit, w)
   
   # Compute simulations to estimate the IC50 conf. interval
   pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
