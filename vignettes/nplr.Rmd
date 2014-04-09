@@ -17,11 +17,11 @@ The n-parameter logistic regression used by $nplr()$ is of the form:
 $$y = B + \frac{(T - B)}{[1 + 10^{b.(xmid - x)}]^s}$$
 
 Where $B$ and $T$ are the bottom and top asymptotes, respectively, $b$ and $xmid$ are the Hill slope and the x-coordinate at the inflexion point, respectively, and $s$ is an asymetric coefficient. This equation is sometimes refered to as a 5-parameter logistic regression, or the Richards equation.  
-The $npars$ argument allows a user to run simplest models, while the default value $npars = "all"$ asks the function to test which model fits the best the data, with respect to a Goodness-of-Fit estimator. See the $nplr$ documentation for more details.
+The $npars$ argument allows a user to run simplest models, while the default value $npars = "all"$ asks the function to test which model fits the best the data, with respect to a weighted Goodness-of-Fit estimator. See the $nplr$ documentation for more details.
 
 In a drug-response (or progression) curve fitting context, typical needs are to invert the function in order to estimate the x-value, e.g. an IC50, given a y-value (the 0.5 survival rate). To do so, the implemented $predict()$ method takes 2 arguments: the built model (an instance of the class nplr), and one (or a vector of) target(s), and returns the corresponding x-values and their 95% confidence intervals.
 
-The $nplr()$ function has been optimized for fitting curves on y-values passed as proportions, from 0 to 1. If data are provided as original response values, e.g. optic density measurements, the $convertToProp()$ function may be helpful. If the x-values are the original drug concentrations, the $useLog=TRUE$ argument in $nplr()$ will transform it in $Log_{10}(conc.)$. Other arguments are described in the $nplr$ documentation.
+The $nplr()$ function has been optimized for fitting curves on y-values passed as proportions, from 0 to 1. If data are provided as original response values, e.g. optic density measurements, the $convertToProp()$ function may be helpful. For some curve fitting, the x-values may need to be log-transformed, e.g. drug concentrations. In such case, using $useLog=TRUE$ in $nplr()$ applies a $Log_10$ transformation on the x-values. Other arguments are described in the $nplr$ documentation.
 
 A specific $plot()$ function has been implemented in order to visualize the results.
 
