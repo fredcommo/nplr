@@ -3,8 +3,7 @@ setMethod(
   signature = "nplr",
   definition = function(object, x=NA, y=NA, pcol="aquamarine1", lcol="red3", cex=1.5,
                         showTarget=.5, showGOF=TRUE, showCI=TRUE, showInfl=FALSE, B=1e4, unit='',
-                        Title=NA, xlab='Log10(Drug[c])', ylab='Survival',
-                        las = 1, cex.axis = 1.25, cex.lab = 1.5,...){
+                        Title=NA, xlab='Log10(Drug[c])', ylab='Survival', ...){
 
     x <- getX(object)
     y <- getY(object)
@@ -13,7 +12,8 @@ setMethod(
     my <- as.numeric(by(y, x, mean, na.rm=TRUE))
     mx <- unique(x)
     gof <- round(getGoodness(object), 3)
-    plot(x, y, col=pcol, cex=cex, pch=19, xlab=xlab, ylab=ylab,...)
+    plot(x, y, col=pcol, cex=cex, pch=19, xlab=xlab, ylab=ylab,
+         las = 1, cex.axis = 1.25, cex.lab = 1.5,...)
     points(x, y, pch = 1, cex = cex)
     
     if(showGOF)
