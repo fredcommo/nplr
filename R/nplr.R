@@ -23,12 +23,17 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   if(is.numeric(npars) & (npars<2 | npars>5))
     stop("\nThe number of parameters (npars) has to be in [2, 5], or 'all'!\n")
   
-  minrep <- min(table(x), na.rm=TRUE)
   method <- match.arg(method)
+
+  minrep <- min(table(x), na.rm=TRUE)
   if(method=="sdw" & minrep<2)
     warning("\nOne (or more) points have no replicates. The 'sdw' method may not be appropriate.\n",
             call.=FALSE, immediate.=TRUE)
   
+  if(method=="gw" & any(y<0))
+    warning("\nBecause of one (or more) y negative values, the 'gw' method may not be appropriate.\n",
+            call.=FALSE, immediate.=TRUE)
+
   if(any(is.na(x) | is.na(y))){
     NAs <- union(which(is.na(x)), which(is.na(y)))
     x <- x[-NAs]
@@ -51,7 +56,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   if(useLog) x <- log10(x)
   object <- new("nplr", x=x, y=y, useLog=useLog, LPweight=LPweight)
   
-  weights <- rep(1, length(y))
+#  weights <- rep(1, length(y))
   .weight <- .chooseWeight(method)
   
   if(npars=="all"){
@@ -75,7 +80,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   newX <- seq(min(x), max(x), length=200)
   newY <- nPL(bottom, top, xmid, scal, s, newX)
   yFit <- nPL(bottom, top, xmid, scal, s, x)
-  if(length(unique(yFit))==1)
+  if(length(unique(signif(yFit, 5)))==1)
     stop("nplr failed and returned constant fitted values. Your data may not be appropriate for such model.")
   w <- .weight(x, y, yFit, LPweight)
   perf <- .getPerf(y, yFit, w)
