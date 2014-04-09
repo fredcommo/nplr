@@ -57,16 +57,6 @@
   )
   return(.weight)
 }
-# .chooseSCE <- function(method){
-#   switch(method,
-#          res = {.sce <- .wsqRes},
-#          sdw = {.sce <- .sdWeight},
-#          gw = {.sce <- .generalWeight},
-#          Y2 = {.sce <- .Y2},
-#          pw = {.sce <- .poissonWeight}
-#   )
-#   return(.sce)
-# }
 .chooseModel <- function(npars){
   switch(as.character(npars),
          "2" = {nPL <- .nPL2},
@@ -76,7 +66,6 @@
   )
   return(nPL)
 }
-
 .estimScal <- function(x, y){
   bottom <- as.numeric(quantile(y, .025, na.rm=TRUE))
   top <- as.numeric(quantile(y, .975, na.rm=TRUE))
@@ -116,7 +105,6 @@
   fstat <- lmtest$fstatistic
   p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
   goodness <- lmtest$adj.r.squared
-  #  stdErr <- sqrt(1/(length(yfit)-2)*1/sum(w)*sum(w*(yfit-y)^2))
   n <- sum(w!=0)
   W <- n/((n-1)*sum(w))
   stdErr <- sqrt(W*sum(w*(yfit-y)^2))
