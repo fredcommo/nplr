@@ -15,70 +15,58 @@
   yfit <- 1/(1+10^((xmid-X)*scal))
   return(yfit)
 }
-.wsqRes <- function(pars, x, yobs, Weights, wcoef, nPL) {
-  bottom <- pars[1]
-  top <- pars[2]
-  xmid <- pars[3]
-  scal <- pars[4]
-  s <- pars[5]
-  ytheo <- nPL(bottom, top, xmid, scal, s, x)
-  residuals <- (yobs - ytheo)^2
-  Weights <- (1/residuals)^(wcoef)
-  return(sum(Weights*(yobs - ytheo)^2))
+.wsqRes <- function(x, yobs, yfit, LPweight) {
+  residuals <- (yobs - yfit)^2
+  return((1/residuals)^(LPweight))
 }
-.sdWeight <- function(pars, x, yobs, Weights, wcoef, nPL){
-  bottom <- pars[1]
-  top <- pars[2]
-  xmid <- pars[3]
-  scal <- pars[4]
-  s <- pars[5]
-  ytheo <- nPL(bottom, top, xmid, scal, s, x)
-  residuals <- (yobs - ytheo)^2
+.sdWeight <- function(x, yobs, yfit, LPweight){
   v <- as.numeric(by(yobs, x, var, na.rm=TRUE))
   v <- ifelse(is.na(v), 1, v)
-  Weights <- rep(v, times=table(x))
-  return(sum(residuals/Weights))
+  return(1/rep(v, times=table(x)))
 }
-.generalWeight <- function(pars, x, yobs, Weights, wcoef, nPL){
+.generalWeight <- function(x, yobs, yfit, LPweight){
+  return(1/yfit^LPweight)
+}
+.Y2 <- function(x, yobs, yfit, LPweight){
+  return(1/yfit^2)
+}
+.poissonWeight <- function(x, yobs, yfit, LPweight){
+  return(1/abs(yfit))
+}
+.uniWeight <- function(yobs){
+  return(rep(1, length(yobs)))
+}
+.sce <- function(pars, x, yobs, .weight, LPweight, nPL){
   bottom <- pars[1]
   top <- pars[2]
   xmid <- pars[3]
   scal <- pars[4]
   s <- pars[5]
-  ytheo <- nPL(bottom, top, xmid, scal, s, x)
-  residuals <- (yobs - ytheo)^2
-  return(sum(residuals/(ytheo^wcoef)))
+  yfit <- nPL(bottom, top, xmid, scal, s, x)
+  residuals <- (yobs - yfit)^2
+  w <- .weight(x, yobs, yfit, LPweight)
+  return(sum(w*residuals))
 }
-.Y2 <- function(pars, x, yobs, Weights, wcoef, nPL){
-  bottom <- pars[1]
-  top <- pars[2]
-  xmid <- pars[3]
-  scal <- pars[4]
-  s <- pars[5]
-  ytheo <- nPL(bottom, top, xmid, scal, s, x)
-  residuals <- (yobs - ytheo)^2
-  return(sum(residuals/ytheo^2))
-}
-.poissonWeight <- function(pars, x, yobs, Weights, wcoef, nPL){
-  bottom <- pars[1]
-  top <- pars[2]
-  xmid <- pars[3]
-  scal <- pars[4]
-  s <- pars[5]
-  ytheo <- nPL(bottom, top, xmid, scal, s, x)
-  residuals <- (yobs - ytheo)^2
-  return(sum(residuals/abs(ytheo)))
-}
-.chooseSCE <- function(method){
+.chooseWeight <- function(method){
   switch(method,
-         res = {.sce <- .wsqRes},
-         sdw = {.sce <- .sdWeight},
-         gw = {.sce <- .generalWeight},
-         Y2 = {.sce <- .Y2},
-         pw = {.sce <- .poissonWeight}
+         res = {.weight <- .wsqRes},
+         sdw = {.weight <- .sdWeight},
+         gw = {.weight <- .generalWeight},
+         Y2 = {.weight <- .Y2},
+         pw = {.weight <- .poissonWeight}
   )
-  return(.sce)
+  return(.weight)
 }
+# .chooseSCE <- function(method){
+#   switch(method,
+#          res = {.sce <- .wsqRes},
+#          sdw = {.sce <- .sdWeight},
+#          gw = {.sce <- .generalWeight},
+#          Y2 = {.sce <- .Y2},
+#          pw = {.sce <- .poissonWeight}
+#   )
+#   return(.sce)
+# }
 .chooseModel <- function(npars){
   switch(as.character(npars),
          "2" = {nPL <- .nPL2},
@@ -88,6 +76,7 @@
   )
   return(nPL)
 }
+
 .estimScal <- function(x, y){
   bottom <- as.numeric(quantile(y, .025, na.rm=TRUE))
   top <- as.numeric(quantile(y, .975, na.rm=TRUE))
@@ -122,21 +111,25 @@
   y = pars$bottom + (pars$top - pars$bottom)*(pars$s/(pars$s+1))^pars$s
   return(cbind.data.frame(x=x, y=y))
 }
-.getPerf <- function(y, yfit){
-  lmtest <- summary(lm(y ~ yfit))
+.getPerf <- function(y, yfit, w){
+  lmtest <- summary(lm(y ~ yfit, weights=w))
   fstat <- lmtest$fstatistic
   p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
   goodness <- lmtest$adj.r.squared
-  stdErr <- sqrt(1/(length(yfit)-2)*sum((yfit-y)^2))
+  #  stdErr <- sqrt(1/(length(yfit)-2)*1/sum(w)*sum(w*(yfit-y)^2))
+  n <- sum(w!=0)
+  W <- n/((n-1)*sum(w))
+  stdErr <- sqrt(W*sum(w*(yfit-y)^2))
+  
   return(cbind.data.frame(goodness=goodness, stdErr=stdErr, p=p))
 }
-.testAll <- function(.sce, x, y, weights, LPweight, silent){
+.testAll <- function(.sce, x, y, .weight, LPweight, silent){
   if(!silent) cat("Testing pars\n")
   err <- sapply(1, function(p){
-    test2 <- try(nlm(f=.sce, p=.initPars(x, y, 2), x=x, yobs=y, Weights=weights, wcoef=LPweight, .nPL2), silent=TRUE)
-    test3 <- try(nlm(f=.sce, p=.initPars(x, y, 3), x=x, yobs=y, Weights=weights, wcoef=LPweight, .nPL3), silent=TRUE)
-    test4 <- try(nlm(f=.sce, p=.initPars(x, y, 4), x=x, yobs=y, Weights=weights, wcoef=LPweight, .nPL4), silent=TRUE)
-    test5 <- try(nlm(f=.sce, p=.initPars(x, y, 5), x=x, yobs=y, Weights=weights, wcoef=LPweight, .nPL5), silent=TRUE)
+    test2 <- try(nlm(f=.sce, p=.initPars(x, y, 2), x=x, yobs=y, .weight=.weight, LPweight=LPweight, nPL=.nPL2), silent=TRUE)
+    test3 <- try(nlm(f=.sce, p=.initPars(x, y, 3), x=x, yobs=y, .weight, LPweight, .nPL3), silent=TRUE)
+    test4 <- try(nlm(f=.sce, p=.initPars(x, y, 4), x=x, yobs=y, .weight, LPweight, .nPL4), silent=TRUE)
+    test5 <- try(nlm(f=.sce, p=.initPars(x, y, 5), x=x, yobs=y, .weight, LPweight, .nPL5), silent=TRUE)
     scores <- sapply(list(test2, test3, test4, test5), function(t){
       if(class(t)!="try-error") return(t$minimum)
       else return(Inf) 
