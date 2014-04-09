@@ -51,27 +51,33 @@ when specifying \code{npars = 3 or 2}, add 2 more constraints and force \code{B}
 
 Weighted methods:
 
-The model parameters are optimized, simultaneously, using \code{\href{http://stat.ethz.ch/R-manual/R-devel/library/stats/html/nlm.html}{nlm}}, given an objective function to minimize.
+The model parameters are optimized, simultaneously, using \code{\href{http://stat.ethz.ch/R-manual/R-devel/library/stats/html/nlm.html}{nlm}}, given a sum of squared errors function, sse(Y), to minimize:
 
-The following methods can be called in the function in order to reduce the effect of possible outliers.
-
-The residuals-weights (method \code{"res"}) computes the sum of squared errors as:
 \deqn{
-  err(Y) = \Sigma (Yobs - Yfit)^[ 2.(1 - LPweight) ]
+  sse(Y) = \Sigma [W.(Yobs - Yfit)^2 ]
 }
-where \code{yobs}, \code{yfit}, and \code{LPweight} are the observed values, the fitted values and a weight-adjustment coefficient such that \eqn{0 \le LPweight < 1}, respectively. Best results are generally obtained by setting \eqn{LPweight = 0.25} (default value), while setting \eqn{LPweight = 0} results in computing a non-weighted sum of squared errors.
 
-The standard-weights method (\code{"sdw"}) computes the sum of squared errors as:
-\deqn{
-  err(Y) = \Sigma [ (Yobs - Yfit)^2/\sigma(Yobs)^2 ]
-}
-where \eqn{\sigma(Yobs)} is the vector of the within-replicates standard deviations.
+where Yobs, Yfit and W are the vectors of observed values, fitted values and weights, respectively.
 
-The general-weights method (\code{"gw"}) computes the sum of squared errors as:
+In order to reduce the effect of possible outliers, the weights passed to sse(Y) can be computed in different ways, specified in \code{nplr}.
+
+The residuals-weights (method \code{"res"}) computes the weights as:
 \deqn{
-  err(Y) = \Sigma [ (Yobs - Yfit)^2/Yobs^LPweight ]
+  W = (1/residuals)^LPweight
 }
-where \code{yobs}, \code{yfit}, and \code{LPweight} are the observed values, the fitted values and a weight-adjustment coefficient, respectively. As for the residuals-weights method, setting \eqn{LPweight = 0} results in computing a non-weighted sum of squared errors.
+where \code{residuals} and \code{LPweight} are the quadratic difference between the observed and fitted values, and a weight-adjustment coefficient, respectively. Best results are generally obtained by setting \eqn{LPweight = 0.25} (default value), while setting \eqn{LPweight = 0} results in computing a non-weighted sum of squared errors.
+
+The standard-weights method (\code{"sdw"}) computes the weights as:
+\deqn{
+  W = 1/Var(Yobs_r)
+}
+where \code{Var(Yobs_r)} is the vector of the within-replicates variances.
+
+The general-weights method (\code{"gw"}) computes weights as:
+\deqn{
+  W = 1/yfit^LPweight
+}
+where \code{yfit} and \code{LPweight} are the fitted values and a weight-adjustment coefficient, respectively. As for the residuals-weights method, setting \eqn{LPweight = 0} results in computing a non-weighted sum of squared errors.
 
 %%  ~~ If necessary, more details than the description above ~~
 }
