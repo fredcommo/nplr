@@ -25,10 +25,19 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   
   method <- match.arg(method)
 
-  minrep <- min(table(x), na.rm=TRUE)
-  if(method=="sdw" & minrep<2)
-    warning("\nOne (or more) points have no replicates. The 'sdw' method may not be appropriate.\n",
+  repTable <- table(x)
+  maxrep <- max(repTable, na.rm=TRUE)
+  minrep <- min(repTable, na.rm=TRUE)
+  if(method=="sdw"){
+    if(maxrep<2){
+      method <- "res"
+      warning("\nNone of the x-values seem to be replicated. The 'sdw' method has been replaced by 'res'.\n",
             call.=FALSE, immediate.=TRUE)
+    } else if(minrep<2){
+      warning("\nOne (or more) points have no replicates. The 'sdw' method may not be appropriate.\n",
+              call.=FALSE, immediate.=TRUE)
+    }
+  }
   
   if(method=="gw" & any(y<0))
     warning("\nBecause of one (or more) y negative values, the 'gw' method may not be appropriate.\n",
