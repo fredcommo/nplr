@@ -3,7 +3,8 @@ setMethod(
   signature = "nplr",
   definition = function(object, x=NA, y=NA, pcol="aquamarine1", lcol="red3", cex=1.5,
                         showTarget=.5, showGOF=TRUE, showCI=TRUE, showInfl=FALSE, B=1e4, unit='',
-                        Title=NA, xlab='Log10(Drug[c])', ylab='Survival',...){
+                        Title=NA, xlab='Log10(Drug[c])', ylab='Survival',
+                        las = 1, cex.axis = 1.25, cex.lab = 1.5,...){
 
     x <- getX(object)
     y <- getY(object)
@@ -12,8 +13,7 @@ setMethod(
     my <- as.numeric(by(y, x, mean, na.rm=TRUE))
     mx <- unique(x)
     gof <- round(getGoodness(object), 3)
-    plot(x, y, col=pcol, cex=cex, pch=19, xlab=xlab, ylab=ylab,
-         las = 1, cex.axis = 1.5, cex.lab = 1.75, mar = c(6.5, 5.5, 4, 2), mgp = c(3.5, 1, 0))
+    plot(x, y, col=pcol, cex=cex, pch=19, xlab=xlab, ylab=ylab,...)
     points(x, y, pch = 1, cex = cex)
     
     if(showGOF)
@@ -41,9 +41,9 @@ setMethod(
     
     lines(newy ~ newx, col=lcol, lwd=4)
     if(object@LPweight != 0){
-      Sub = sprintf("Weighted %s-P logistic regr. (nplogistic package, version: 0.1)", object@npars)
+      Sub = sprintf("Weighted %s-P logistic regr. (nplr package, version: %s)", object@npars, packageVersion("nplr"))
     } else{ 
-      Sub = sprintf("Non-weighted %s-P logistic regr. (nplogistic package, version: 0.1)", object@npars)
+      Sub = sprintf("Non-weighted %s-P logistic regr. (nplr package, version: %s)", object@npars, packageVersion("nplr"))
     }
     title (main = Title, sub = Sub, cex.sub = .75)
   }
