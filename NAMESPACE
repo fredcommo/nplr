@@ -22,7 +22,6 @@ exportMethods(
   getXcurve,
   getY,
   getYcurve,
-  predict,
   plot
 )
 
