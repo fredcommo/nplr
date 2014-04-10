@@ -9,7 +9,6 @@ setMethod("getPar", "nplr", function(object){return(list(npar=object@npars, para
 setMethod('getGoodness', 'nplr', function(object) return(object@goodness))
 setMethod('getStdErr', 'nplr', function(object) return(object@stdErr))
 setMethod("getAUC", "nplr", function(object) return(object@AUC))
-setMethod('getEstimates', 'nplr', function(object) return(object@estimates))
 
 
 ## MAIN nplr FUNCION
@@ -96,14 +95,14 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   w <- .weight(x, y, yFit, LPweight)
   perf <- .getPerf(y, yFit, w)
   
-  # Compute simulations to estimate the IC50 conf. interval
-  pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
-  targets <- seq(.9, .1, by=(-.1))
-  estimates <- lapply(targets, function(target){.estimateRange(target, perf$stdErr, pars, B, object@useLog)})
-  estimates <- cbind.data.frame(Resp = targets, do.call(rbind, estimates))
-  colnames(estimates) <- c('y', 'xmin', 'x', 'xmax')
+#   # Compute simulations to estimate the IC50 conf. interval
+#   targets <- seq(.9, .1, by=(-.1))
+#   estimates <- lapply(targets, function(target){.estimateRange(target, perf$stdErr, pars, B, object@useLog)})
+#   estimates <- cbind.data.frame(Resp = targets, do.call(rbind, estimates))
+#   colnames(estimates) <- c('y', 'xmin', 'x', 'xmax')
   
   # Inflexion point coordinates
+  pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
   infl <- .inflPoint(pars)
   
   object@npars <- npars
@@ -114,7 +113,6 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   object@inflPoint <- infl
   object@goodness <- perf$goodness
   object@stdErr <- perf$stdErr
-  object@estimates <- estimates
   object@AUC <- data.frame(trapezoide = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
   object@nPL <- nPL
   object@SCE <- .sce
