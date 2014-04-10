@@ -1,7 +1,6 @@
 \name{nplrAccessors}
 \docType{methods}
 \alias{getAUC}
-\alias{getEstimates}
 \alias{getFitValues}
 \alias{getGoodness}
 \alias{getInflexion}
@@ -23,7 +22,6 @@
   \describe{
     \item{\code{signature(object = "nplr")}}{
       getAUC(object)
-      getEstimates(object)
       getFitValues(object)
       getGoodness(object)
       getInflexion(object)
