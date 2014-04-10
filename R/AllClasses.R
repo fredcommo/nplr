@@ -13,8 +13,7 @@ setClass(
     inflPoint='data.frame', 
     goodness='numeric', 
     stdErr='numeric',
-    pars='data.frame', 
-    estimates='data.frame', 
+    pars='data.frame',
     AUC='data.frame',
     nPL='ANY', 
     SCE='ANY'),
@@ -30,7 +29,6 @@ setClass(
     goodness = 0, 
     stdErr = 0, 
     pars = data.frame(),
-    estimates = data.frame(), 
     AUC = data.frame(), 
     nPL = NULL, 
     SCE = NULL)
@@ -46,13 +44,9 @@ setMethod(
     cat(sprintf("%s-P logistic model\n", object@npars))
     cat("Bottom asymptote:", getPar(object)$params$bottom, "\n")
     cat("Top asymptote:", getPar(object)$params$top, "\n")
+    cat("Inflexion point at (x, y):", as.numeric(getInflexion(object)), "\n")
     cat("Goodness of fit:", getGoodness(object), "\n")
     cat("Standard error:", getStdErr(object), "\n")
     cat("\n")
-    if(nrow(object@estimates) > 0){
-      ee <- getEstimates(object)
-      cat("Estimated values:\n")
-      show(getEstimates(object))
-    }
   }
 )
