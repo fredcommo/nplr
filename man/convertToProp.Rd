@@ -30,19 +30,15 @@ In typical cell viability experiments, responses to drug concentrations should b
 
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{ a vector of values.
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+\value{
+  a vector of values.
 }
 \references{
 1 - \url{http://dtp.nci.nih.gov/branches/btb/ivclsp.html}
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+  Frederic Commo
 }
 \note{
 %%  ~~further notes~~
@@ -58,15 +54,6 @@ In typical cell viability experiments, responses to drug concentrations should b
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (y, T0 = NA, Ctrl = NA) 
-{
-    if (is.na(Ctrl)) 
-        Ctrl <- max(y, na.rm = TRUE)
-    if (is.na(T0)) 
-        return(y/Ctrl)
-    else return((y - T0)/(Ctrl - T0))
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

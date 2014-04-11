@@ -83,6 +83,32 @@ where \code{yfit} and \code{LPweight} are the fitted values and a weight-adjustm
 }
 \value{
 An object of class \code{nplr}.
+
+The following model parameters, performances, and values are stored as slots and can be retrieved using the \code{nplrAccessors} functions:  
+
+- original x values, in Log10 if \code{useLog} was set to TRUE. 
+
+- original y values.  
+
+- y fitted values.  
+
+- x-curve values (a sequence of 200 values from min(x) to max(x)).  
+
+- y-curve values (200 fitted values given x-curve).  
+
+- number of parameters: for the best model if \code{npars} was set to 'all', or specified by the user otherwise.
+
+- logistic model parameters.  
+
+- inflexion point coordinates.   
+
+- goodness-of-fit.  
+
+- standard error.
+
+- area under the curve (AUC) estimated by both the trapezoid rule and the Simpson's rule.
+
+
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -103,8 +129,7 @@ discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
-}
+Frederic Commo}
 \note{
 %%  ~~further notes~~
 }
