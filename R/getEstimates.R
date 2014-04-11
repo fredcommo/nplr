@@ -1,11 +1,9 @@
 setMethod(
   f = "getEstimates", 
   signature = "nplr", 
-  definition = function(object, targets=NULL, B=1e4){
+  definition = function(object, targets=seq(.9, .1, by=-.1), B=1e4){
     
-    if(is.null(targets)){
-      targets <- seq(.9, .1, by=-.1)
-    } else if(any(!is.numeric(targets)))
+    if(any(!is.numeric(targets)))
         stop("Target values have to be numeric")
 
     pars <- getPar(object)
