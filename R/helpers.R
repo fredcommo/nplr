@@ -173,5 +173,5 @@
     x50 <- signif(estimates[2], 2)
     x95 <- signif(max(estimates), 2)
   }
-  return(as.numeric(c(Dmin, D, Dmax)))
+  return(as.numeric(c(x05, x50, x95)))
 }
