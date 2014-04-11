@@ -161,7 +161,7 @@
 }
 .estimateRange <- function(target, stdErr, pars, B, useLog){
   Xtarget = .invModel(pars, target)
-  if(is.na(Xtarget)) Dmin <- D <- Dmax <- NA
+  if(is.na(Xtarget)) x05 <- x50 <- x95 <- NA
   else{
     Ytmp <- target + rnorm(B, 0, stdErr)
     if(any(Ytmp<pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<pars$bottom)]
