@@ -169,9 +169,9 @@
     Q <- quantile(Ytmp, probs=c(.05, .95), na.rm=T)
     estimates <- .invModel(pars, c(Q[1], target, Q[2]))
     if(useLog) estimates <- 10^estimates
-    Dmin <- signif(min(estimates), 2)
-    D <- signif(estimates[2], 2)
-    Dmax <- signif(max(estimates), 2)
+    x05 <- signif(min(estimates), 2)
+    x50 <- signif(estimates[2], 2)
+    x95 <- signif(max(estimates), 2)
   }
   return(as.numeric(c(Dmin, D, Dmax)))
 }
