@@ -29,30 +29,3 @@ setMethod(
     return(estim)
   }
 )
-
-.invModel <- function(pars, target){
-  return(pars$xmid - 1/pars$scal*log10(((pars$top - pars$bottom)/(target - pars$bottom))^(1/pars$s)-1))
-}
-.estimateRange <- function(target, stdErr, pars, B, useLog){
-  Xtarget = .invModel(pars, target)
-  if(is.na(Xtarget)) Dmin <- D <- Dmax <- NA
-  else{
-    Ytmp <- target + rnorm(B, 0, stdErr)
-    if(any(Ytmp<pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<pars$bottom)]
-    if(any(Ytmp>pars$top)) Ytmp <- Ytmp[-which(Ytmp>pars$top)]
-    Q <- quantile(Ytmp, probs=c(.05, .95), na.rm=T)
-    estimates <- .invModel(pars, c(Q[1], target, Q[2]))
-    if(useLog) estimates <- 10^estimates
-    x05 <- signif(min(estimates), 2)
-    x50 <- signif(estimates[2], 2)
-    x95 <- signif(max(estimates), 2)
-    
-#     estimates <- .invModel(pars, Ytmp)
-#     if(useLog) estimates <- 10^estimates
-#     Q <- quantile(estimates, c(.05, .5, .95), na.rm=TRUE)
-#     x05 <- signif(Q[1], 2)
-#     x <- signif(Q[2], 2)
-#     x95 <- signif(Q[3], 2)
-  }
-  return(as.numeric(c(x05, x, x95)))
-}
