@@ -14,7 +14,7 @@ setMethod("getAUC", "nplr", function(object) return(object@AUC))
 ## MAIN nplr FUNCION
 nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
                  npars="all", method=c("res", "sdw", "gw", "Y2", "pw"),
-                 B=1e4, silent=FALSE,...){
+                 silent=FALSE){
   
   if(length(x)!=length(y))
     stop("x and y lengths differ.\n")
