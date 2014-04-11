@@ -9,7 +9,7 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw", "Y2", "pw"), B = 10000, ...)
+nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw", "Y2", "pw"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,12 +30,6 @@ nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw
 }
   \item{method}{ a character string to specify what weighted method to use. Options are \code{"res"(\code{Default}), "sdw", "gw", "Y2", "pw"}. See \code{Details}
 %%     ~~Describe \code{method} here~~
-}
-  \item{B}{a numeric value indicating the number of simulations to run, in order to estimate the x-values corresponding to responses from 0.1 to 0.9, and given the model. See the \code{\link{predict()}} method for more flexibility.
-%%     ~~Describe \code{B} here~~
-}
-  \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
 }
 }
 \details{
