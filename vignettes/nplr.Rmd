@@ -1,116 +1,147 @@
 %\VignetteEngine{knitr::knitr}
 # nplr Vignette
+
 ### **AUTHORS**: _Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
 
+## Overview
+
+The *nplr* package provides functions to compute a weighted n-parameter logistic regression, n from 2 to 5, and to estimate x values corresponding to some given targets.  
+Typical applications are drug-response or progression curve fitting.
+
+The n-parameter logistic regression used by *nplr* is of the form:
+
+$$y = B + \frac{T - B}{[1 + 10^{b.(xmid - x)}]^s}$$
+
+Where *B* and *T* are the bottom and top asymptotes, respectively, *b* and *xmid* are the Hill slope and the x-coordinate at the inflexion point, respectively, and *s* is an asymetric coefficient. This equation is sometimes refered to as a 5-parameter logistic regression, or the Richards equation.  
+The *npars* argument allows a user to run simplest models, while the default value *npars='all'* asks the function to test which model fits the best the data, with respect to a weighted Goodness-of-Fit estimator. See the *nplr* documentation for more details.
+
+The *nplr()* function has been optimized for fitting curves on y-values passed as proportions of control, between 0 to 1. If data are provided as original response values, e.g. optic density measurements, the *convertToProp()* function may be helpful. In drug-response curve fitting, a good practice consists in adjusting the signals on a $T_0$ and a *control*  (Ctrl) values. Providing this values, the proportion values, $y_p$, are computed as:
+
+$$y_p = \frac{y - T_0}{Ctrl - T_0}$$
+
+Note that if neither $T_0$ nor *Ctrl* are provided, the default behaviour of *convertToProp()* is to adjust the values as proportions of their *min* and *max*. In that case, the user should be aware that $y = 0.5$ does not correspond to the *IC50*, but to the *EC50*, as shown in the examples below.
+
+In some situations, the x values may need to be log-transformed, e.g. x is provided as original drug concentrations. In such case, setting *useLog=TRUE* in *nplr()* will apply a $Log_10$ transformation on the x values.  
+Other arguments are described in the *nplr* documentation.
+
+In a drug-response (or progression) curve fitting context, typical needs are to invert the function in order to estimate the x value, e.g. the IC50, given a y value (the 0.5 survival rate). To do so, the implemented *getEstimates()* method takes 2 arguments: the model (an instance of the class nplr), and one (or a vector of) target(s). *getEstimates()* returns the corresponding x values and their estimated 95% confidence intervals.
+
+A specific *plot()* function has been implemented in order to visualize the results, using predefined plotting parameters. An easy way to draw simplest, or customized, plots is described in the examples below.
+
+Finally, several self-explanatory *get* functions give an easy access to the results, model parameters and model performances stored in the *nplr()* output.
+
+The examples below use some of the NCI-60 Growth Inhibition Data. For the purpose of the following examples, the provided drug concentrations have been re-exponentiated.  
+The full data can be downloaded at https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}.  
+
+
+## Examples
 ```{r, include=FALSE, eval=TRUE}
 require(nplr)
 require(RCurl)
 ```
 
-## Overview
 
-This function computes a weighted n-parameters logistic regression, n from 2 to 5.  
-Typical applications are drug-response or progression curve fitting.
-
-The n-parameter logistic regression used by $nplr()$ is of the form:
-
-$$y = B + \frac{(T - B)}{[1 + 10^{b.(xmid - x)}]^s}$$
-
-Where $B$ and $T$ are the bottom and top asymptotes, respectively, $b$ and $xmid$ are the Hill slope and the x-coordinate at the inflexion point, respectively, and $s$ is an asymetric coefficient. This equation is sometimes refered to as a 5-parameter logistic regression, or the Richards equation.  
-The $npars$ argument allows a user to run simplest models, while the default value $npars = "all"$ asks the function to test which model fits the best the data, with respect to a weighted Goodness-of-Fit estimator. See the $nplr$ documentation for more details.
-
-In a drug-response (or progression) curve fitting context, typical needs are to invert the function in order to estimate the x-value, e.g. an IC50, given a y-value (the 0.5 survival rate). To do so, the implemented $predict()$ method takes 2 arguments: the model (an instance of the class nplr), and one (or a vector of) target(s).$predict()$ returns the corresponding x-values and their 95% confidence intervals, estimated by a Monte-Carlo simulation.
-
-The $nplr()$ function has been optimized for fitting curves on y-values passed as proportions, from 0 to 1. If data are provided as original response values, e.g. optic density measurements, the $convertToProp()$ function may be helpful. For some curve fitting, the x-values may need to be log-transformed, e.g. drug concentrations. In such case, using $useLog=TRUE$ in $nplr()$ applies a $Log_10$ transformation on the x-values. Other arguments are described in the $nplr$ documentation.
-
-A specific $plot()$ function has been implemented in order to visualize the results, using predefined plotting parameters. An easy way to draw simplest, or customized, plots is described in the examples below.
-
-Several self-explanatory $get$ functions give an easy access to the results, model parameters and model performances stored in the $nplr()$ output.
-
-
-```{r}
-sessionInfo()
+The first example fits a simple drug-response curve: the PC-3 cell line treated with Thioguanine, 19 points without replicates.
+```{r, simpleExample, fig.align='center', fig.width=11}
+path <- system.file("extdata", "pc3.txt", package="nplr")
+pc3 <- read.table(path, header=TRUE)
+np1 <- nplr(pc3$CONC, pc3$GIPROP)
+plot(np1, main="PC-3 cell line. Response to Thioguanine", cex.main=2)
 ```
 
-## Examples
-```{r, simpleExample, fig.align='center', fig.width=9}
-# A simple example: a drug-response fitting without replicates
-url <- getURL("https://raw.github.com/fredcommo/IC50new/master/demo_files/demo1.tsv")
-dat <- read.delim(text=url)
-np1 <- nplr(dat$x, dat$y)
-plot(np1)
 
+Once the model is built, several accessor functions allow to get access to the parameters and performances of the model.
+```{r}
+# Getting the AUC and the x-estimates
+getGoodness(np1)
+getPar(np1)
+```
+
+
+But the purpose of the fitting is to estimate the response to the drug.  
+The *getAUC()* function returns the area under the curve (AUC) estimated by the trapezoid rule and the Simpson's rule.  
+The *getEstimates()* invert the function and returns the estimated concentration for a given response.  If no target is specified, the default output is a table of the x values corresponding to responses from 0.9 to 0.1.
+```{r}
 # Getting the AUC and the x-estimates
 getAUC(np1)
 getEstimates(np1)
+getEstimates(np1, c(.25, .5, .75))
+```
 
+
+A *plot()* function has been specifically implemented for objects of the class *nplr*. This function has several predefined graphical parameters, and not all can be overwritten.  
+However, a convenient way to draw simplest or customized plots is shown in the example below:
+```{r, comparePlots, fig.align='center', fig.width=11}
 # Drawing a simple plot
 op <- par(no.readonly=TRUE)
 par(mfrow=c(1,2))
-plot(np1)
-plot(getX(np1), getY(np1))
-lines(getXcurve(np1), getYcurve(np1))
+plot(np1, pcol="grey40", lcol="skyblue1", showTarget=.5, showInfl=TRUE, main="Using plot()", cex.main=1.5)
+x1 <- getX(np1); y1 <- getY(np1)
+x2 <- getXcurve(np1); y2 <- getYcurve(np1)
+plot(x1, y1, pch=17, cex=2, col="tan1", main="Custom plot", cex.main=1.5)
+lines(x2, y2, lwd=5, col="seagreen4")
 par(op)
 ```
-The $getAUC()$ method returns the area under the curve (AUC), approximated by the trapezoidal rule and the Simpson's rule.  
-The $getEstimates()$ method returns the x-values, and their 95% intervals, for a predefined set of responses, from .1 to .9. As shown in the next example, the $predict()$ method is more flexible.  
-Note that, such model cannot approximate x from y values outside the 2 asymptotes. In such case, the x approximation corresponding to the minimal (or maximal) possible y value will be returned.
 
-The following example is a drug-response analysis, with replicated drug concentrations.
-```{r, duplicates, fig.align='center', fig.width=9}
-# Here a similar example, with replicated measurements
-url <- getURL("https://raw.github.com/fredcommo/IC50new/master/demo_files/demo2.tsv")
-dat <- read.delim(text=url)
-np2 <- nplr(dat$x, dat$y)
-plot(np2)
-predict(np2, c(.25, .5, .75))
+
+The next example analyses a drug-response experiment with replicated drug concentrations: the MCF-7 cell line treated with Irinotecan.
+```{r, duplicates, fig.align='center', fig.width=11}
+path <- system.file("extdata", "mcf7.txt", package="nplr")
+mcf7 <- read.table(path, header=TRUE)
+np2 <- nplr(mcf7$CONC, mcf7$GIPROP)
+plot(np2, main="MCF-7 cell line. Response to Irinotecan", cex.main=2)
 ```
 
-The next example shows the use of $nplr$ for fitting progression data.
+As there are replicates, we can compare the effect of the different weighted methods with the default *residuals weights*, on the fitting:
+```{r, weightMethods, fig.align='center', fig.width=11}
+noweight <- nplr(mcf7$CONC, mcf7$GIPROP, LPweight=0)
+sdw <- nplr(mcf7$CONC, mcf7$GIPROP, method="sdw")
+gw <-  nplr(mcf7$CONC, mcf7$GIPROP, method="sdw", LPweight=1.5)
+par(mfrow=c(2,2))
+plot(np2, showTarget=.5, main="residuals weights")
+plot(noweight, showTarget=.5, main="No weight")
+plot(sdw, showTarget=.5, main="Stdev weights")
+plot(noweight, showTarget=.5, main="general weights")
+par(op)
+```
+
+This last example illustrates a Time/progression experiment: these are simulated data.
+```{r}
+# Getting the data stored in 'nplr'
+path <- system.file("extdata", "prog.txt", package="nplr")
+prog <- read.table(path, header=TRUE)
+```
+
+
+Progression values are given in some unknown unit. But as we have access to a $T_0$ value, and a *control* value as well, we can use *convertToProp()* in order to convert the data to proportions. Here, the x values are *Time* in hours, and we don't want to use $Log_10$ transformations.  
+When progression is at stake, it may be interesting to get the  coordinates of the *inflexion point*, as this is where the slope (progression) is maximal.
 ```{r, progressCurve, fig.align='center', fig.width=9}
-# An example of progression curve fitting
-# where the x-values Log10 transformation is not required
-# and the y-values are in some arbitrary scale.
-url <- getURL("https://raw.github.com/fredcommo/IC50new/master/demo_files/demo4.tsv")
-dat <- read.delim(text=url)
-
 # convert the y-values to proportions
-x <- dat$x
-yp <- convertToProp(dat$y, 5, 110)
+x <- prog$time
+yp <- convertToProp(prog$prog, 5, 102)
 np3 <- nplr(x, yp, useLog=FALSE)
-plot(np3, showTarget=FALSE, xlab="Time (hrs)", ylab="Progression")
+plot(np3, showTarget=FALSE, xlab="Time (hrs)", ylab="Progression (prop. of control)",
+     main="Progression", cex.main=2)
 
-# Getting the inflexion point coordinates
+# Getting the inflexion point coordinates, and some estimates:
 getInflexion(np3)
-
-# Estimating the x_values, given a vector of responses
-predict(np3, c(.25, .50, .75))
+getEstimates(np3, c(.25, .50, .75))
 ```
-When a 5-p logistic regression is used, and because of the asymetric parameter, the curve is no longer symetrical around its inflexion point: this point can differs both from the mid-point and from the $y_{0.5}$ point.  
-However, the inflexion point can be, in some situation, an important information to consider as it represents the coordinates at the maximum slope.  The $getInflexion$ gives access to its coordinates.
 
-This last example shows the effect of the number of parameters on the curve fitting:
+When a 5-p logistic regression is used, and because of the asymetric parameter, the curve is no longer symetrical around its inflexion point. Here is an illustration of the impact of the number of parameters on the fitting.
 ```{r, nparsEffect, fig.align='center', fig.width=9}
-# On the same data: how the number of parameters can affect the fitting
-url <- getURL("https://raw.github.com/fredcommo/IC50new/master/demo_files/demo4.tsv")
-dat <- read.delim(text=url)
-
-# convert the y-values to proportions
-x <- dat$x
-yp <- convertToProp(dat$y, 5, 110)
-models <- lapply(2:5, function(p){
-  tmp <- nplr(x, yp, useLog=FALSE, npars=p)
-  list(x=getXcurve(tmp), y=getYcurve(tmp), infp=getInflexion(tmp), gof=getGoodness(tmp))
-  })
-
-plot(x, yp, col="grey", pch=19, cex=1.25)
-for(i in 1:length(models)) {
-  tmp <- models[[i]]
-  lines(tmp$x, tmp$y, lwd=5, col=i)
-  points(tmp$infp, pch=19, col=i, cex=2)
-  legend(0, 1-i/10, legend=sprintf("%s-par: gof=%s", i+1, round(tmp$gof, 3)), lwd=2, col=i, bty="n")
-  }
+plot(x, yp, pch=19, col="grey", cex=1.5, main="The n-parameter effect", cex.main=2)
+points(x, yp, cex=1.6)
+for(i in 2:5){
+  test <- nplr(x, yp, npars=i, useLog=FALSE)
+  lines(getXcurve(test), getYcurve(test), lwd=3, lty=3, , col=i)
+  points(getInflexion(test), pch=15, cex=1.5, col=i)
+  gof <- getGoodness(test)
+  legend(0, 1-i/20, legend=sprintf("%s-P model: GOF=%s", i, round(gof, 4)), lwd=2, col=i, bty="n")
+}
 ```
+
+*Note that even if it is the case here, the 5-P model is not systematically the best choice.*
 
 
 ## References
@@ -124,3 +155,8 @@ concentration-effect curves: empirical versus mechanistic models. Pharmacol Ther
 Motulsky HJ, Brown RE. Detecting outliers when fitting data with nonlinear
 regression - a new method based on robust nonlinear regression and the false
 discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
+
+
+```{r}
+sessionInfo()
+```
