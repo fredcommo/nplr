@@ -1,10 +1,10 @@
 setMethod(
   f = "getEstimates", 
   signature = "nplr", 
-  definition = function(object, targets=seq(.9, .1, by=-.1), B=1e4){
+  definition = function(object, targets, B){
     
     if(any(!is.numeric(targets)))
-        stop("Target values have to be numeric")
+        stop("Target values have to be numeric.")
 
     pars <- getPar(object)
     if(any(targets<=pars$params$bottom)){
