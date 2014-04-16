@@ -1,0 +1,1453 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdfetex 2013.5.30)  16 APR 2014 14:43
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**\nonstopmode \input /Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vi
+gnettes/nplr.md
+(/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:2: You
+ can't use `macro parameter character #' in vertical mode.
+l.2 #
+      nplr Vignette
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:4: You
+ can't use `macro parameter character #' in vertical mode.
+l.4 #
+     ## AUTHORS: _Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:4: You
+ can't use `macro parameter character #' in vertical mode.
+l.4 ##
+      # AUTHORS: _Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:4: You
+ can't use `macro parameter character #' in vertical mode.
+l.4 ###
+        AUTHORS: _Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:4: Mis
+sing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.4 ### AUTHORS: _
+                  Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:4: Mis
+placed alignment tab character &.
+l.4 ...RS: _Frederic Commo (fredcommo@gmail.com) &
+                                                   Brian M. Bot_
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:5: Mis
+sing { inserted.
+<to be read again> 
+                   \par 
+l.5 
+    
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:5: Mis
+sing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.5 
+    
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:5: Mis
+sing } inserted.
+<inserted text> 
+                }
+<to be read again> 
+                   $
+<to be read again> 
+                   \par 
+l.5 
+    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:6: You
+ can't use `macro parameter character #' in vertical mode.
+l.6 #
+     # Overview
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:6: You
+ can't use `macro parameter character #' in vertical mode.
+l.6 ##
+       Overview
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:13: Un
+defined control sequence.
+l.13 $$y = B + \frac
+                    {T - B}{[1 + 10^{b.(xmid - x)}]^s}$$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:20: Un
+defined control sequence.
+l.20 $$y_p = \frac
+                  {y - T_0}{Ctrl - T_0}$$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:34: To
+o many }'s.
+l.34 .../NCIDTPdata/NCI-60+Growth+Inhibition+Data}
+                                                  .
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:37: Yo
+u can't use `macro parameter character #' in vertical mode.
+l.37 #
+      # Examples
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:37: Yo
+u can't use `macro parameter character #' in vertical mode.
+l.37 ##
+        Examples
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:51: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.51 #
+      # Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:51: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.51 ##
+        Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:52: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.52 #
+      # 5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:52: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.52 ##
+        5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:66: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.66 #
+       Getting the AUC and the x-estimates
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:71: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.71 #
+      # [1] 0.9969
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:71: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.71 ##
+        [1] 0.9969
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:79: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.79 #
+      # $npar
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:79: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.79 ##
+        $npar
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:80: Yo
+u can't use `macro parameter character #' in math mode.
+l.80 #
+      # [1] 5
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:80: Yo
+u can't use `macro parameter character #' in math mode.
+l.80 ##
+        [1] 5
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:81: Yo
+u can't use `macro parameter character #' in math mode.
+l.81 #
+      #
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:81: Yo
+u can't use `macro parameter character #' in math mode.
+l.81 ##
+       
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:82: Yo
+u can't use `macro parameter character #' in math mode.
+l.82 #
+      # $params
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:82: Yo
+u can't use `macro parameter character #' in math mode.
+l.82 ##
+        $params
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:83: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.83 #
+      #      bottom    top   xmid   scal      s
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:83: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.83 ##
+             bottom    top   xmid   scal      s
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:84: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.84 #
+      # 1 0.0001829 0.9965 -6.183 -1.428 0.3352
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:84: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.84 ##
+        1 0.0001829 0.9965 -6.183 -1.428 0.3352
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+[1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:94: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.94 #
+       Getting the AUC and the x-estimates
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:99: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.99 #
+      #   trapezoide Simpson
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:99: Yo
+u can't use `macro parameter character #' in horizontal mode.
+l.99 ##
+          trapezoide Simpson
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:100: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.100 #
+       # 1      2.507   2.527
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:100: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.100 ##
+         1      2.507   2.527
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:108: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.108 #
+       #     y     x05       x     x95
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:108: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.108 ##
+             y     x05       x     x95
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:109: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.109 #
+       # 1 0.9 2.3e-07 3.2e-07 4.0e-07
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:109: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.109 ##
+         1 0.9 2.3e-07 3.2e-07 4.0e-07
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:110: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.110 #
+       # 2 0.8 5.2e-07 6.2e-07 7.3e-07
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:110: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.110 ##
+         2 0.8 5.2e-07 6.2e-07 7.3e-07
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:111: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.111 #
+       # 3 0.7 8.8e-07 1.0e-06 1.2e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:111: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.111 ##
+         3 0.7 8.8e-07 1.0e-06 1.2e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:112: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.112 #
+       # 4 0.6 1.4e-06 1.6e-06 1.8e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:112: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.112 ##
+         4 0.6 1.4e-06 1.6e-06 1.8e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:113: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.113 #
+       # 5 0.5 2.2e-06 2.5e-06 2.9e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:113: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.113 ##
+         5 0.5 2.2e-06 2.5e-06 2.9e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:114: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.114 #
+       # 6 0.4 3.6e-06 4.2e-06 5.0e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:114: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.114 ##
+         6 0.4 3.6e-06 4.2e-06 5.0e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:115: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.115 #
+       # 7 0.3 6.4e-06 7.9e-06 9.9e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:115: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.115 ##
+         7 0.3 6.4e-06 7.9e-06 9.9e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:116: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.116 #
+       # 8 0.2 1.4e-05 1.9e-05 2.7e-05
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:116: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.116 ##
+         8 0.2 1.4e-05 1.9e-05 2.7e-05
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:117: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.117 #
+       # 9 0.1 4.6e-05 8.0e-05 1.7e-04
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:117: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.117 ##
+         9 0.1 4.6e-05 8.0e-05 1.7e-04
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:125: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.125 #
+       #      y     x05       x     x95
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:125: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.125 ##
+              y     x05       x     x95
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:126: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.126 #
+       # 1 0.25 9.2e-06 1.2e-05 1.5e-05
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:126: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.126 ##
+         1 0.25 9.2e-06 1.2e-05 1.5e-05
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:127: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.127 #
+       # 2 0.50 2.2e-06 2.5e-06 2.9e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:127: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.127 ##
+         2 0.50 2.2e-06 2.5e-06 2.9e-06
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:128: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.128 #
+       # 3 0.75 6.9e-07 8.0e-07 9.3e-07
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:128: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.128 ##
+         3 0.75 6.9e-07 8.0e-07 9.3e-07
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:137: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.137 #
+        Drawing a simple plot
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:167: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.167 #
+       # Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:167: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.167 ##
+         Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:168: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.168 #
+       # 5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:168: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.168 ##
+         5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+Overfull \hbox (35.07939pt too wide) in paragraph at lines 175--176
+[]\tenrm <img src="figure/duplicates.png" ti-tle="plot of chunk du-pli-cates" a
+lt="plot of chunk du-pli-cates" style="display:|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm <
+.\tenrm i
+.\tenrm m
+.\tenrm g
+.etc.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:185: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.185 #
+       # Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:185: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.185 ##
+         Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:186: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.186 #
+       # 5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:186: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.186 ##
+         5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:194: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.194 #
+       # Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:194: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.194 ##
+         Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:198: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.198 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:198: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.198 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:199: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.199 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:199: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.199 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:203: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.203 #
+       # 5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:203: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.203 ##
+         5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:207: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.207 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:207: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.207 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:208: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.208 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:208: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.208 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:216: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.216 #
+       # Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:216: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.216 ##
+         Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:220: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.220 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:220: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.220 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:221: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.221 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:221: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.221 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:225: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.225 #
+       # 5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:225: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.225 ##
+         5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:229: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.229 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:229: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.229 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:230: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.230 #
+       # Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:230: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.230 ##
+         Warning: NA/Inf replaced by maximum positive value
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+[2]
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:251: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.251 #
+        Getting the data stored in 'nplr'
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:262: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.262 #
+        convert the y-values to proportions
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:269: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.269 #
+       # Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:269: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.269 ##
+         Testing pars
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:270: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.270 #
+       # 5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:270: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.270 ##
+         5-Parameters model seems to have better performance.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:282: Y
+ou can't use `macro parameter character #' in vertical mode.
+l.282 #
+        Getting the inflexion point coordinates, and some estimates:
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:287: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.287 #
+       #      x      y
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:287: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.287 ##
+              x      y
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:288: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.288 #
+       # 1 24.9 0.8144
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:288: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.288 ##
+         1 24.9 0.8144
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:296: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.296 #
+       #      y  x05    x x95
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:296: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.296 ##
+              y  x05    x x95
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:297: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.297 #
+       # 1 0.25  5.2  8.6  11
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:297: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.297 ##
+         1 0.25  5.2  8.6  11
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:298: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.298 #
+       # 2 0.50 17.0 18.0  20
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:298: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.298 ##
+         2 0.50 17.0 18.0  20
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:299: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.299 #
+       # 3 0.75 23.0 24.0  25
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:299: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.299 ##
+         3 0.75 23.0 24.0  25
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:325: Y
+ou can't use `macro parameter character #' in vertical mode.
+l.325 #
+       # References
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:325: Y
+ou can't use `macro parameter character #' in vertical mode.
+l.325 ##
+         References
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:344: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.344 #
+       # R version 3.0.1 (2013-05-16)
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:344: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.344 ##
+         R version 3.0.1 (2013-05-16)
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:345: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.345 #
+       # Platform: x86_64-apple-darwin10.8.0 (64-bit)
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:345: Y
+ou can't use `macro parameter character #' in horizontal mode.
+l.345 ##
+         Platform: x86_64-apple-darwin10.8.0 (64-bit)
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:345: M
+issing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.345 ## Platform: x86_
+                       64-apple-darwin10.8.0 (64-bit)
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:346: Y
+ou can't use `macro parameter character #' in math mode.
+l.346 #
+       #
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:346: Y
+ou can't use `macro parameter character #' in math mode.
+l.346 ##
+        
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:347: Y
+ou can't use `macro parameter character #' in math mode.
+l.347 #
+       # locale:
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:347: Y
+ou can't use `macro parameter character #' in math mode.
+l.347 ##
+         locale:
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:348: Y
+ou can't use `macro parameter character #' in math mode.
+l.348 #
+       # [1] fr_FR.UTF-8/fr_FR.UTF-8/fr_FR.UTF-8/C/fr_FR.UTF-8/fr_FR.UTF-8
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:348: Y
+ou can't use `macro parameter character #' in math mode.
+l.348 ##
+         [1] fr_FR.UTF-8/fr_FR.UTF-8/fr_FR.UTF-8/C/fr_FR.UTF-8/fr_FR.UTF-8
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:349: Y
+ou can't use `macro parameter character #' in math mode.
+l.349 #
+       #
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:349: Y
+ou can't use `macro parameter character #' in math mode.
+l.349 ##
+        
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:350: Y
+ou can't use `macro parameter character #' in math mode.
+l.350 #
+       # attached base packages:
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:350: Y
+ou can't use `macro parameter character #' in math mode.
+l.350 ##
+         attached base packages:
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:351: Y
+ou can't use `macro parameter character #' in math mode.
+l.351 #
+       # [1] stats     graphics  grDevices utils     datasets  methods   base
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:351: Y
+ou can't use `macro parameter character #' in math mode.
+l.351 ##
+         [1] stats     graphics  grDevices utils     datasets  methods   base
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:352: Y
+ou can't use `macro parameter character #' in math mode.
+l.352 #
+       #
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:352: Y
+ou can't use `macro parameter character #' in math mode.
+l.352 ##
+        
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:353: Y
+ou can't use `macro parameter character #' in math mode.
+l.353 #
+       # other attached packages:
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:353: Y
+ou can't use `macro parameter character #' in math mode.
+l.353 ##
+         other attached packages:
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:354: Y
+ou can't use `macro parameter character #' in math mode.
+l.354 #
+       # [1] knitr_1.5        RCurl_1.95-4.1   bitops_1.0-6     nplr_0.1
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:354: Y
+ou can't use `macro parameter character #' in math mode.
+l.354 ##
+         [1] knitr_1.5        RCurl_1.95-4.1   bitops_1.0-6     nplr_0.1
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:355: Y
+ou can't use `macro parameter character #' in math mode.
+l.355 #
+       # [5] rmarkdown_0.1.82
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:355: Y
+ou can't use `macro parameter character #' in math mode.
+l.355 ##
+         [5] rmarkdown_0.1.82
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:356: Y
+ou can't use `macro parameter character #' in math mode.
+l.356 #
+       #
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:356: Y
+ou can't use `macro parameter character #' in math mode.
+l.356 ##
+        
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:357: Y
+ou can't use `macro parameter character #' in math mode.
+l.357 #
+       # loaded via a namespace (and not attached):
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:357: Y
+ou can't use `macro parameter character #' in math mode.
+l.357 ##
+         loaded via a namespace (and not attached):
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:358: Y
+ou can't use `macro parameter character #' in math mode.
+l.358 #
+       # [1] evaluate_0.5.1 formatR_0.10   stringr_0.6.2  tools_3.0.1
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:358: Y
+ou can't use `macro parameter character #' in math mode.
+l.358 ##
+         [1] evaluate_0.5.1 formatR_0.10   stringr_0.6.2  tools_3.0.1
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/Users/fredcommo/Documents/MyProjects/FredScripts/nplr/vignettes/nplr.md:360: M
+issing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.360 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (263.44997pt too wide) in paragraph at lines 343--360
+\tenrm 8\teni =fr[]R:UTF \tensy ^^@ \tenrm 8\teni =fr[]R:UTF \tensy ^^@ \tenrm 
+8\teni =C=fr[]R:UTF \tensy ^^@ \tenrm 8\teni =fr[]R:UTF \tensy ^^@ \tenrm 8\ten
+i attachedbasepackages \tenrm : [1]\teni statsgraphicsgrDevicesutilsdatasetsmet
+hodsbaseotherattachedpackages \tenrm :|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm 8
+.\teni =
+.\teni f
+.\kern1.0764
+.\teni r
+.etc.
+
+)
+! Emergency stop.
+<*> ...Projects/FredScripts/nplr/vignettes/nplr.md
+                                                  
+*** (job aborted, no legal \end found)
+
+!  ==> Fatal error occurred, no output PDF file produced!
