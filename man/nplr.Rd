@@ -7,7 +7,7 @@
   This function computes a weighted n-parameters logistic regression, given x and y values. See \code{Details}.
 }
 \usage{
-nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw", "Y2", "pw"))
+nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw", "Y2", "pw"), silent = FALSE)
 }
 \arguments{
   \item{x}{ : a vector of numeric values, e.g. a vector of drug concentrations.
@@ -21,6 +21,8 @@ nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw
   \item{npars}{ : a numeric value (or \code{"all"}) to specify the number of parameters to use in the model. If \code{"all"} the logistic model will be tested with 2 to 5 parameters, and the best option will be returned. See \code{Details}
 }
   \item{method}{ : a character string to specify what weighted method to use. Options are \code{"res"(\code{Default}), "sdw", "gw", "Y2", "pw"}. See \code{Details}
+}
+  \item{silent}{ : Logical. Specify whether \code{warnings} ad/or \code{messages} has to be silenced. Default is \code{FALSE}.
 }
 }
 \details{
