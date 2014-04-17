@@ -13,7 +13,7 @@ setMethod("getAUC", "nplr", function(object) return(object@AUC))
 
 ## MAIN nplr FUNCION
 nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
-                 npars="all", method=c("res", "sdw", "gw", "Y2", "pw"),
+                 npars="all", method=c("res", "sdw", "gw"),
                  silent=FALSE){
   
   if(length(x)!=length(y))
@@ -30,25 +30,29 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   if(method=="sdw"){
     if(maxrep<2){
       method <- "res"
-      warning("\nNone of the x-values seem to be replicated. The 'sdw' method has been replaced by 'res'.\n",
+      if(!silent)
+        warning("\nNone of the x-values seem to be replicated. The 'sdw' method has been replaced by 'res'.\n",
             call.=FALSE, immediate.=TRUE)
     } else if(minrep<2){
-      warning("\nOne (or more) points have no replicates. The 'sdw' method may not be appropriate.\n",
+      if(!silent)
+        warning("\nOne (or more) points have no replicates. The 'sdw' method may not be appropriate.\n",
               call.=FALSE, immediate.=TRUE)
     }
   }
   
   if(method=="gw" & any(y<0))
-    warning("\nBecause of one (or more) y negative values, the 'gw' method may not be appropriate.\n",
-            call.=FALSE, immediate.=TRUE)
+    if(!silent)
+      warning("\nBecause of one (or more) y negative values, the 'gw' method may not be appropriate.\n",
+              call.=FALSE, immediate.=TRUE)
 
   if(any(is.na(x) | is.na(y))){
     NAs <- union(which(is.na(x)), which(is.na(y)))
     x <- x[-NAs]
     y <- y[-NAs]
-    warning(call.=FALSE,
-            sprintf("%s point(s) has(ve) been removed for missingness.\n", length(NAs)),
-            immediate.=TRUE)
+    if(!silent)
+      warning(call.=FALSE,
+              sprintf("%s point(s) has(ve) been removed for missingness.\n", length(NAs)),
+              immediate.=TRUE)
   }
   y <- y[order(x)]
   x <- sort(x)

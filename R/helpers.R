@@ -27,15 +27,6 @@
 .generalWeight <- function(x, yobs, yfit, LPweight){
   return(1/yfit^LPweight)
 }
-.Y2 <- function(x, yobs, yfit, LPweight){
-  return(1/yfit^2)
-}
-.poissonWeight <- function(x, yobs, yfit, LPweight){
-  return(1/abs(yfit))
-}
-.uniWeight <- function(yobs){
-  return(rep(1, length(yobs)))
-}
 .sce <- function(pars, x, yobs, .weight, LPweight, nPL){
   bottom <- pars[1]
   top <- pars[2]
@@ -51,10 +42,8 @@
   switch(method,
          res = {.weight <- .wsqRes},
          sdw = {.weight <- .sdWeight},
-         gw = {.weight <- .generalWeight},
-         Y2 = {.weight <- .Y2},
-         pw = {.weight <- .poissonWeight}
-  )
+         gw = {.weight <- .generalWeight}
+         )
   return(.weight)
 }
 .chooseModel <- function(npars){
@@ -108,7 +97,6 @@
   n <- sum(w!=0)
   W <- n/((n-1)*sum(w))
   stdErr <- sqrt(W*sum(w*(yfit-y)^2))
-  
   return(cbind.data.frame(goodness=goodness, stdErr=stdErr, p=p))
 }
 .testAll <- function(.sce, x, y, .weight, LPweight, silent){
