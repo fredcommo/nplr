@@ -3,7 +3,7 @@
 
 ### AUTHORS: _Frederic Commo (fredcommo@gmail.com) & Brian M. Bot_
 
-## Overview
+### 1- Introduction
 
 The $nplr$ package provides functions to compute a weighted n-parameter logistic regression, n from 2 to 5, and to estimate x values corresponding to some given targets.  
 Typical applications are drug-response or progression curve fitting.
@@ -48,8 +48,8 @@ np1 <- nplr(pc3$CONC, pc3$GIPROP)
 ```
 
 ```
-## Testing pars
-## 5-Parameters model seems to have better performance.
+Testing pars
+5-Parameters model seems to have better performance.
 ```
 
 ```r
@@ -63,12 +63,11 @@ plot(np1, main = "PC-3 cell line. Response to Thioguanine", cex.main = 2)
 Once the model is built, several accessor functions allow to get access to the parameters and performances of the model.
 
 ```r
-# Getting the AUC and the x-estimates
 getGoodness(np1)
 ```
 
 ```
-## [1] 0.9969
+[1] 0.9969
 ```
 
 ```r
@@ -76,12 +75,12 @@ getPar(np1)
 ```
 
 ```
-## $npar
-## [1] 5
-## 
-## $params
-##      bottom    top   xmid   scal      s
-## 1 0.0001829 0.9965 -6.183 -1.428 0.3352
+$npar
+[1] 5
+
+$params
+     bottom    top   xmid   scal      s
+1 0.0001829 0.9965 -6.183 -1.428 0.3352
 ```
 
 
@@ -91,13 +90,12 @@ The $getAUC()$ function returns the area under the curve (AUC) estimated by the 
 The $getEstimates()$ invert the function and returns the estimated concentration for a given response.  If no target is specified, the default output is a table of the x values corresponding to responses from 0.9 to 0.1.
 
 ```r
-# Getting the AUC and the x-estimates
 getAUC(np1)
 ```
 
 ```
-##   trapezoide Simpson
-## 1      2.507   2.527
+  trapezoide Simpson
+1      2.507   2.527
 ```
 
 ```r
@@ -105,16 +103,16 @@ getEstimates(np1)
 ```
 
 ```
-##     y     x05       x     x95
-## 1 0.9 2.3e-07 3.2e-07 4.0e-07
-## 2 0.8 5.2e-07 6.2e-07 7.3e-07
-## 3 0.7 8.8e-07 1.0e-06 1.2e-06
-## 4 0.6 1.4e-06 1.6e-06 1.8e-06
-## 5 0.5 2.2e-06 2.5e-06 2.9e-06
-## 6 0.4 3.6e-06 4.2e-06 5.0e-06
-## 7 0.3 6.4e-06 7.9e-06 9.9e-06
-## 8 0.2 1.4e-05 1.9e-05 2.7e-05
-## 9 0.1 4.6e-05 8.0e-05 1.7e-04
+    y     x05       x     x95
+1 0.9 2.3e-07 3.2e-07 4.0e-07
+2 0.8 5.2e-07 6.2e-07 7.3e-07
+3 0.7 8.8e-07 1.0e-06 1.2e-06
+4 0.6 1.4e-06 1.6e-06 1.8e-06
+5 0.5 2.2e-06 2.5e-06 2.9e-06
+6 0.4 3.6e-06 4.2e-06 5.1e-06
+7 0.3 6.4e-06 7.9e-06 9.9e-06
+8 0.2 1.4e-05 1.9e-05 2.7e-05
+9 0.1 4.6e-05 8.0e-05 1.7e-04
 ```
 
 ```r
@@ -122,10 +120,10 @@ getEstimates(np1, c(0.25, 0.5, 0.75))
 ```
 
 ```
-##      y     x05       x     x95
-## 1 0.25 9.2e-06 1.2e-05 1.5e-05
-## 2 0.50 2.2e-06 2.5e-06 2.9e-06
-## 3 0.75 6.9e-07 8.0e-07 9.3e-07
+     y     x05       x     x95
+1 0.25 9.1e-06 1.2e-05 1.5e-05
+2 0.50 2.2e-06 2.5e-06 2.9e-06
+3 0.75 6.9e-07 8.0e-07 9.3e-07
 ```
 
 
@@ -134,7 +132,6 @@ A $plot()$ function has been specifically implemented for objects of the class $
 However, a convenient way to draw simplest or customized plots is shown in the example below:
 
 ```r
-# Drawing a simple plot
 op <- par(no.readonly = TRUE)
 par(mfrow = c(1, 2))
 plot(np1, pcol = "grey40", lcol = "skyblue1", showTarget = 0.5, showInfl = TRUE, 
@@ -164,8 +161,8 @@ np2 <- nplr(mcf7$CONC, mcf7$GIPROP)
 ```
 
 ```
-## Testing pars
-## 5-Parameters model seems to have better performance.
+Testing pars
+5-Parameters model seems to have better performance.
 ```
 
 ```r
@@ -178,59 +175,9 @@ plot(np2, main = "MCF-7 cell line. Response to Irinotecan", cex.main = 2)
 As there are replicates, we can compare the effect of the different weighted methods with the default $residuals weights$, on the fitting:
 
 ```r
-noweight <- nplr(mcf7$CONC, mcf7$GIPROP, LPweight = 0)
-```
-
-```
-## Testing pars
-## 5-Parameters model seems to have better performance.
-```
-
-```r
-sdw <- nplr(mcf7$CONC, mcf7$GIPROP, method = "sdw")
-```
-
-```
-## Testing pars
-```
-
-```
-## Warning: NA/Inf replaced by maximum positive value
-## Warning: NA/Inf replaced by maximum positive value
-```
-
-```
-## 5-Parameters model seems to have better performance.
-```
-
-```
-## Warning: NA/Inf replaced by maximum positive value
-## Warning: NA/Inf replaced by maximum positive value
-```
-
-```r
-gw <- nplr(mcf7$CONC, mcf7$GIPROP, method = "sdw", LPweight = 1.5)
-```
-
-```
-## Testing pars
-```
-
-```
-## Warning: NA/Inf replaced by maximum positive value
-## Warning: NA/Inf replaced by maximum positive value
-```
-
-```
-## 5-Parameters model seems to have better performance.
-```
-
-```
-## Warning: NA/Inf replaced by maximum positive value
-## Warning: NA/Inf replaced by maximum positive value
-```
-
-```r
+noweight <- nplr(mcf7$CONC, mcf7$GIPROP, LPweight = 0, silent = TRUE)
+sdw <- nplr(mcf7$CONC, mcf7$GIPROP, method = "sdw", silent = TRUE)
+gw <- nplr(mcf7$CONC, mcf7$GIPROP, method = "sdw", LPweight = 1.5, silent = TRUE)
 par(mfrow = c(2, 2))
 plot(np2, showTarget = 0.5, main = "residuals weights")
 plot(noweight, showTarget = 0.5, main = "No weight")
@@ -248,7 +195,6 @@ par(op)
 This last example illustrates a Time/progression experiment: these are simulated data.
 
 ```r
-# Getting the data stored in 'nplr'
 path <- system.file("extdata", "prog.txt", package = "nplr")
 prog <- read.table(path, header = TRUE)
 ```
@@ -259,15 +205,14 @@ Progression values are given in some unknown unit. But as we have access to a $T
 When progression is at stake, it may be interesting to get the  coordinates of the $inflexion point$, as this is where the slope (progression) is maximal.
 
 ```r
-# convert the y-values to proportions
 x <- prog$time
 yp <- convertToProp(prog$prog, 5, 102)
 np3 <- nplr(x, yp, useLog = FALSE)
 ```
 
 ```
-## Testing pars
-## 5-Parameters model seems to have better performance.
+Testing pars
+5-Parameters model seems to have better performance.
 ```
 
 ```r
@@ -279,13 +224,12 @@ plot(np3, showTarget = FALSE, xlab = "Time (hrs)", ylab = "Progression (prop. of
 
 ```r
 
-# Getting the inflexion point coordinates, and some estimates:
 getInflexion(np3)
 ```
 
 ```
-##      x      y
-## 1 24.9 0.8144
+     x      y
+1 24.9 0.8144
 ```
 
 ```r
@@ -293,10 +237,10 @@ getEstimates(np3, c(0.25, 0.5, 0.75))
 ```
 
 ```
-##      y  x05    x x95
-## 1 0.25  5.2  8.6  11
-## 2 0.50 17.0 18.0  20
-## 3 0.75 23.0 24.0  25
+     y  x05    x x95
+1 0.25  5.2  8.6  11
+2 0.50 17.0 18.0  20
+3 0.75 23.0 24.0  25
 ```
 
 
@@ -351,8 +295,7 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] knitr_1.5        RCurl_1.95-4.1   bitops_1.0-6     nplr_0.1        
-## [5] rmarkdown_0.1.82
+## [1] RCurl_1.95-4.1 bitops_1.0-6   nplr_0.1       knitr_1.5     
 ## 
 ## loaded via a namespace (and not attached):
 ## [1] evaluate_0.5.1 formatR_0.10   stringr_0.6.2  tools_3.0.1
