@@ -5,6 +5,7 @@ Version: 0.1
 Date: 2014-03-28
 Author: Frederic Commo, Brian M. Bot
 Maintainer: Frederic Commo <fredcommo@gmail.com>
+Depends: methods
 Imports: stats,graphics
 Suggests: RUnit,knitr
 VignetteBuilder: knitr
