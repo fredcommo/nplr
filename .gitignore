@@ -1,6 +1,6 @@
+*.Rproj
 .Rproj.user
 .Rhistory
 .RData
 .Rapp.history
 nplogistic.Rproj
-.Rbuildignore

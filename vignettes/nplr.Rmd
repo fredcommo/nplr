@@ -7,7 +7,7 @@
 In in-vitro experiments, the aim of drug response analyses is usually to estimate the drug concentration required to reach a given cell line growth inhibition rate - typically the 50% inhibitory concentration (IC50), which inhibits 50% of the proliferation, compared with an untreated control. This estimation can be achieved by modeling the inhibition rate observed under a range of drug concentrations.  
 Once the model is fitted, the x values (drug concentrations) can be estimated from the y values (inhibition rates) by simply inverting the function.
 
-The most commonly used model for drug response analysis is the Richards’ equation (1), also refered to as a 5-parameter logistic regression (2):
+The most commonly used model for drug response analysis is the Richards' equation (1), also refered to as a 5-parameter logistic regression (2):
 
 $$y = B + \frac{T - B}{[1 + 10^{b.(xmid - x)}]^s}$$
 
@@ -163,16 +163,11 @@ for(i in 2:5){
 'The R code is freely available on github: https://github.com/fredcommo/nplr'
 
 ## References
-1- Richards, F. J. (1959). A flexible growth function for empirical use. J Exp
-Bot 10, 290–300.
+1- Richards, F. J. (1959). A flexible growth function for empirical use. J Exp Bot 10, 290-300.
 
-2- Giraldo J, Vivas NM, Vila E, Badia A. Assessing the (a)symmetry of
-concentration-effect curves: empirical versus mechanistic models. Pharmacol Ther.
-2002 Jul;95(1):21-45.
+2- Giraldo J, Vivas NM, Vila E, Badia A. Assessing the (a)symmetry of concentration-effect curves: empirical versus mechanistic models. Pharmacol Ther. 2002 Jul;95(1):21-45.
 
-3- Motulsky HJ, Brown RE. Detecting outliers when fitting data with nonlinear
-regression - a new method based on robust nonlinear regression and the false
-discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
+3- Motulsky HJ, Brown RE. Detecting outliers when fitting data with nonlinear regression - a new method based on robust nonlinear regression and the false discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
 
 
 ```{r}

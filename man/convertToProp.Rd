@@ -33,8 +33,6 @@ If none of the T0 and Ctrl values are provided, \code{min(y)} and \code{max(y)} 
 \author{
 Frederic Commo, Brian M. Bot
 }
-\note{
-}
 \section{Warning }{
 Note that for drug response analyses, rescaling the responses between 0 to 1 using to the min and max values, would lead to estimate an EC50 (the half effect between the maximum and the minimum of the observed effects), but not an IC50.
 }

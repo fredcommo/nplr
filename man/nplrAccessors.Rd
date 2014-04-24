@@ -2,34 +2,34 @@
 \docType{methods}
 \alias{getX}
 \alias{getX-methods}
-\alias{getX, nplr-method}
+\alias{getX,nplr-method}
 \alias{getY}
 \alias{getY-methods}
-\alias{getY, nplr-method}
+\alias{getY,nplr-method}
 \alias{getXcurve}
 \alias{getXcurve-methods}
-\alias{getXcurve, nplr-method}
+\alias{getXcurve,nplr-method}
 \alias{getYcurve}
 \alias{getYcurve-methods}
-\alias{getYcurve, nprl-method}
+\alias{getYcurve,nplr-method}
 \alias{getFitValues}
 \alias{getFitValues-methods}
-\alias{getFitValues, nplr-method}
+\alias{getFitValues,nplr-method}
 \alias{getInflexion}
 \alias{getInflexion-methods}
-\alias{getInflexion, nplr-method}
+\alias{getInflexion,nplr-method}
 \alias{getPar}
 \alias{getPar-methods}
-\alias{getPar, nplr-method}
+\alias{getPar,nplr-method}
 \alias{getAUC}
 \alias{getAUC-methods}
-\alias{getAUC, nprl-method}
+\alias{getAUC,nplr-method}
 \alias{getGoodness}
 \alias{getGoodness-methods}
-\alias{getGoodness, nplr-method}
+\alias{getGoodness,nplr-method}
 \alias{getStdErr}
 \alias{getStdErr-methods}
-\alias{getStdErr, nplr-method}
+\alias{getStdErr,nplr-method}
 
 \title{ \code{\link{nplr}} accessor functions }
 
