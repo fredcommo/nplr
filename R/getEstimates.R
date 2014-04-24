@@ -1,7 +1,7 @@
 setMethod(
   f = "getEstimates", 
   signature = "nplr", 
-  definition = function(object, targets, B){
+  definition = function(object, targets, B, conf.level=.95){
     
     if(any(!is.numeric(targets)))
         stop("Target values have to be numeric.")
@@ -20,10 +20,12 @@ setMethod(
       message("These values have been replaced by the maximal possible value the model can estimate.")
     }
     estim <- lapply(targets, function(target)
-      .estimateRange(target, getStdErr(object), pars$params, B, object@useLog)
+      .estimateRange(target, getStdErr(object), pars$params, B, object@useLog, conf.level)
     )
     estim <- cbind.data.frame(y=targets, do.call(rbind, estim))
-    colnames(estim)[-1] <- c('x05', 'x', 'x95')
+    xlower <- sprintf("x.%s", substr((1-conf.level)/2, 3, 5))
+    xupper <- sprintf("x.%s", substr(1-(1-conf.level)/2, 3, 5))
+    colnames(estim)[-1] <- c(xlower, 'x', xupper)
     return(estim)
   }
 )

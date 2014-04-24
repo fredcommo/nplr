@@ -147,9 +147,11 @@
 .invModel <- function(pars, target){
   return(pars$xmid - 1/pars$scal*log10(((pars$top - pars$bottom)/(target - pars$bottom))^(1/pars$s)-1))
 }
-.estimateRange <- function(target, stdErr, pars, B, useLog){
+.estimateRange <- function(target, stdErr, pars, B, useLog, conf.level){
+  lo <- (1-conf.level)/2
+  hi <- 1-(1-conf.level)/2
   Xtarget = .invModel(pars, target)
-  if(is.na(Xtarget)) x05 <- x50 <- x95 <- NA
+  if(is.na(Xtarget)) xlower <- x50 <- xupper <- NA
   else{
     Ytmp <- target + rnorm(B, 0, stdErr)
     if(any(Ytmp<pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<pars$bottom)]
@@ -157,9 +159,9 @@
     Q <- quantile(Ytmp, probs=c(.05, .95), na.rm=T)
     estimates <- .invModel(pars, c(Q[1], target, Q[2]))
     if(useLog) estimates <- 10^estimates
-    x05 <- signif(min(estimates), 2)
+    xlower <- signif(min(estimates), 2)
     x50 <- signif(estimates[2], 2)
-    x95 <- signif(max(estimates), 2)
+    xupper <- signif(max(estimates), 2)
   }
-  return(as.numeric(c(x05, x50, x95)))
+  return(as.numeric(c(xlower, x50, xupper)))
 }

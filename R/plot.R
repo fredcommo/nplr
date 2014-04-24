@@ -2,8 +2,8 @@ setMethod(
   f = "plot", 
   signature = "nplr",
   definition = function(object, x=NA, y=NA, pcol="aquamarine1", lcol="red3", cex=1.5,
-                        showTarget=FALSE, showGOF=TRUE, showCI=TRUE, showInfl=FALSE, B=1e4, unit='',
-                        Title=NA, xlab='Log10(Drug[c])', ylab='Survival', ...){
+                        showTarget=FALSE, showGOF=TRUE, showCI=TRUE, showInfl=FALSE, B=1e4, conf.level=.95,
+                        unit='', Title=NA, xlab='Log10(Drug[c])', ylab='Survival', ...){
 
     x <- getX(object)
     y <- getY(object)
@@ -22,7 +22,7 @@ setMethod(
     
     if(!(!showTarget)){
       stdErr <- getStdErr(object)
-      estim <- .estimateRange(showTarget, stdErr, getPar(object)$params, B, object@useLog)
+      estim <- .estimateRange(showTarget, stdErr, getPar(object)$params, B, object@useLog, conf.level)
       legend1 <- sprintf("IC%d : %s%s", showTarget*100, format(estim[2], scientific=TRUE), unit)
       legend2 <- sprintf("[%s, %s]", format(estim[1], scientific=TRUE), format(estim[3], scientific=TRUE))
       legend(ifelse(newy[length(newy)]<newy[1], 'bottomleft', 'topleft'),

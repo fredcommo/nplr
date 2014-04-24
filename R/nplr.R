@@ -98,13 +98,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     stop("nplr failed and returned constant fitted values. Your data may not be appropriate for such model.")
   w <- .weight(x, y, yFit, LPweight)
   perf <- .getPerf(y, yFit, w)
-  
-#   # Compute simulations to estimate the IC50 conf. interval
-#   targets <- seq(.9, .1, by=(-.1))
-#   estimates <- lapply(targets, function(target){.estimateRange(target, perf$stdErr, pars, B, object@useLog)})
-#   estimates <- cbind.data.frame(Resp = targets, do.call(rbind, estimates))
-#   colnames(estimates) <- c('y', 'xmin', 'x', 'xmax')
-  
+    
   # Inflexion point coordinates
   pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
   infl <- .inflPoint(pars)
