@@ -36,7 +36,7 @@ Frederic Commo, Brian M. Bot
 \note{
 }
 \section{Warning }{
-Note that for drug response analyses, rescaling the responses between 0 to 1 using to the min and max values, leads to estimate an EC50, but not an IC50.
+Note that for drug response analyses, rescaling the responses between 0 to 1 using to the min and max values, would lead to estimate an EC50 (the half effect between the maximum and the minimum of the observed effects), but not an IC50.
 }
 \seealso{
   \code{\link{nplr}}
