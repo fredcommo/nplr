@@ -1,5 +1,6 @@
 \name{nplr}
 \alias{nplr}
+\alias{nplr-class}
 \title{
   Function to compute n-parameters logistic regression.
 }
@@ -20,7 +21,7 @@ nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw
 }
   \item{npars}{ : a numeric value (or \code{"all"}) to specify the number of parameters to use in the model. If \code{"all"} the logistic model will be tested with 2 to 5 parameters, and the best option will be returned. See \code{Details}
 }
-  \item{method}{ : a character string to specify what weighted method to use. Options are \code{"res"(\code{Default}), "sdw", "gw"}. See \code{Details}
+  \item{method}{ : a character string to specify what weighted method to use. Options are \code{"res"(Default), "sdw", "gw"}. See \code{Details}
 }
   \item{silent}{ : Logical. Specify whether \code{warnings} ad/or \code{messages} has to be silenced. Default is \code{FALSE}.
 }
@@ -38,7 +39,7 @@ when specifying \code{npars = 3 or 2}, add 2 more constraints and force \code{B}
 
 Weighted methods:
 
-The model parameters are optimized, simultaneously, using \code{\href{http://stat.ethz.ch/R-manual/R-devel/library/stats/html/nlm.html}{nlm}}, given a sum of squared errors function, sse(Y), to minimize:
+The model parameters are optimized, simultaneously, using \href{http://stat.ethz.ch/R-manual/R-devel/library/stats/html/nlm.html}{nlm}, given a sum of squared errors function, sse(Y), to minimize:
 
 \deqn{
   sse(Y) = \Sigma [W.(Yobs - Yfit)^2 ]
@@ -94,23 +95,16 @@ The following model parameters, performances, and values are stored as slots and
 - area under the curve (AUC) estimated by both the trapezoid rule and the Simpson's rule.
 }
 \references{
-Richards, F. J. (1959). A flexible growth function for empirical use. J Exp
-Bot 10, 290–300.
+Richards, F. J. (1959). A flexible growth function for empirical use. J Exp Bot 10, 290-300.
 
-Giraldo J, Vivas NM, Vila E, Badia A. Assessing the (a)symmetry of
-concentration-effect curves: empirical versus mechanistic models. Pharmacol Ther.
-2002 Jul;95(1):21-45.
+Giraldo J, Vivas NM, Vila E, Badia A. Assessing the (a)symmetry of concentration-effect curves: empirical versus mechanistic models. Pharmacol Ther. 2002 Jul;95(1):21-45.
 
-Motulsky HJ, Brown RE. Detecting outliers when fitting data with nonlinear
-regression - a new method based on robust nonlinear regression and the false
-discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
+Motulsky HJ, Brown RE. Detecting outliers when fitting data with nonlinear regression - a new method based on robust nonlinear regression and the false discovery rate. BMC Bioinformatics. 2006 Mar 9;7:123.
 
 NCI-60 Growth Inhibition Data: \url{https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}
 }
 \author{
 Frederic Commo, Brian M. Bot
-}
-\note{
 }
 \seealso{
     \code{\link{convertToProp}} and \code{\link{getEstimates}}
@@ -123,5 +117,3 @@ Frederic Commo, Brian M. Bot
   model <- nplr(pc3$CONC, pc3$GIPROP)
   plot(model)
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }

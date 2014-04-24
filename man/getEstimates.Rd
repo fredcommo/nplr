@@ -1,7 +1,7 @@
 \name{getEstimates}
 \alias{getEstimates}
 \alias{getEstimates-methods}
-\alias{getEstimates, nplr-method}
+\alias{getEstimates,nplr-method}
 \title{
   Function to estimate x given y.
 }
@@ -46,12 +46,8 @@ A data set containing:
 }
 
 }
-\references{
-}
 \author{
 Frederic Commo, Brian M. Bot
-}
-\note{
 }
 \section{Warning}{
   Note that, if any \eqn{target<=B} or \eqn{target>=T}, in other words outside the 2 asymptotes, the maximal (or minimal) possible value the model can estimates is returned.
