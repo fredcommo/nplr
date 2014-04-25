@@ -22,7 +22,7 @@
   : the length of the y distribution from which the x confidence interval is estimated.
 }
   \item{conf.level}{
-  : the estimated x confidence interval level. These will be labelled as (1-conf.level)/2 and 1 - (1-conf.level)/2 (by default x.025 and x.975).
+  : the estimated x confidence interval, bounded by (1-conf.level)/2 and 1 - (1-conf.level)/2 (by default x.025 and x.975).
 }
 }
 \details{
@@ -36,13 +36,13 @@ A data set containing:
   : the target value provided.
 }
   \item{x05}{
-  : the lower bound of the estimated 95\% confidence interval.
+  : the lower bound of the estimated 95\% confidence interval. If another value is passed to conf.level, x will be labelled as x.(1-conf.level)/2
 }
   \item{x50}{
   : the estimated value.
 }
   \item{x95}{
-  : the upper bound of the estimated 95\% confidence interval.
+  : the upper bound of the estimated 95\% confidence interval. If another value is passed to conf.level, x will be labelled as x.1-(1-conf.level)/2
 }
 
 }
