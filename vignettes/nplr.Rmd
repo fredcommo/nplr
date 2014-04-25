@@ -40,7 +40,7 @@ Other arguments are described in the $nplr$ documentation.
 In a drug-response (or progression) curve fitting context, typical needs are to invert the function in order to estimate the x value, e.g. the IC50, given a y value (the 0.5 survival rate). To do so, the implemented $getEstimates()$ method takes 2 arguments: the model (an instance of the class nplr), and one (or a vector of) target(s). $getEstimates()$ returns the corresponding x values and their estimated confidence intervals, as specified by 'conf.level'.
 
 The examples below use some a sample of the NCI-60 Growth Inhibition Data. For the purpose of the following examples, the provided drug concentrations have been re-exponentiated.  
-The full data can be downloaded at https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}.  
+The full data can be downloaded at https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data.  
 
 
 ## Example 1
