@@ -3,7 +3,7 @@ setMethod(
   signature = "nplr",
   definition = function(object, x=NA, y=NA, pcol="aquamarine1", lcol="red3", cex=1.5,
                         showTarget=FALSE, showGOF=TRUE, showCI=TRUE, showInfl=FALSE, B=1e4, conf.level=.95,
-                        unit='', Title=NA, xlab='Log10(Drug[c])', ylab='Survival', ...){
+                        unit='', Title=NA, xlab=expression(Log[10](conc.)), ylab='Survival', ...){
 
     x <- getX(object)
     y <- getY(object)
