@@ -40,25 +40,18 @@
 \section{Methods}{
   \describe{
     \item{\code{signature(object = "nplr")}}{
-      getX(object)
-      
-      getY(object)
-      
-      getXcurve(object)
-      
-      getYcurve(object)
-      
-      getFitValues(object)  
-      
-      getInflexion(object)  
-      
-      getPar(object)
-      
-      getAUC(object)
-      
-      getGoodness(object)  
-      
-      getStdErr(object)      
+    \itemize{
+      \item getX(object)
+      \item getY(object)
+      \item getXcurve(object)
+      \item getYcurve(object)
+      \item getFitValues(object)  
+      \item getInflexion(object)  
+      \item getPar(object)
+      \item getAUC(object)
+      \item getGoodness(object)  
+      \item getStdErr(object)
+      }
     }
   }
 }
