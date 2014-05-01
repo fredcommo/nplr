@@ -6,6 +6,7 @@
 \usepackage{floatrow}
 \usepackage{url}
 \usepackage{amsmath}
+\usepackage{enumitem}
 
 % Bibliography
 \usepackage[backend=bibtex, sorting=none]{biblatex}
@@ -72,20 +73,21 @@ $$y = B + \dfrac{T - B}{\left [1 + 10^{b(x_{mid} - x)} \right ]^s}$$
 
 Where $B$ and $T$ are the bottom and top asymptotes,  and $b$, $x_{mid}$ and $s$ are the Hill slope, the x-coordinate at the inflexion point and an asymetric coefficient, respectively.
 
-The $nplr$ package we have developed is based on the full 5-parameter model, and provides several options in order to compute flexible weighted n-parameter logistic regression: n can be explicitly specified, from 2 to 5, or $nplr$ can compare all of these models, and return the optimal one (by default, 'npars="all"'), with respect to a weighted Goodness-of-Fit estimator. See the $nplr$ documentation for more details.
+The \texttt{nplr} package we have developed is based on the full 5-parameter model, and provides several options in order to compute flexible weighted n-parameter logistic regression: n can be explicitly specified, from 2 to 5, or \texttt{nplr} can compare all of these models, and return the optimal one (by default, \texttt[npars=\dQuote{all}]), with respect to a weighted Goodness-of-Fit estimator. See the \texttt{nplr} documentation for more details.
 
-During the fitting step, all of the parameters are optimized, simultaneously, using a Newton method (nlm, R package stats). The objective function to minimize is a weighted sum of squared errors:
+During the fitting step, all of the parameters are optimized, simultaneously, using a Newton method (\texttt{nlm}, R package \texttt{stats}). The objective function to minimize is a weighted sum of squared errors:
 
 $$ sse(Y) = \Sigma_i{w_i.(\hat{y}_i - y_i)^2}, i=1,...,n $$
 \\
 The weights, $wi$, used in the objective function can be computed using 3 possible methods, as follows:
 
-  - residuals weights: $w_i = \left (\frac{1}{res_i}\right )^p, i=1,...,n\ values$
-  
-  - standard weights: $w_{ir} = \frac{1}{Var(y_r)}, r=1,...,r\ replicated\ conditions$ 
+\begin{itemize}
+  \renewcommand\labelitemi{--}
+  \item{residuals weights:} $w_i = \left (\frac{1}{res_i}\right )^p, i=1,...,n\ values$
+  \item{standard weights:} $w_{ir} = \frac{1}{Var(y_r)}, r=1,...,r\ replicated\ conditions$ 
+  \item{general weights:} $w_{i} = \left (\frac{1}{\hat{y}_i}\right )^p, i=1,...,n\ values$
+\end{itemize}
 
-  - general weights: $w_{i} = \left (\frac{1}{\hat{y}_i}\right )^p, i=1,...,n\ values$
-\\
 where $p$ is a tuning parameter. The 'standard weights' and the 'general weights' are described in \cite{Motulsky}.
 
 \subsection{Functions in \emph{nplr}}
