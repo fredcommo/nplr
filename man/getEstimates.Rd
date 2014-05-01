@@ -9,7 +9,7 @@
   This function takes as its first argument a model returned by \code{nplr}. By inverting the logistic model, it returns the x values estimates corresponding to one (or a vector of) y target(s) provided. The standard error of the model, defined as the mean squared error on the fitted values, is used to estimate a 95\% confidence interval on the predicted x values. see \code{Details}.
 }
 \usage{
-  getEstimates(object, targets=seq(.9, .1, by=-.1), B=1e4, conf.level=.95)
+  \method{getEstimates}{nplr}(object, targets=seq(.9, .1, by=-.1), B=1e4, conf.level=.95)
 }
 \arguments{
   \item{object}{
