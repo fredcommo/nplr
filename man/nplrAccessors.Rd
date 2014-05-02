@@ -30,11 +30,14 @@
 \alias{getStdErr}
 \alias{getStdErr-methods}
 \alias{getStdErr,nplr-method}
+\alias{nplrAccessors}
+\alias{nplrAccessors-methods}
+\alias{nplrAccessors,nplr-method}
 
 \title{ \code{\link{nplr}} accessor functions }
 
 \description{
-  Methods for extracting information from an object of class \code{\link{nplr}}. Each of the below methods are simply convenience functions which extract the corresponding slots (as the name of each method suggests) from the object of class \code{\link{nplr}}.
+  Methods for extracting information from an object of class \code{nplr}. Each of the below methods are simply convenience functions which extract the corresponding slots (as the name of each method suggests) from the object of class \code{\link{nplr}}.
 }
 
 \section{Methods}{
@@ -57,5 +60,5 @@
 }
 
 \seealso{
-  \code{\link{nplr}}
+  \code{\link{nplr}}, \code{\link{getEstimates}}
 }

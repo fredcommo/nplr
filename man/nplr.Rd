@@ -1,31 +1,29 @@
 \name{nplr}
 \alias{nplr}
 \alias{nplr-class}
+
 \title{
   Function to compute n-parameters logistic regression.
 }
+
 \description{
   This function computes a weighted n-parameters logistic regression, given x and y values. See \code{Details}.
 }
+
 \usage{
 nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw"), silent = FALSE)
 }
+
 \arguments{
-  \item{x}{ : a vector of numeric values, e.g. a vector of drug concentrations.
+  \item{x}{ : a vector of numeric values, e.g. a vector of drug concentrations.}
+  \item{y}{ : a vector of numeric values, e.g. a vector of responses, provided as proportions of control.}
+  \item{useLog}{ : Logical. Should x-values be transformed to \eqn{log10(x)}. Default is \code{TRUE}.}
+  \item{LPweight}{ : a coefficient to adjust the weights. \eqn{LPweight = 0} will compute a non-weighted np-logistic regression.}
+  \item{npars}{ : a numeric value (or \code{"all"}) to specify the number of parameters to use in the model. If \code{"all"} the logistic model will be tested with 2 to 5 parameters, and the best option will be returned. See \code{Details}}
+  \item{method}{ : a character string to specify what weighted method to use. Options are \code{"res"(Default), "sdw", "gw"}. See \code{Details}}
+  \item{silent}{ : Logical. Specify whether \code{warnings} ad/or \code{messages} has to be silenced. Default is \code{FALSE}.}
 }
-  \item{y}{ : a vector of numeric values, e.g. a vector of responses, provided as proportions of control.
-}
-  \item{useLog}{ : Logical. Should x-values be transformed to \eqn{log10(x)}. Default is \code{TRUE}.
-}
-  \item{LPweight}{ : a coefficient to adjust the weights. \eqn{LPweight = 0} will compute a non-weighted np-logistic regression.
-}
-  \item{npars}{ : a numeric value (or \code{"all"}) to specify the number of parameters to use in the model. If \code{"all"} the logistic model will be tested with 2 to 5 parameters, and the best option will be returned. See \code{Details}
-}
-  \item{method}{ : a character string to specify what weighted method to use. Options are \code{"res"(Default), "sdw", "gw"}. See \code{Details}
-}
-  \item{silent}{ : Logical. Specify whether \code{warnings} ad/or \code{messages} has to be silenced. Default is \code{FALSE}.
-}
-}
+
 \details{
 The n-parameter logistic regression is of the form:
 \deqn{
@@ -67,33 +65,29 @@ The general-weights method (\code{"gw"}) computes weights as:
 }
 where \code{yfit} and \code{LPweight} are the fitted values and a weight-adjustment coefficient, respectively. As for the residuals-weights method, setting \eqn{LPweight = 0} results in computing a non-weighted sum of squared errors.
 }
+
 \value{
 An object of class \code{nplr}.
-
-The following model parameters, performances, and values are stored as slots and can be retrieved using the \code{nplrAccessors} functions:  
-
-- original x values, in Log10 if \code{useLog} was set to TRUE. 
-
-- original y values.  
-
-- y fitted values.  
-
-- x-curve values (a sequence of 200 values from min(x) to max(x)).  
-
-- y-curve values (200 fitted values given x-curve).  
-
-- number of parameters: for the best model if \code{npars} was set to 'all', or specified by the user otherwise.
-
-- logistic model parameters.  
-
-- inflexion point coordinates.   
-
-- goodness-of-fit.  
-
-- standard error.
-
-- area under the curve (AUC) estimated by both the trapezoid rule and the Simpson's rule.
 }
+
+\section{slots}{
+  \itemize{
+    \item{x}{ : the x values as they are used in the model. It can be \code{Log10(x)} if \code{useLog} was set to \code{TRUE}.}
+    \item{y}{ : the y values.}
+    \item{useLog}{ : logical.}
+    \item{npars}{ : the best number of parameters if \code{npars="all", the specified number of parameters, otherwise.}}
+    \item{LPweight}{ : the weights tuning parameter.}
+    \item{yFit}{ : the y fitted values.}
+    \item{xCurve}{ : the x values generated to draw the curve. 200 points between the \code{min} and \code{max} of x.}
+    \item{yCurve}{ : the fitted values used to draw the curve. the fitted values corresponding to \code{xCurve}.}
+    \item{inflPoint}{ : the inflexion point x and y coordinates.}
+    \item{goodness}{ : the goodness-of-fit. The correlation between the fitted and the observed y values}
+    \item{stdErr}{ : the mean squared error between the fitted and the observed y values}
+    \item{pars}{ : the model parameters.}
+    \item{AUC}{ : the area under the curve estimated using both the trapezoid method and the Simpson's rule.}
+    }
+}
+
 \references{
 Richards, F. J. (1959). A flexible growth function for empirical use. J Exp Bot 10, 290-300.
 
@@ -107,13 +101,13 @@ NCI-60 Growth Inhibition Data: \url{https://wiki.nci.nih.gov/display/NCIDTPdata/
 Frederic Commo, Brian M. Bot
 }
 \seealso{
-    \code{\link{convertToProp}} and \code{\link{getEstimates}}
+    \code{\link{convertToProp}}, \code{\link{getEstimates}}, \code{\link{plot.nplr}}, \code{\link{nplrAccessors}}
 }
 \examples{
 # Using the PC-3 data
   require(nplr)
   path <- system.file("extdata", "pc3.txt", package="nplr")
   pc3 <- read.table(path, header=TRUE)
-  model <- nplr(pc3$CONC, pc3$GIPROP)
+  model <- nplr(x=pc3$CONC, y=pc3$GIPROP)
   plot(model)
 }

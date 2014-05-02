@@ -8,9 +8,16 @@
 \description{
   This function takes as its first argument a model returned by \code{nplr}. By inverting the logistic model, it returns the x values estimates corresponding to one (or a vector of) y target(s) provided. The standard error of the model, defined as the mean squared error on the fitted values, is used to estimate a 95\% confidence interval on the predicted x values. see \code{Details}.
 }
-\usage{
-  \method{getEstimates}{nplr}(object, targets=seq(.9, .1, by=-.1), B=1e4, conf.level=.95)
-}
+%\usage{
+%  getEstimates(object, targets=seq(.9, .1, by=-.1), B=1e4, conf.level=.95)
+%}
+\section{Methods}{
+  \describe{
+    \item{\code{signature(object = "nplr")}}{
+      getEstimates(object, targets=seq(.9, .1, by=-.1), B=1e4, conf.level=.95)
+    }
+    }
+  }
 \arguments{
   \item{object}{
   : an object of class \code{nplr}.
@@ -53,15 +60,16 @@ Frederic Commo, Brian M. Bot
   Note that, if any \eqn{target<=B} or \eqn{target>=T}, in other words outside the 2 asymptotes, the maximal (or minimal) possible value the model can estimates is returned.
 }
 \seealso{
-  \code{\link{nplr}}
+  \code{\link{nplr}}, \code{\link{plot.nplr}}, , \code{\link{nplrAccessors}}
 }
 \examples{
 # Using the PC-3 data
   require(nplr)
   path <- system.file("extdata", "pc3.txt", package="nplr")
   pc3 <- read.table(path, header=TRUE)
-  model <- nplr(pc3$CONC, pc3$GIPROP)
+  model <- nplr(x=pc3$CONC, y=pc3$GIPROP)
   getEstimates(model)
+  getEstimates(model, c(.3, .6), conf.level=.9)
 }
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }
