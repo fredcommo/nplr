@@ -14,9 +14,7 @@ setClass(
     goodness='numeric', 
     stdErr='numeric',
     pars='data.frame',
-    AUC='data.frame',
-    nPL='ANY', 
-    SCE='ANY'),
+    AUC='data.frame'),
   
   prototype = prototype(
     useLog = TRUE,
@@ -29,9 +27,8 @@ setClass(
     goodness = 0, 
     stdErr = 0, 
     pars = data.frame(),
-    AUC = data.frame(), 
-    nPL = NULL, 
-    SCE = NULL)
+    AUC = data.frame()
+    )
 )
 
 ## SHOW METHOD FOR THIS CLASS

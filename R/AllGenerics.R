@@ -9,4 +9,5 @@ setGeneric("getInflexion", function(object) standardGeneric("getInflexion"))
 setGeneric("getGoodness", function(object) standardGeneric("getGoodness"))
 setGeneric("getStdErr", function(object) standardGeneric("getStdErr"))
 setGeneric("getAUC", function(object) standardGeneric("getAUC"))
-setGeneric("getEstimates", function(object, targets=seq(.9, .1, by=-.1), B=1e4, conf.level=.95) standardGeneric("getEstimates"))
+setGeneric("getEstimates",
+           function(object, targets=seq(.9, .1, by=-.1), B=1e4, conf.level=.95) standardGeneric("getEstimates"))
