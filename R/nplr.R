@@ -112,8 +112,8 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   object@goodness <- perf$goodness
   object@stdErr <- perf$stdErr
   object@AUC <- data.frame(trapezoide = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
-  object@nPL <- nPL
-  object@SCE <- .sce
+#  object@nPL <- nPL
+#  object@SCE <- .sce
   
   return(object)
 }
