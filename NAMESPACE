@@ -3,6 +3,9 @@ importFrom(stats, nlm)
 importFrom(stats, predict)
 importFrom(graphics, plot)
 
+## EXPORT S3 methods
+S3method(plot, nplr)
+
 ## EXPORT S3 FUNCTIONS
 export(
   nplr,
@@ -21,8 +24,7 @@ exportMethods(
   getX,
   getXcurve,
   getY,
-  getYcurve,
-  plot
+  getYcurve
 )
 
 
