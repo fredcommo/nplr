@@ -68,7 +68,6 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   if(useLog) x <- log10(x)
   object <- new("nplr", x=x, y=y, useLog=useLog, LPweight=LPweight)
   
-#  weights <- rep(1, length(y))
   .weight <- .chooseWeight(method)
   
   if(npars=="all"){
@@ -111,9 +110,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   object@inflPoint <- infl
   object@goodness <- perf$goodness
   object@stdErr <- perf$stdErr
-  object@AUC <- data.frame(trapezoide = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
-#  object@nPL <- nPL
-#  object@SCE <- .sce
+  object@AUC <- data.frame(trapezoid = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
   
   return(object)
 }

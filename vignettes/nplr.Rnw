@@ -124,7 +124,7 @@ require(nplr)
 The first example fits a simple drug-response curve: the PC-3 cell line treated with Thioguanine, 19 points without replicates.
 <<>>=
 path <- system.file("extdata", "pc3.txt", package="nplr")
-pc3 <- read.table(path, header=TRUE)
+pc3 <- read.delim(path)
 np1 <- nplr(x=pc3$CONC, y=pc3$GIPROP)
 @
 
@@ -137,7 +137,7 @@ np1
 \subsubsection{Visualizing the model}
 A specific \texttt{plot()} function has been implemented in order to visualize the results.
 <<simpleExample, include=FALSE>>=
-plot(np1, main="PC-3 cell line. Response to Thioguanine", cex.main=1.2)
+plot(np1, main="PC-3 cell line. Response to Thioguanine", cex.main = 1.2)
 @
 
 <<fig1, ref.label='simpleExample'>>=
@@ -187,13 +187,13 @@ getEstimates(np1, c(.25, .5, .75), conf.level=.90)
 The next example analyses a drug-response experiment with replicated drug concentrations: the MCF-7 cell line treated with Irinotecan.
 <<>>=
 path <- system.file("extdata", "mcf7.txt", package="nplr")
-mcf7 <- read.table(path, header=TRUE)
+mcf7 <- read.delim(path)
 np2 <- nplr(x=mcf7$CONC, y=mcf7$GIPROP)
 plot(np2, main="MCF-7 cell line. Response to Irinotecan", cex.main=1.25)
 @
 
 \vspace{.5in}
-As there are replicates, we can compare the effect of the different weighted methods with the default $residuals weights$, on the fitting. A 'no-weight' condition can be tested by setting the \texttt{LPweight} argument to 0: The vector of weights is then a vector of 1s.
+As there are replicates, we can compare the effect of the different weighted methods with the default $residuals weights$, on the fitting. A 'no-weight' condition can be tested by setting the \texttt{LPweight} argument to 0: The vector of weights is then a vector of 1's.
 <<message=FALSE, warning=FALSE, fig.width=12, fig.height=10, echo=c(1:6, 8:11)>>=
 x <- mcf7$CONC
 y <- mcf7$GIPROP
@@ -217,7 +217,7 @@ Note that the curves do not seem to change dramatically. However, the different 
 This last example illustrates a Progression/Time experiment: these are simulated data.\\
 <<>>=
 path <- system.file("extdata", "prog.txt", package="nplr")
-prog <- read.table(path, header=TRUE)
+prog <- read.delim(path)
 @
 
 Here, the progression values are given in some unknown unit. Here, the x values are \texttt{Time} in hours, and we don't need to use a $Log_10$ transformation. Next, let us assume that we have access to a $T_0$ and a $control$ values. We can use \texttt{convertToProp()} in order to convert the data to proportions. 

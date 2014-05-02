@@ -7,11 +7,11 @@
   This function allows to visualize logistic models fitted using \code{\link{nplr}}.
 }
 \usage{
-  \method{plot}{nplr}(object, pcol="aquamarine1", lcol="red3",
-  showTarget=FALSE, showCI=TRUE, showGOF=TRUE, showInfl=FALSE, B=1e4, conf.level=.95, unit=NA, ...)
+  \method{plot}{nplr}(x, pcol = "aquamarine1", lcol = "red3",
+  showTarget = FALSE, showCI = TRUE, showGOF = TRUE, showInfl = FALSE, B = 1e4, conf.level = .95, unit = NA, ...)
 }
 \arguments{
-  \item{object}{ : an object of class \code{\link{nplr}}}
+  \item{x}{ : an object of class \code{\link{nplr}}}
   \item{pcol}{ : the points color.}
   \item{lcol}{ : the line color.}
   \item{showTarget}{ : logical. show the estimated value.}
@@ -32,12 +32,15 @@ None
 \references{
 None
 }
+\note{
+The data used in the examples are samples from the NCI-60 Growth Inhibition Data: \url{https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}
+}
 \examples{
 # Using the PC-3 data
   require(nplr)
-  path <- system.file("extdata", "pc3.txt", package="nplr")
-  pc3 <- read.table(path, header=TRUE)
-  model <- nplr(x=pc3$CONC, y=pc3$GIPROP)
+  path <- system.file("extdata", "pc3.txt", package = "nplr")
+  pc3 <- read.delim(path)
+  model <- nplr(x = pc3$CONC, y = pc3$GIPROP)
   plot(model)
 }
 \seealso{

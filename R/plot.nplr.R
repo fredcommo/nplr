@@ -1,14 +1,14 @@
-plot.nplr <- function(object, pcol="aquamarine1", lcol="red3",
+plot.nplr <- function(x, pcol="aquamarine1", lcol="red3",
          showTarget=FALSE, showCI=TRUE, showGOF=TRUE, showInfl=FALSE,
          B=1e4, conf.level=.95, unit=NA, ...){
   
+  object <- x
   x <- getX(object)
   y <- getY(object)
   newx <- getXcurve(object)
   newy <- getYcurve(object)
   gof <- round(getGoodness(object), 3)
-  plot(x, y, col=pcol, pch=19,
-       las = 1, cex.axis = 1.25, cex.lab = 1.5,...)
+  plot(x, y, col=pcol, pch=19, las = 1, cex.axis = 1.25, cex.lab = 1.5,...)
   points(x, y, pch = 1)
   
   if(showGOF)
