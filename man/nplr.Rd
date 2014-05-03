@@ -11,7 +11,8 @@
 }
 
 \usage{
-nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all", method = c("res", "sdw", "gw"), silent = FALSE)
+nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all",
+        method = c("res", "sdw", "gw"), silent = FALSE)
 }
 
 \arguments{

@@ -8,7 +8,8 @@
 }
 \usage{
   \method{plot}{nplr}(x, pcol = "aquamarine1", lcol = "red3",
-  showTarget = FALSE, showCI = TRUE, showGOF = TRUE, showInfl = FALSE, B = 1e4, conf.level = .95, unit = NA, ...)
+  showTarget = FALSE, showCI = TRUE, showGOF = TRUE, showInfl = FALSE,
+  B = 1e4, conf.level = .95, unit = NA, ...)
 }
 \arguments{
   \item{x}{ : an object of class \code{\link{nplr}}}

@@ -5,7 +5,6 @@ Version: 0.1
 Date: 2014-03-28
 Authors@R: c(person(given="Frederic", family="Commo", role=c("aut", "cre"), email="fredcommo@gmail.com"),
 	      person(given="Brian M.", family="Bot", role="aut"))
-Author: Frederic Commo AND Brian M. Bot
 Maintainer: Frederic Commo <fredcommo@gmail.com>
 Depends: methods
 Imports: stats,graphics

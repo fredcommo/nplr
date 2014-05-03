@@ -1,16 +1,26 @@
-%\VignetteIndexEntry{nplr}
 
 % Packages
-\documentclass{article}
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\setlength{\parskip}{0.7ex plus0.1ex minus0.1ex}
+\setlength{\parindent}{0em}
+
+%\documentclass{article}
 \usepackage[american]{babel}
 \usepackage{floatrow}
 \usepackage{url}
-%\usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumitem}
 
-% Bibliography
+% Page settings
+%\setlength{\textwidth}{15cm} 
+%\setlength{\textheight}{22cm}
+%\setlength{\oddsidemargin}{1cm} 
+%\setlength{\evensidemargin}{2cm}
+%\setlength{\topmargin}{-1.5cm}
+
+% References
 \usepackage[backend=bibtex, sorting=none]{biblatex}
 \bibliography{references}
 \usepackage{csquotes}
@@ -47,14 +57,10 @@
 
 \end{filecontents*}
 
-% Page settings
-\setlength{\textwidth}{15cm} 
-\setlength{\textheight}{24cm}
-\setlength{\oddsidemargin}{0cm} 
-\setlength{\evensidemargin}{2cm}
-\setlength{\topmargin}{-2cm}
-
 \begin{document}
+
+%\VignetteIndexEntry{R package nplr}
+%\VignetteEngine{knitr::knitr}
 
 \title{R package \emph{nplr} \\
   \emph{n-parameter logistic regressions}}
@@ -64,25 +70,28 @@
 % Chunk setup
 <<setup, include=FALSE>>=
 require(knitr)
-opts_chunk$set(fig.align='center', fig.width=5.5, fig.height=5, dev='pdf', prompt=TRUE, comment=NA, highlight=FALSE, tidy=FALSE)
+opts_chunk$set(fig.align='center', fig.width=5.5, fig.height=4.5,
+               dev='pdf', prompt=TRUE, comment=NA, highlight=FALSE, tidy=FALSE)
 @
 
 \section{Introduction}
 \subsection{Overview}
-In in-vitro experiments, the aim of drug response analyses is usually to estimate the drug concentration required to reach a given cell line growth inhibition rate - typically the 50\% inhibitory concentration ($IC_50$), which inhibits 50\% of the proliferation, compared with an untreated control. This estimation can be achieved by modeling the inhibition rate observed under a range of drug concentrations.  
-Once the model is fitted, the x values (drug concentrations) can be estimated from the y values (inhibition rates) by simply inverting the function.\\
+In in-vitro experiments, the aim of drug response analyses is usually to estimate the drug concentration required to reach a given cell line growth inhibition rate - typically the 50\% inhibitory concentration ($IC_{50}$), which inhibits 50\% of the proliferation, compared with an untreated control. This estimation can be achieved by modeling the inhibition rate observed under a range of drug concentrations. Once the model is fitted, the x values (drug concentrations) can be estimated from the y values (inhibition rates) by simply inverting the function.
+\par
 The most commonly used model for drug response analysis is the Richards' equation \cite{Richards}, also refered to as a 5-parameter logistic regression \cite{Giraldo}:
 
 $$y = B + \dfrac{T - B}{\left [1 + 10^{b(x_{mid} - x)} \right ]^s}$$
 \\
-Where $B$ and $T$ are the bottom and top asymptotes,  and $b$, $x_{mid}$ and $s$ are the Hill slope, the x-coordinate at the inflexion point and an asymetric coefficient, respectively.\\
-The \texttt{nplr} package we have developed is based on the full 5-parameter model, and provides several options in order 
-to compute flexible weighted n-parameter logistic regression: n can be explicitly specified, from 2 to 5, or \texttt{nplr} can compare all of these models, and return the optimal one (by default, \texttt{npars="all"}), with respect to a weighted Goodness-of-Fit estimator. See the \texttt{nplr} documentation for more details.
-\\
+where $B$ and $T$ are the bottom and top asymptotes,  and $b$, $x_{mid}$ and $s$ are the Hill slope, the x-coordinate at the inflexion point and an asymetric coefficient, respectively.
+\par
+\vspace{\baselineskip}
+
+The \texttt{nplr} package we have developed is based on the full 5-parameter model, and provides several options in order to compute flexible weighted n-parameter logistic regression: n can be explicitly specified, from 2 to 5, or \texttt{nplr} can compare all of these models, and return the optimal one (by default, \texttt{npars="all"}), with respect to a weighted Goodness-of-Fit estimator. See the \texttt{nplr} documentation for more details.
+\par
 During the fitting step, all of the parameters are optimized, simultaneously, using a Newton method (\texttt{nlm}, R package \texttt{stats}). The objective function to minimize is a weighted sum of squared errors:
 
 $$ sse(Y) = \Sigma_i{w_i.(\hat{y}_i - y_i)^2}, i=1,...,n $$
-
+\\
 The weights, $wi$, used in the objective function can be computed using 3 possible methods, as follows:
 
 \begin{itemize}
@@ -92,56 +101,55 @@ The weights, $wi$, used in the objective function can be computed using 3 possib
   \item{general weights:} $w_{i} = \left (\frac{1}{\hat{y}_i}\right )^p, i=1,...,n\ values$
 \end{itemize}
 
-where $p$ is a tuning parameter. The \texttt{standard weights} and the \texttt{general weights} are described in \cite{Motulsky}.
+where $p$ is a tuning parameter. The \texttt{standard weights} and the \texttt{general weights} methods are described in \cite{Motulsky}.
 
 \subsection{Functions in \texttt{nplr}}
-The main function is simply \texttt{nplr}, and requires 2 main arguments: a vector of \texttt{x} and a vector of \texttt{y}.\\
+The main function is simply \texttt{nplr}, and requires 2 main arguments: a vector of \texttt{x} and a vector of \texttt{y}.
+\par
 The $npars$ argument allows a user to run specific n-parameter models, n from 2 to 5, while the default value, \texttt{npars="all"}, asks the function to test which model fits the best the data, according to a weighted Goodness-of-Fit estimator.\\
-In some situations, the x values may need to be log-transformed, e.g. x is provided as original drug concentrations. In such case, setting $useLog=TRUE$ in \texttt{nplr()} will apply a $Log_10$ transformation on the x values.
-\\
+In some situations, the x values may need to be log-transformed, e.g. x is provided as original drug concentrations. In such case, setting \texttt{useLog=TRUE} in \texttt{nplr()} will apply a $Log_{10}$ transformation on the x values.
+\par
 The \texttt{nplr()} function has been optimized for fitting curves on y-values passed as proportions of control, between 0 to 1.
 If data are supplied as original response values, e.g. optic density measurements, the \texttt{convertToProp()} function may be helpful. In drug-response curve fitting, a good practice consists in adjusting the signals on a $T_0$ and a $control$  (Ctrl) values. Providing this values, the proportion values, $y_p$, are computed as:
-
 $$y_p = \frac{y - T_0}{Ctrl - T_0}$$
-\\
-where $y$, $T_0$ and $Ctrl$ are the observed values, the 'time zero' and the 'untreated control', respectively.\\
-Note that if neither $T_0$ nor $Ctrl$ are provided, the default behavior of \texttt{convertToProp()} is to adjust the values as proportions of the $min$ and $max$ of $y$. In that case, the user should be aware that $y = 0.5$ may not correspond to a $IC50$, but rather to a $EC50$ (the half-effect between the maximum and the minimum of the observed effects).
-\\
+where $y$, $T_0$ and $Ctrl$ are the observed values, the 'time zero' and the 'untreated control', respectively.
+\par
+Note that if neither $T_0$ nor $Ctrl$ are provided, \texttt{convertToProp()} will compute the proportions with respect to the $min$ and $max$ of $y$. In that case, the user should be aware that $y = 0.5$ may not correspond to a $IC_{50}$, but rather to a $EC_{50}$ (the half-effect between the maximum and the minimum of the observed effects).
+\par
+\vspace{\baselineskip}
 
 In a drug-response (or progression) curve fitting context, typical needs are to invert the function in order to estimate the x value, e.g. the $IC_50$, given a $y$ value, e.g. the 0.5 survival rate. To do so, the implemented \texttt{getEstimates()} method takes 2 arguments: the model (an instance of the class nplr), and one (or a vector of) target(s). \texttt{getEstimates()} returns the corresponding x values and their estimated confidence intervals, as specified by \texttt{conf.level}.
 
-
 \section{Examples}
-The examples below use some samples of the NCI-60 Growth Inhibition Data. The full data can be downloaded at \cite{NCI}.\\
-For the purpose of the demonstration, the supplied drug concentrations have been re-exponentiated.
+The examples below use some samples of the NCI-60 Growth Inhibition Data. The full data can be downloaded at \cite{NCI}. For the purpose of the demonstration, the supplied drug concentrations have been re-exponentiated.
 
 \subsection{Example 1}
 \subsubsection{Fitting a model}
-<<message=FALSE, warning=FALSE>>=
+<<nplr, message=FALSE, warning=FALSE>>=
 require(nplr)
 @
 
 The first example fits a simple drug-response curve: the PC-3 cell line treated with Thioguanine, 19 points without replicates.
-<<>>=
+<<test1>>=
 path <- system.file("extdata", "pc3.txt", package="nplr")
 pc3 <- read.delim(path)
 np1 <- nplr(x=pc3$CONC, y=pc3$GIPROP)
 @
 
 Calling the object returns the fitting summary for the model.
-<<>>=
+<<out1>>=
 np1
 @
 
-
 \subsubsection{Visualizing the model}
 A specific \texttt{plot()} function has been implemented in order to visualize the results.
-<<simpleExample, include=FALSE>>=
-plot(np1, main="PC-3 cell line. Response to Thioguanine", cex.main = 1.2)
+<<plot1, include=FALSE>>=
+plot(np1, cex.main = 1.2,
+     main="PC-3 cell line. Response to Thioguanine")
 @
 
-<<fig1, ref.label='simpleExample'>>=
-    @
+<<fig1, ref.label='plot1'>>=
+@
 
 \vspace{.5in}
 This function has several predefined graphical parameters, and some of them can be overwritten.  
@@ -149,58 +157,78 @@ However, a convenient way to draw simplest or customized plots is shown in the e
 <<custom, include=FALSE>>=
 op <- par(no.readonly=TRUE)
 par(mfrow=c(1,2))
-plot(np1, pcol="grey40", lcol="skyblue1", showTarget=.5, showInfl=TRUE, main="Using plot()", cex.main=1.5)
+plot(np1, pcol="grey40", lcol="skyblue1", showTarget=.5, showInfl=TRUE,
+     main="Using plot()", cex.main=1.5)
 x1 <- getX(np1); y1 <- getY(np1)
 x2 <- getXcurve(np1); y2 <- getYcurve(np1)
-plot(x1, y1, pch=15, cex=2, col="tan1", xlab=expression(Log[10](conc)), ylab="Prop", main="My plot", cex.main=1.5)
+plot(x1, y1, pch=15, cex=2, col="tan1", xlab=expression(Log[10](conc)),
+     ylab="Prop", main="My plot", cex.main=1.5)
 lines(x2, y2, lwd=5, col="seagreen4")
 par(op)
 @
 
-<<fig2, ref.label='custom', fig.width=10, echo=3:9>>=
-    @
+<<plotCustom, ref.label='custom', fig.width=12, fig.height=5.5, echo=3:7>>=
+@
 
 \subsubsection{Accessing the performances}
 Once the model is built, several accessor functions allow to get access to the performances of the model, and its parameters.
-<<>>=
+<<getGoodness1>>=
 getGoodness(np1)
-getStdErr(np1)
-getPar(np1)
 @
 
+<<getStdErr1>>=
+getStdErr(np1)
+@
+
+<<getPar1>>=
+getPar(np1)
+@
+Here, the 5-parameter model have been chosen as it showed better performances, according to the goodness-of-fit (\texttt{npar=5}). The optimal values for the parameters are reported in \texttt{params}.
+
 \subsubsection{Estimating the drug concentrations}
-The purpose of the fitting is to estimate the response to the drug. To do so, \texttt{nplr} provides 2 estimates: the area under the curve (AUC), and the drug concentration corresponding to a given response.\\  
-The \texttt{getAUC()} function returns the area under the curve (AUC) estimated by the trapezoid rule and the Simpson's rule.\\  
-The \texttt{getEstimates()} invert the function and returns the estimated concentration for a given response.  If no target is specified, the default output is a table of the x values corresponding to responses from 0.9 to 0.1.
-<<>>=
+The purpose of such fitting is to estimate the response to the drug. To do so, \texttt{nplr} provides 2 estimates: the area under the curve (AUC), and the drug concentration for a given response to reach.
+\par  
+The \texttt{getAUC()} function returns the area under the curve (AUC) estimated by the trapezoid rule and the Simpson's rule, while \texttt{getEstimates()} invert the function and returns the estimated concentration for a given response.  If no target is specified, the default output is a table of the x values corresponding to responses from 0.9 to 0.1.
+<<getAUC1>>=
 getAUC(np1)
+@
+
+<<getEstimates1>>=
 getEstimates(np1)
 @
 
 A single value (a target), or a vector of values, can be passed to \texttt{getEstimates()}, and a confidence level can be specified (by default, conf.level is set to .95).
-<<>>=
+<<getTarget1>>=
 getEstimates(np1, .5)
+@
+
+<<getTargetCI>>=
 getEstimates(np1, c(.25, .5, .75), conf.level=.90)
 @
 
 \subsection{Example 2}
 The next example analyses a drug-response experiment with replicated drug concentrations: the MCF-7 cell line treated with Irinotecan.
-<<>>=
+<<test2>>=
 path <- system.file("extdata", "mcf7.txt", package="nplr")
 mcf7 <- read.delim(path)
 np2 <- nplr(x=mcf7$CONC, y=mcf7$GIPROP)
-plot(np2, main="MCF-7 cell line. Response to Irinotecan", cex.main=1.25)
+@
+
+<<plot2>>=
+plot(np2 , cex.main=1.25, main="Cell line MCF-7. Response to Irinotecan")
 @
 
 \vspace{.5in}
-As there are replicates, we can compare the effect of the different weighted methods with the default $residuals weights$, on the fitting. A 'no-weight' condition can be tested by setting the \texttt{LPweight} argument to 0: The vector of weights is then a vector of 1's.
-<<message=FALSE, warning=FALSE, fig.width=12, fig.height=10, echo=c(1:6, 8:11)>>=
+As there are replicates, we can compare the effect of the different weighted methods: the default method is \texttt{residuals weights, "res"}. A \texttt{no-weight} condition can be tested by setting the \texttt{LPweight} argument to 0: The vector of weights is then just a vector of 1's.
+<<testWeights, message=FALSE, warning=FALSE>>=
 x <- mcf7$CONC
 y <- mcf7$GIPROP
 noweight <- nplr(x, y, LPweight=0, silent=TRUE)
 sdw <- nplr(x, y, method="sdw", silent=TRUE)
 gw <-  nplr(x, y, method="sdw", LPweight=1.5, silent=TRUE)
+@
 
+<<plotWeights, fig.width=12, fig.height=10, echo=2:5>>=
 par(mfrow=c(2,2))
 plot(np2, showTarget=.5, main="residuals weights")
 plot(noweight, showTarget=.5, main="No weight")
@@ -210,50 +238,52 @@ par(op)
 @
 
 \vspace{.5in}
-Note that the curves do not seem to change dramatically. However, the different weights can have different performances.
+Note that the curves do not seem to change dramatically. However, the different weights can give different performances.
 
 \subsection{Example 3}
 \subsubsection{Fitting a Progression/Time model}
 This last example illustrates a Progression/Time experiment: these are simulated data.\\
-<<>>=
+<<loadProg>>=
 path <- system.file("extdata", "prog.txt", package="nplr")
 prog <- read.delim(path)
 @
 
-Here, the progression values are given in some unknown unit. Here, the x values are \texttt{Time} in hours, and we don't need to use a $Log_10$ transformation. Next, let us assume that we have access to a $T_0$ and a $control$ values. We can use \texttt{convertToProp()} in order to convert the data to proportions. 
-<<>>=
+Here, the progression values are given in some unknown unit, and the x values are \texttt{Time} in hours. So we don't need to use a $Log_{10}$ transformation. Let us assume that we have access to the $T_0$ and the $control$ values. We can use \texttt{convertToProp()} in order to convert the y values to proportions. 
+<<test3>>=
 x <- prog$time
-yp <- convertToProp(prog$prog, 5, 102)
+yp <- convertToProp(prog$prog, T0 = 5, Ctrl = 102)
 np3 <- nplr(x, yp, useLog=FALSE)
 @
 
-\vspace{.5in}
 When progression is at stake, it may be interesting to get the  coordinates of the inflexion point, as it corresponds to the point where the slope (the progression) is maximal.
-<<>>=
-plot(np3, showInfl=TRUE, xlab="Time (hrs)", ylab="Progression (prop. of control)", main="Progression", cex.main=2)
+<<getInf3>>=
 getInflexion(np3)
+@
+
+<<plot3>>=
+plot(np3, showInfl=TRUE, xlab="Time (hrs)", cex.main=1.5, cex.lab=1.2,
+     ylab="Prop. of control", main="Progression")
 @
 
 \subsubsection{Evaluating the number of parameters}
 When a 5-p logistic regression is used, and because of the asymetric parameter, the curve is no longer symetrical around its inflexion point. Here is an illustration of the impact of the number of parameters on the fitting.
 <<npar>>=
-plot(x, yp, main="The n-parameter effect", xlab="Time", ylab="Progression", cex.main=1.5)
-l <- c()
+plot(x, yp , cex.main=1.5, cex.lab=1.2,
+     main="The n-parameter effect", xlab="Time", ylab="Progression")
+le <- c()
 for(i in 2:5){
   test <- nplr(x, yp, npars=i, useLog=FALSE)
-  lines(getXcurve(test), getYcurve(test), lwd=2, lty=3, , col=i)
-  points(getInflexion(test), pch=15, cex=1.5, col=i)
+  lines(getXcurve(test), getYcurve(test), lwd=2, col=i)
+  points(getInflexion(test), pch=19, cex=1.25, col=i)
   gof <- getGoodness(test)
-  l <- c(l, sprintf("%s-P: GOF=%s", i, round(gof, 4)))
+  le <- c(le, sprintf("%s-P: GOF=%s", i, round(gof, 4)))
 }
-legend("bottomright", legend=l, lwd=2, col=2:5, bty="n")
+legend("bottomright", legend=le, lwd=2, pch=19, col=2:5, bty="n")
 @
-
-\emph{Note that even if it is the case here, the 5-P model may not be always the best choice.}
+Note that even if it is the case here, the 5-P model may not be always the best choice.
 
 \section{Accessing R code}
-The R code for $nplr$ is available on github: \url{https://github.com/fredcommo/nplr}
-
+The R code for \texttt{nplr} is available on github: \url{https://github.com/fredcommo/nplr}
 
 \printbibliography
 
