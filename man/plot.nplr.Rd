@@ -8,20 +8,20 @@
 }
 \usage{
   \method{plot}{nplr}(x, pcol = "aquamarine1", lcol = "red3",
-  showTarget = FALSE, showCI = TRUE, showGOF = TRUE, showInfl = FALSE,
-  B = 1e4, conf.level = .95, unit = NA, ...)
+  showEstim = FALSE, showCI = TRUE, showGOF = TRUE, showInfl = FALSE,
+  B = 1e4, conf.level = .95, unit = "", ...)
 }
 \arguments{
   \item{x}{ : an object of class \code{\link{nplr}}}
   \item{pcol}{ : the points color.}
   \item{lcol}{ : the line color.}
-  \item{showTarget}{ : logical. show the estimated value.}
+  \item{showEstim}{ : logical/numeric. If a numerical value is passed (a y value to reach), the estimated x value , and interval, is displayed on the plot. Default is \code{FALSE} }
   \item{showCI}{ : logical. show the estimated confidence interval}
   \item{showGOF}{ : logical. show the estimated goodness-of-fit.}
   \item{showInfl}{ : logical. add the inflexion point on the plot.}
   \item{B}{ : the length of simulated y values. Used to estimate the confidence interval}
   \item{conf.level}{ : the confidence level. See \code{\link{getEstimates}}}
-  \item{unit}{ : the unit to specify when \code{showEstim} is \code{TRUE}}
+  \item{unit}{ : the unit to specify when \code{showEstim} is \code{TRUE}. Default is an empty string.}
   \item{...}{ : other graphical parameters.}
 }
 \details{
@@ -42,7 +42,7 @@ The data used in the examples are samples from the NCI-60 Growth Inhibition Data
   path <- system.file("extdata", "pc3.txt", package = "nplr")
   pc3 <- read.delim(path)
   model <- nplr(x = pc3$CONC, y = pc3$GIPROP)
-  plot(model)
+  plot(model, showEstim = 0.5, unit = "µM")
 }
 \seealso{
     \code{\link{nplr}}, \code{\link{convertToProp}}, \code{\link{getEstimates}}

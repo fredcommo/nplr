@@ -1,6 +1,6 @@
 plot.nplr <- function(x, pcol="aquamarine1", lcol="red3",
-         showTarget=FALSE, showCI=TRUE, showGOF=TRUE, showInfl=FALSE,
-         B=1e4, conf.level=.95, unit=NA, ...){
+         showEstim=FALSE, showCI=TRUE, showGOF=TRUE, showInfl=FALSE,
+         B=1e4, conf.level=.95, unit="", ...){
   
   object <- x
   x <- getX(object)
@@ -15,11 +15,11 @@ plot.nplr <- function(x, pcol="aquamarine1", lcol="red3",
     legend(ifelse(newy[length(newy)]<newy[1], 'topright', 'bottomright'),
            legend = paste('Goodness of fit:', gof), bty = 'n', cex = 1.5)
   
-  if(!(!showTarget)){
+  if(!(!showEstim)){
     stdErr <- getStdErr(object)
-    estim <- .estimateRange(showTarget, stdErr, getPar(object)$params, B, object@useLog, conf.level)
-    legend1 <- sprintf("IC%d : %s%s", showTarget*100, format(estim[2], scientific=TRUE), unit)
-    legend2 <- sprintf("[%s, %s]", format(estim[1], scientific=TRUE), format(estim[3], scientific=TRUE))
+    estim <- .estimateRange(showEstim, stdErr, getPar(object)$params, B, object@useLog, conf.level)
+    legend1 <- sprintf("IC%d : %s%s", showEstim*100, format(estim[2], scientific=TRUE, digits=2), unit)
+    legend2 <- sprintf("[%s, %s]", format(estim[1], scientific=TRUE, digits=2), format(estim[3], scientific=TRUE, digits=2))
     legend(ifelse(newy[length(newy)]<newy[1], 'bottomleft', 'topleft'),
            legend = c(legend1, legend2), cex = 1.5, text.col = 'steelblue4', bty = 'n')
   }
