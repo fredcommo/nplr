@@ -148,20 +148,21 @@
   return(pars$xmid - 1/pars$scal*log10(((pars$top - pars$bottom)/(target - pars$bottom))^(1/pars$s)-1))
 }
 .estimateRange <- function(target, stdErr, pars, B, useLog, conf.level){
-  lo <- (1-conf.level)/2
-  hi <- 1-(1-conf.level)/2
-  Xtarget = .invModel(pars, target)
-  if(is.na(Xtarget)) xlower <- x50 <- xupper <- NA
-  else{
-    Ytmp <- target + rnorm(B, 0, stdErr)
-    if(any(Ytmp<pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<pars$bottom)]
-    if(any(Ytmp>pars$top)) Ytmp <- Ytmp[-which(Ytmp>pars$top)]
-    Q <- quantile(Ytmp, probs=c(.05, .95), na.rm=T)
-    estimates <- .invModel(pars, c(Q[1], target, Q[2]))
-    if(useLog) estimates <- 10^estimates
-    xlower <- signif(min(estimates), 2)
-    x50 <- signif(estimates[2], 2)
-    xupper <- signif(max(estimates), 2)
-  }
-  return(as.numeric(c(xlower, x50, xupper)))
+  a1 <- (1-conf.level)/2
+  a2 <- 1-(1-conf.level)/2
+#  xtarget = .invModel(pars, target)
+  if(target<=pars$bottom || target>=pars$top){
+    xlower <- xtarget <- xupper <- NA
+  } else{
+      Ytmp <- target + rnorm(B, 0, stdErr)
+      if(any(Ytmp<=pars$bottom)) Ytmp <- Ytmp[-which(Ytmp<=pars$bottom)]
+      if(any(Ytmp>=pars$top)) Ytmp <- Ytmp[-which(Ytmp>=pars$top)]
+      Q <- quantile(Ytmp, probs=c(a1, a2), na.rm=T)
+      estimates <- .invModel(pars, c(Q[1], target, Q[2]))
+      if(useLog) estimates <- 10^estimates
+      xlower <- min(estimates, na.rm=TRUE)
+      xtarget <- estimates[2]
+      xupper <- max(estimates, na.rm=TRUE)
+    }
+  return(as.numeric(c(xlower, xtarget, xupper)))
 }
