@@ -1,7 +1,7 @@
 
 % Packages
 \documentclass[a4paper]{article}
-\usepackage{a4wide}
+%\usepackage{a4wide}
 \setlength{\parskip}{0.7ex plus0.1ex minus0.1ex}
 \setlength{\parindent}{0em}
 
@@ -12,6 +12,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumitem}
+\usepackage{authblk}
 
 % Page settings
 %\setlength{\textwidth}{15cm} 
@@ -54,8 +55,17 @@
 @misc{NCI,
   url = {https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}
 }
-
 \end{filecontents*}
+
+% Authors
+\author[1,2]{Frederic Commo}
+\author[1]{Briant M. Bot}
+
+\affil[1]{Sage Bionetworks, Fred Hutchinson Cancer Research Center, Seattle, Washington}
+\affil[2]{INSERM U981, Institut Gustave Roussy, 114 rue Edouard Vaillant, 94805 Villejuif, France}
+
+\renewcommand\Authands{ and }
+\renewcommand\Affilfont{\fontsize{9}{10.8}\itshape}
 
 \begin{document}
 
@@ -64,8 +74,8 @@
 
 \title{R package \emph{nplr} \\
   \emph{n-parameter logistic regressions}}
-\author{Frederic Commo \& Briant M. Bot}
-\maketitle\thispagestyle{empty}
+
+\maketitle
 
 % Chunk setup
 <<setup, include=FALSE>>=
