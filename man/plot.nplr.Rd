@@ -42,7 +42,7 @@ The data used in the examples are samples from the NCI-60 Growth Inhibition Data
   path <- system.file("extdata", "pc3.txt", package = "nplr")
   pc3 <- read.delim(path)
   model <- nplr(x = pc3$CONC, y = pc3$GIPROP)
-  plot(model, showEstim = 0.5, unit = "µM")
+  plot(model, showEstim = 0.5, unit = "nM")
 }
 \seealso{
     \code{\link{nplr}}, \code{\link{convertToProp}}, \code{\link{getEstimates}}
