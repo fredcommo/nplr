@@ -31,7 +31,7 @@ If none of the T0 and Ctrl values are provided, \code{min(y, na.rm=TRUE)} and \c
 Frederic Commo, Brian M. Bot
 }
 \section{Warning}{
-Notice that, for drug response analyses, rescaling the responses between 0 to 1 using to the min and max of y, would lead to estimate a EC50 (the half effect between the maximum and the minimum of the observed effects), rather than a IC50.
+Note that, for drug response analyses, rescaling the responses between 0 to 1 using to the min and max of y, would lead to estimate a EC50 (the half effect between the maximum and the minimum of the observed effects), rather than a IC50.
 }
 \seealso{
   \code{\link{nplr}}
