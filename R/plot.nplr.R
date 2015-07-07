@@ -7,7 +7,7 @@ plot.nplr <- function(x, pcol="aquamarine1", lcol="red3",
   y <- getY(object)
   newx <- getXcurve(object)
   newy <- getYcurve(object)
-  gof <- round(getGoodness(object), 3)
+  gof <- format(getGoodness(object), digits=4, scientific = TRUE)
   plot(x, y, col=pcol, pch=19, las = 1, cex.axis = 1.25, cex.lab = 1.5,...)
   points(x, y, pch = 1)
   

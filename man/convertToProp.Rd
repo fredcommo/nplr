@@ -4,7 +4,8 @@
   Function to convert a y vector to proportions.
 }
 \description{
-Convert a vector of values to proportions, given a minimun and a maximun value (optional). See \code{Details} and \code{Examples}.
+Convert a vector of values to proportions, given a minimun and a maximun value (optional).
+See \code{Details} and \code{Examples}.
 }
 \usage{
 convertToProp(y, T0 = NULL, Ctrl = NULL)
@@ -25,7 +26,7 @@ If none of the T0 and Ctrl values are provided, \code{min(y, na.rm=TRUE)} and \c
   a vector of values.
 }
 \references{
-1 - \url{http://dtp.nci.nih.gov/branches/btb/ivclsp.html}
+1 - https://dtp.nci.nih.gov/branches/btb/ivclsp.html
 }
 \author{
 Frederic Commo, Brian M. Bot
@@ -37,7 +38,8 @@ Note that, for drug response analyses, rescaling the responses between 0 to 1 us
   \code{\link{nplr}}
 }
 \note{
-The data used in the examples are samples from the NCI-60 Growth Inhibition Data: \url{https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}
+The data used as examples come from the NCI-60 Growth Inhibition Data:
+\url{https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}
 }
 \examples{
 ## Using the MDA-N data
