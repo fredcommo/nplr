@@ -1,7 +1,7 @@
 \name{convertToProp}
 \alias{convertToProp}
 \title{
-  Function to convert a y vector to proportions.
+  Function to Convert a Vector Into Proportions.
 }
 \description{
 Convert a vector of values to proportions, given a minimun and a maximun value (optional).

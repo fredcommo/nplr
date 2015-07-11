@@ -3,11 +3,11 @@
 \alias{nplr-class}
 
 \title{
-  Function to fit n-parameter logistic regressions.
+  Function to Fit n-Parameter Logistic Regressions.
 }
 
 \description{
-  This function computes a weighted n-parameters logistic regression, given x and y values. See \code{Details}.
+  This function computes a weighted n-parameters logistic regression, given x (typically compound concentrations) and y values (responses: optic densities, fluorescence, cell counts,...). See \code{Details}.
 }
 
 \usage{

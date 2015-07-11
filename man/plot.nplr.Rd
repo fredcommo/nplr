@@ -1,10 +1,10 @@
 \name{plot.nplr}
 \alias{plot.nplr}
 \title{
-  Plotting \code{nplr} objects
+  Plotting \code{nplr} Objects
 }
 \description{
-  This function allows to visualize logistic models fitted using \code{\link{nplr}}.
+  This function allows visualizing logistic models fitted using \code{\link{nplr}}.
 }
 \usage{
   \method{plot}{nplr}(x, pcol = "aquamarine1", lcol = "red3",
@@ -22,7 +22,7 @@
   \item{B}{ : the length of simulated y values. Used to estimate the confidence interval}
   \item{conf.level}{ : the confidence level. See \code{\link{getEstimates}}}
   \item{unit}{ : the unit to specify when \code{showEstim} is \code{TRUE}. Default is an empty string.}
-  \item{...}{ : other graphical parameters.}
+  \item{...}{ : other graphical parameters. See \code{\link{par}}.}
 }
 \details{
 None
@@ -45,6 +45,6 @@ The data used in the examples are samples from the NCI-60 Growth Inhibition Data
   plot(model, showEstim = 0.5, unit = "nM")
 }
 \seealso{
-    \code{\link{nplr}}, \code{\link{convertToProp}}, \code{\link{getEstimates}}
+    \code{\link{overlay}}
 }
 \keyword{datasets}

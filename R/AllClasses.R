@@ -14,7 +14,7 @@ setClass(
     inflPoint='data.frame', 
     goodness='numeric', 
     stdErr='numeric',
-    nlmErr='vector',
+#    nlmErr='vector',
     pars='data.frame',
     AUC='data.frame',
     call='ANY'),
@@ -29,7 +29,7 @@ setClass(
     inflPoint = data.frame(), 
     goodness = 0, 
     stdErr = 0,
-    nlmErr = 0,
+#    nlmErr = 0,
     pars = data.frame(),
     AUC = data.frame(),
     call=NULL
@@ -41,7 +41,7 @@ setMethod(
   f = 'show', 
   signature = 'nplr',
   definition = function(object){
-    cat("Instance of class nplr\n")
+    cat("Instance of class", class(object), "\n")
     cat("\n")
     cat("Call:\n")
     print(object@call)
@@ -52,7 +52,7 @@ setMethod(
     cat("Inflexion point at (x, y):", as.numeric(getInflexion(object)), "\n")
     cat("Goodness of fit:", getGoodness(object), "\n")
     cat("Standard error:", getStdErr(object), "\n")
-    cat("nlm error(s):", object@nlmErr, "\n")
+#    cat("nlm error(s):", object@nlmErr, "\n")
     cat("\n")
   }
 )

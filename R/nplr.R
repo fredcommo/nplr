@@ -128,7 +128,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     infl <- .inflPoint(pars)
   
     object@w <- (y - yFit)^2
-    object@nlmErr <- ifelse(npars=="all", testAll$err, NA)
+#    object@nlmErr <- ifelse(npars=="all", testAll$err, NA)
     object@npars <- npars
     object@pars <- pars
     object@yFit <- yFit

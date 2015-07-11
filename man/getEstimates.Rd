@@ -3,7 +3,7 @@
 \alias{getEstimates-methods}
 \alias{getEstimates,nplr-method}
 \title{
-  Function to estimate x given y.
+  Function to Estimate x Given y.
 }
 \description{
   This function takes as its first argument a model returned by \code{nplr()}. By inverting the logistic model, it estimates the x values corresponding to one (or a vector of) y target(s) provided. The standard error of the model, defined as the mean squared error on the fitted values, is used to estimate a confidence interval on the predicted x values, according to the specified \code{conf.level}. see \code{Details}.

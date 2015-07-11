@@ -1,4 +1,11 @@
+#################################################
 ## HELPER FUNCTIONS (ALL INTERNAL TO THE PACKAGE)
+#################################################
+
+##################
+# LOGISTIC MODELS
+##################
+
 .nPL2 <- function(bottom, top, xmid, scal, s,  X){
     yfit <- 1/(1+10^((xmid-X)*scal))
     return(yfit)
@@ -15,6 +22,20 @@
     yfit <- bottom+(top-bottom)/(1+10^((xmid-X)*scal))^s
     return(yfit)
 }
+.chooseModel <- function(npars){
+  switch(as.character(npars),
+        "2" = {nPL <- .nPL2},
+        "3" = {nPL <- .nPL3},
+        "4" = {nPL <- .nPL4},
+        "5" = {nPL <- .nPL5}
+  )
+  return(nPL)
+}
+
+##################
+# WEIGHT MODELS
+##################
+
 .wsqRes <- function(x, yobs, yfit, LPweight) {
     residuals <- (yobs - yfit)^2
     return((1/residuals)^(LPweight))
@@ -46,15 +67,11 @@
         )
     return(.weight)
 }
-.chooseModel <- function(npars){
-  switch(as.character(npars),
-        "2" = {nPL <- .nPL2},
-        "3" = {nPL <- .nPL3},
-        "4" = {nPL <- .nPL4},
-        "5" = {nPL <- .nPL5}
-  )
-  return(nPL)
-}
+
+##################
+# PARS INIT
+##################
+
 .estimScal <- function(x, y){
     bottom <- as.numeric(quantile(y, .025, na.rm=TRUE))
     top <- as.numeric(quantile(y, .975, na.rm=TRUE))
@@ -71,6 +88,11 @@
     scal <- .estimScal(x, y)
     return(c(bottom, top, xmid, scal, s=1))
 }
+
+##################
+# FITTING
+##################
+
 .getPars <- function(model){
     bottom <- model$estimate[1]
     top <- model$estimate[2]
@@ -90,23 +112,11 @@
     y = pars$bottom + (pars$top - pars$bottom)*(pars$s/(pars$s+1))^pars$s
     return(cbind.data.frame(x=x, y=y))
 }
-.gof <- function(y, yfit, w){
-    n <- length(y)
-    S2y <- var(y)
-    Rw <- 1 - sum(w^2)/((n-1)*S2y)
-    return(Rw)
-}
-.getPerf <- function(y, yfit){
-    w <- (y - yfit)^2
-    lmtest <- summary(lm(y ~ yfit, weights=w))
-    fstat <- lmtest$fstatistic
-    p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
-    goodness <- .gof(y, yfit, w)
-    n <- sum(w!=0)
-    W <- n/((n-1)*sum(w))
-    stdErr <- sqrt(W*sum(w*(yfit-y)^2))
-    return(cbind.data.frame(goodness=goodness, stdErr=stdErr, p=p))
-}
+
+##################
+# PERFORMANCES
+##################
+
 .testAll <- function(.sce, x, y, .weight, LPweight, silent){
     if(!silent)
         message("Testing pars...")
@@ -125,6 +135,28 @@
     })
   return( list(err=as.numeric(err), npars=which.min(err) + 1) )
 }
+.gof <- function(y, yfit, w){
+    n <- length(y)
+    S2y <- var(y)
+    Rw <- 1 - sum(w^2)/((n-1)*S2y)
+    return(Rw)
+}
+.getPerf <- function(y, yfit){
+    w <- (y - yfit)^2
+    lmtest <- summary(lm(y ~ yfit, weights=w))
+    fstat <- lmtest$fstatistic
+    p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
+    goodness <- .gof(y, yfit, w)
+    n <- sum(w!=0)
+    W <- n/((n-1)*sum(w))
+    stdErr <- sqrt(W*sum(w*(yfit-y)^2))
+    return(cbind.data.frame(goodness=goodness, stdErr=stdErr, p=p))
+}
+
+##################
+# AREAS
+##################
+
 .AUC <- function(x, y){
     auc <- lapply(2:length(x), function(i){
         da <- x[i]-x[i-1]
@@ -146,15 +178,12 @@
     fy <- y[2:(n-1)]*rep(c(4, 2), (n-2)/2)
     return(dx/3*(f1 + sum(fy) + fn))
 }
-.confInt <- function(stdErr, yobs, yfit, newy){
-    n <- length(yobs)
-    ybar <- mean(yobs, na.rm = TRUE)
-    t <- qt(.975, n-2)
-    ci <- t*stdErr*sqrt((1/n+(newy - ybar)^2/sum((newy - ybar)^2)))
-    lo <- newy - ci
-    hi <- newy + ci
-    return(list(lo = lo, hi = hi))
-}
+
+
+##################
+# ESTIMATE RESP
+##################
+
 .invModel <- function(pars, target){
     return(pars$xmid - 1/pars$scal*
         log10(((pars$top - pars$bottom)/(target - pars$bottom))^(1/pars$s)-1))
@@ -180,4 +209,91 @@
         xupper <- max(estimates, na.rm=TRUE)
         }
     return(as.numeric(c(xlower, xtarget, xupper)))
+}
+.confInt <- function(stdErr, yobs, yfit, newy){
+    n <- length(yobs)
+    ybar <- mean(yobs, na.rm = TRUE)
+    t <- qt(.975, n-2)
+    ci <- t*stdErr*sqrt((1/n+(newy - ybar)^2/sum((newy - ybar)^2)))
+    lo <- newy - ci
+    hi <- newy + ci
+    return(list(lo = lo, hi = hi))
+}
+
+######################
+# PLOT FUNCTIONS
+######################
+.plot <- function(object,...){
+    x <- getX(object)
+    y <- getY(object)
+    gof <- format(getGoodness(object), digits=4, scientific = TRUE)
+    plot(x, y, type = "n", bty = "n",...)
+    #las = 1, cex.axis = 1.25, cex.lab = 1.5, 
+}
+.addPolygon <- function(object){
+    newx <- getXcurve(object)
+    newy <- getYcurve(object)
+    bounds <- .confInt(getStdErr(object), getY(object), getFitValues(object), newy)
+    xx <- c(newx, rev(newx))
+    yy <- c(bounds$lo, rev(bounds$hi))
+    polygon(xx, yy, border = NA, col = rgb(.8,.8,.8,.4))
+}
+.addEstim <- function(object, showEstim, unit, B, conf.level){
+    stdErr <- getStdErr(object)
+    estim <- .estimateRange(showEstim, stdErr, getPar(object)$params, B, object@useLog, conf.level)
+    newx <- getXcurve(object)
+    newy <- getYcurve(object)
+    legend1 <- sprintf("IC%d : %s%s", showEstim*100, format(estim[2], scientific=TRUE, digits=2), unit)
+    legend2 <- sprintf("[%s, %s]", format(estim[1], scientific=TRUE, digits=2), format(estim[3], scientific=TRUE, digits=2))
+    legend(ifelse(newy[length(newy)]<newy[1], 'bottomleft', 'topleft'),
+           legend = c(legend1, legend2), cex = 1.5, text.col = 'steelblue4', bty = 'n')
+    
+}
+.addGOF <- function(object){
+    gof <- format(getGoodness(object), digits=3, scientific = TRUE)
+    newx <- getXcurve(object)
+    newy <- getYcurve(object)
+    legend(ifelse(newy[length(newy)]<newy[1], 'topright', 'bottomright'),
+           legend = paste('Goodness of fit:', gof), bty = 'n', cex = 1.5)
+}
+.addPoints <- function(object, pcol, ...){
+    x <- getX(object)
+    y <- getY(object)
+    points(x, y, col = pcol, pch = 19, ...)
+    points(x, y, pch = 1)
+}
+.addCurve <- function(object, lcol){
+    x <- getXcurve(object)
+    y <- getYcurve(object)
+    lines(y ~ x, col=lcol, lwd=4)
+}
+.SE <- function(x, y){
+    .len <- function(x){ sum(!is.na(x)) }
+    n <- by(y, x, .len)
+    er <- by(y, x, sd, na.rm = TRUE)
+    sEr <- as.vector(er/sqrt(n))
+    sEr    
+}
+.addErr <- function(object, e, ...){
+    x <- getX(object)
+    y <- getY(object)
+    my <- as.vector(by(y, x, mean, na.rm = TRUE))
+    sEr <- .SE(x, y)
+    points(unique(x), my, pch = 19, ...)
+    e <- diff(range(x, na.rm = TRUE))/60
+    segments(x0 = unique(x), y0 = my - sEr, y1 = my + sEr, lwd = 3, ...)
+    segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my - sEr, lwd = 3, ...)
+    segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my + sEr, lwd = 3, ...)
+}
+.multiCurve <- function(modelList,...){
+    N <- length(modelList)
+    Conc. <- do.call(c, lapply(modelList, function(tmp) getX(tmp) ))
+    Resp <- do.call(c, lapply(modelList, function(tmp) getY(tmp) ))
+    plot(range(Conc.), range(Resp), type = "n", bty = "n", ...)
+    for(ii in seq_len(N)){
+        tmp <- modelList[[ii]]
+        Col <- grey(ii/(N+1))
+        .addErr(tmp, col = Col)
+        .addCurve(tmp, Col)
+    }
 }
