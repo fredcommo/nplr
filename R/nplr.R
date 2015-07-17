@@ -102,7 +102,9 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
   
     nPL <- .chooseModel(npars)
     inits <- .initPars(x, y, npars)
+    options(warn = -1)
     best <- nlm(f=.sce, p=inits, x=x, yobs=y, .weight, LPweight, nPL)
+    options(warn = 0)
     if(best$iterations==0)
         stop("'nlm' failed to estimate parameters.\n")
   

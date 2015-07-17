@@ -1,4 +1,4 @@
-overlay <- function(modelList = NULL, ...){
+overlay <- function(modelList = NULL, showLegend = TRUE, Cols = NULL, ...){
     
     if(is.null(modelList))
         stop("You just provided an empty list.")
@@ -7,5 +7,5 @@ overlay <- function(modelList = NULL, ...){
     if(!all(isValid))
         stop(sprintf("model #%s is not an instance of class 'nplr'", which(!isValid)))
     
-    .multiCurve(modelList, ...)
+    .multiCurve(modelList, showLegend, Cols, ...)
 }

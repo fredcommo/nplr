@@ -72,21 +72,35 @@
 # PARS INIT
 ##################
 
-.estimScal <- function(x, y){
+.yTOz <- function(y){
     bottom <- as.numeric(quantile(y, .025, na.rm=TRUE))
     top <- as.numeric(quantile(y, .975, na.rm=TRUE))
     z <- (y - bottom)/(top - bottom)
     z[z<=0] <- 0.05; z[z>=1] <- 0.95
+    z
+}
+.lmlz <- function(x, y){
+    z <- .yTOz(y)
+    z <- as.vector(by(z, x, mean, na.rm = TRUE))
     lz <- log(z/(1-z))
-    scal <- coef(lm(lz~x))[2]
-    return(as.numeric(scal))
+    lm(lz ~ unique(x))
+}
+.estimScal <- function(x, y){
+    model <- .lmlz(x, y)
+    return(coef(model)[2])
+}
+.estimMid <- function(x, y){
+    model <- .lmlz(x, y)
+    fit <- model$fitted.values
+    predict(model, data.frame(x = median(fit, na.rm = TRUE)))  
 }
 .initPars <- function(x, y, npars){
+    if(npars<5) s <- 1 else s <- 1
     if(npars<4) bottom <- 0 else bottom <- quantile(y, .05,na.rm=TRUE)
     if(npars<3) top <-1 else top <- quantile(y, .95,na.rm=TRUE)
-    xmid = (max(x)+min(x))/2
+    xmid <- (max(x)+min(x))/2 #.estimMid(x, y) #(max(x)+min(x))/2
     scal <- .estimScal(x, y)
-    return(c(bottom, top, xmid, scal, s=1))
+    c(bottom, top, xmid, scal, s)
 }
 
 ##################
@@ -285,15 +299,24 @@
     segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my - sEr, lwd = 3, ...)
     segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my + sEr, lwd = 3, ...)
 }
-.multiCurve <- function(modelList,...){
+.multiCurve <- function(modelList, showLegend, Cols,...){
     N <- length(modelList)
     Conc. <- do.call(c, lapply(modelList, function(tmp) getX(tmp) ))
     Resp <- do.call(c, lapply(modelList, function(tmp) getY(tmp) ))
-    plot(range(Conc.), range(Resp), type = "n", bty = "n", ...)
+
+    if(is.null(Cols))
+        Cols <- grey(seq_len(N)/(N+1))
+
+    plot(range(Conc.),
+        range(min(Resp, na.rm = TRUE), max(Resp, na.rm = TRUE) + .25),
+        type = "n", bty = "n", ...)
     for(ii in seq_len(N)){
         tmp <- modelList[[ii]]
-        Col <- grey(ii/(N+1))
-        .addErr(tmp, col = Col)
-        .addCurve(tmp, Col)
+        .addErr(tmp, col = Cols[ii])
+        .addCurve(tmp, Cols[ii])
     }
+
+    if(showLegend)
+        legend("top", legend = names(modelList), lwd = 2, pch = 19,
+            col = Cols, ncol = length(modelList), bty = "n")
 }
