@@ -130,6 +130,9 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     infl <- .inflPoint(pars)
   
     w <- .weight(x, y, yFit, LPweight)
+    err <- sum((y - yFit)^2)
+    weightedErr <- sum(w/sum(w)*(y - yFit)^2)
+
     object@w <- w
     object@npars <- npars
     object@pars <- pars
@@ -138,7 +141,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     object@yCurve <- newY
     object@inflPoint <- infl
     object@goodness <- perf$goodness
-    object@stdErr <- c(Err = sum((y - yFit)^2), wErr = perf$stdErr)
+    object@stdErr <- c(stdErr = err, "weighted stdErr" = weightedErr)
     object@AUC <- data.frame(trapezoid = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
   
     return(object)
