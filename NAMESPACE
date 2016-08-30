@@ -4,20 +4,22 @@ import(stats)
 import(graphics)
 
 ## IMPORTS FROM OTHER PACKAGES
-#importFrom(graphics, plot)
-importFrom(grDevices, rgb)
-importFrom(grDevices, grey)
-importFrom(utils, packageVersion)
+importFrom("grDevices", "rgb")
+importFrom("grDevices", "grey")
+importFrom("utils", "packageVersion")
+importFrom("utils", "packageDescription")
 
 ## EXPORT S3 methods
-S3method(plot, nplr)
+S3method("plot", "nplr")
+S3method("summary", "nplr")
 
 ## EXPORT S3 FUNCTIONS
 export(
   nplr,
   convertToProp,
+  overlay,
   plot.nplr,
-  overlay
+  summary.nplr
 )
 
 ## EXPORT METHODS

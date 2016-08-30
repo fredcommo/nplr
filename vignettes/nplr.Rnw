@@ -79,6 +79,11 @@
 }
 \end{filecontents*}
 
+\makeatletter
+\def\blx@maxline{77}
+\makeatother
+
+
 % Authors
 \author[1,2]{Frederic Commo}
 \author[1]{Briant M. Bot}
@@ -258,7 +263,8 @@ np2 <- nplr(x=mcf7$CONC, y=mcf7$GIPROP)
 @
 
 <<plot2>>=
-plot(np2 , cex.main=1.25, main="Cell line MCF-7. Response to Irinotecan")
+plot(np2, showSDerr = TRUE, lwd = 4 , cex.main=1.25,
+     main="Cell line MCF-7. Response to Irinotecan")
 @
 
 \vspace{.5in}
@@ -341,24 +347,25 @@ Models <- lapply(cellsList, function(tmp){
 
 # Visualizing
 overlay(Models, xlab = expression(Log[10](Conc.)), ylab = "Resp.",
-  main="Superimposing multiple curves", cex.main=1.5)
+  main="Superimposing multiple curves", cex.main=1.5, lwd = 3)
 @
 
 
 \subsection{Web-server version}
-\texttt{nplr} is available as a web service at \url{https://fredcommo.shinyapps.io/nplrApp}.
+\texttt{nplr} is available as a free online application at\\
+\url{https://fredcommo.shinyapps.io/curveFitter}\\
 This application is built on top of \texttt{shiny} and \texttt{nplr}, and allows a user to upload
 a file as the same form as those provided as examples in the \texttt{nplr} package.\\
 Plot and results can be exported after the models have been built.
 
 \begin{center}
-  \makebox[\textwidth]{\includegraphics[width=\textwidth]{nplrApp.png}}
-  \captionof{figure}{\texttt{nplr} at https://fredcommo.shinyapps.io/nplrApp.}
+  \makebox[\textwidth]{\includegraphics[width=\textwidth]{nplrApp.pdf}}
+  \captionof{figure}{\texttt{nplr} at https://fredcommo.shinyapps.io/curveFitter}
 \end{center}
 
 
 \section{Accessing R code}
-The R code for \texttt{nplr} is available on github: \url{https://github.com/fredcommo/nplr}
+\texttt{nplr} R code is available on github: \url{https://github.com/fredcommo/nplr}
 
 \printbibliography
 

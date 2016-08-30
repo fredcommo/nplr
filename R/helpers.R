@@ -163,7 +163,8 @@
     goodness <- .gof(y, yfit, w)
     n <- sum(w!=0)
     W <- n/((n-1)*sum(w))
-    stdErr <- sqrt(W*sum(w*(yfit-y)^2))
+#    stdErr <- sqrt(W*sum(w*(yfit-y)^2))
+    stdErr <- W*sum(w*(yfit-y)^2)
     return(cbind.data.frame(goodness=goodness, stdErr=stdErr, p=p))
 }
 
@@ -276,10 +277,10 @@
     points(x, y, col = pcol, pch = 19, ...)
     points(x, y, pch = 1)
 }
-.addCurve <- function(object, lcol){
+.addCurve <- function(object, lcol, ...){
     x <- getXcurve(object)
     y <- getYcurve(object)
-    lines(y ~ x, col=lcol, lwd=4)
+    lines(y ~ x, col=lcol, ...)
 }
 .SE <- function(x, y){
     .len <- function(x){ sum(!is.na(x)) }
@@ -293,16 +294,17 @@
     y <- getY(object)
     my <- as.vector(by(y, x, mean, na.rm = TRUE))
     sEr <- .SE(x, y)
-    points(unique(x), my, pch = 19, ...)
+    points(unique(x), my, ...)
     e <- diff(range(x, na.rm = TRUE))/60
-    segments(x0 = unique(x), y0 = my - sEr, y1 = my + sEr, lwd = 3, ...)
-    segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my - sEr, lwd = 3, ...)
-    segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my + sEr, lwd = 3, ...)
+    segments(x0 = unique(x), y0 = my - sEr, y1 = my + sEr, ...)
+    segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my - sEr, ...)
+    segments(x0 = unique(x) - e, x1 = unique(x) + e, y0 = my + sEr, ...)
 }
 .multiCurve <- function(modelList, showLegend, Cols,...){
     N <- length(modelList)
     Conc. <- do.call(c, lapply(modelList, function(tmp) getX(tmp) ))
     Resp <- do.call(c, lapply(modelList, function(tmp) getY(tmp) ))
+#    args <- as.list( match.call() )
 
     if(is.null(Cols))
         Cols <- grey(seq_len(N)/(N+1))
@@ -312,11 +314,15 @@
         type = "n", bty = "n", ...)
     for(ii in seq_len(N)){
         tmp <- modelList[[ii]]
-        .addErr(tmp, col = Cols[ii])
-        .addCurve(tmp, Cols[ii])
+        .addErr(tmp, col = Cols[ii], ...)
+        .addCurve(tmp, Cols[ii], ...)
     }
 
     if(showLegend)
         legend("top", legend = names(modelList), lwd = 2, pch = 19,
             col = Cols, ncol = length(modelList), bty = "n")
+
+            #lwd = ifelse("lwd" %in% names(args), args$lwd, 2),
+            #            pch = ifelse("pch" %in% names(args), args$pch, 19),        }
 }
+

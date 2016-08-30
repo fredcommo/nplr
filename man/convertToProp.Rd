@@ -39,7 +39,8 @@ Note that, for drug response analyses, rescaling the responses between 0 to 1 us
 }
 \note{
 The data used as examples come from the NCI-60 Growth Inhibition Data:
-\url{https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data}
+\url{https://wiki.nci.nih.gov/display/NCIDTPdata/NCI-60+Growth+Inhibition+Data},
+except for multicell.tsv which are simulated data.
 }
 \examples{
 ## Using the MDA-N data

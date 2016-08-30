@@ -11,7 +11,7 @@ setMethod("getPar", "nplr", function(object){
     })
 setMethod('getGoodness', 'nplr', function(object) return(object@goodness))
 setMethod('getStdErr', 'nplr', function(object) return(object@stdErr))
-setMethod("getNlmErr", "nplr", function(object) return(object@nlmErr))
+#setMethod("getNlmErr", "nplr", function(object) return(object@nlmErr))
 setMethod("getAUC", "nplr", function(object) return(object@AUC))
 
 
@@ -129,8 +129,8 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
     infl <- .inflPoint(pars)
   
-    object@w <- (y - yFit)^2
-#    object@nlmErr <- ifelse(npars=="all", testAll$err, NA)
+    w <- .weight(x, y, yFit, LPweight)
+    object@w <- w
     object@npars <- npars
     object@pars <- pars
     object@yFit <- yFit
@@ -138,7 +138,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     object@yCurve <- newY
     object@inflPoint <- infl
     object@goodness <- perf$goodness
-    object@stdErr <- perf$stdErr
+    object@stdErr <- c(Err = sum((y - yFit)^2), wErr = perf$stdErr)
     object@AUC <- data.frame(trapezoid = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
   
     return(object)
