@@ -155,24 +155,38 @@
     gof <- 1 - sum(w^2)/((n-1)*S2y)
     return(gof)
 }
-.getPerf <- function(y, yfit){
-    n <- length(y)
-    w <- (y - yfit)^2
-    lmSummary <- summary(lm(y ~ yfit, weights=w))
-    goodness <- lmSummary$adj.r.squared
-    res <- lmSummary$residuals
-    stdErr <- sqrt(1/(n - 2)*sum(res^2))
+.getPerf <- function(x, y, w){
+
+    w <- w/sum(w)
+    lmSummary <- summary(lm(y ~ x, weights=w))
     fstat <- lmSummary$fstatistic
     p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
+    goodness <- .gof(x, y, w)
+    stdErr <- sum((y - x)^2)
+    wStdErr <- sum(w*(y - x)^2)
 
-    goodness <- .gof(y, yfit, w)
-    n <- sum(w!=0)
-#    W <- n/((n-1)*sum(w))
-    W <- n/(n-1)*sum(w)
-    stdErr <- W*sum(w*(yfit-y)^2)
+    return(cbind.data.frame(goodness=goodness, stdErr=stdErr, wStdErr=wStdErr, p=p))
 
-    return(cbind.data.frame(goodness=goodness, stdErr=stdErr, p=p))
 }
+
+# .getPerf <- function(y, yfit, w){
+#     n <- length(y)
+#     w <- (y - yfit)^2
+#     lmSummary <- summary(lm(y ~ yfit, weights=w))
+#     fstat <- lmSummary$fstatistic
+#     p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
+
+#     goodness <- .gof(y, yfit, w)
+#     n <- sum(w!=0)
+#     W <- n/(n-1)*sum(w)
+#     wStdErr <- W*sum(w*(yfit-y)^2)
+
+#     return(cbind.data.frame(goodness=goodness, wStdErr=wStdErr, p=p))
+
+#     # goodness <- lmSummary$adj.r.squared
+#     # res <- lmSummary$residuals
+#     # stdErr <- sqrt(1/(n - 2)*sum(res^2))
+# }
 
 ##################
 # AREAS
@@ -271,7 +285,7 @@
     
 }
 .addGOF <- function(object){
-    gof <- format(getGoodness(object), digits = 6, scientific = TRUE)
+    gof <- format(getGoodness(object), digits = 4, scientific = TRUE)
     newx <- getXcurve(object)
     newy <- getYcurve(object)
     xpos <- max(newx, na.rm = TRUE)

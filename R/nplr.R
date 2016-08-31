@@ -122,16 +122,16 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     if(length(unique(signif(yFit, 5)))==1)
         stop("nplr failed and returned constant fitted values.
             Your data may not be appropriate for such model.")
-
-    perf <- .getPerf(y, yFit)
     
     # Inflexion point coordinates
     pars <- cbind.data.frame(bottom=bottom, top=top, xmid=xmid, scal=scal, s=s)
     infl <- .inflPoint(pars)
   
+    # Performances
     w <- .weight(x, y, yFit, LPweight)
-    err <- sum((y - yFit)^2)
-    weightedErr <- sum(w/sum(w)*(y - yFit)^2)
+    perf <- .getPerf(y, yFit, w)
+    # err <- sum((y - yFit)^2)
+    # weightedErr <- sum(w/sum(w)*(y - yFit)^2)
 
     object@w <- w
     object@npars <- npars
@@ -141,7 +141,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     object@yCurve <- newY
     object@inflPoint <- infl
     object@goodness <- perf$goodness
-    object@stdErr <- c(stdErr = err, "weighted stdErr" = weightedErr)
+    object@stdErr <- c(stdErr = perf$stdErr, "weighted stdErr" = perf$wStdErr)
     object@AUC <- data.frame(trapezoid = .AUC(newX, newY), Simpson = .Simpson(newX, newY))
   
     return(object)
