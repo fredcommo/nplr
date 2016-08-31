@@ -146,7 +146,7 @@ The final model performance is estimated by a weighted standard error, and a wei
 
 \begin{itemize}
   \renewcommand\labelitemi{--}
-  \item{weighted standard error:} $ StdErr = \frac{n}{(n-1).\Sigma_i{w_i}}.\Sigma_i{w_i.(\hat{y}_i - y_i)^2}, i=1,...,n $
+  \item{weighted standard error:} $ wStdErr = \frac{n}{(n-1).\Sigma_i{w_i}}.\Sigma_i{w_i.(\hat{y}_i - y_i)^2}, i=1,...,n $
   \item{weighted goodness-of-fit:} $ GOF = 1 - \frac{\Sigma_i{w_i}}{(n - 1).S_y^2}, i=1,...,n $ 
 \end{itemize}
 
@@ -355,7 +355,8 @@ overlay(Models, xlab = expression(Log[10](Conc.)), ylab = "Resp.",
 \texttt{nplr} is available as a free online application at\\
 \url{https://fredcommo.shinyapps.io/curveFitter}\\
 This application is built on top of \texttt{shiny} and \texttt{nplr}, and allows a user to upload
-a file as the same form as those provided as examples in the \texttt{nplr} package.\\
+a file as the same form as those provided as examples in the \texttt{nplr} package. A \texttt{multicell.tsv} 
+example file is also available for download through the App (click on \texttt{Example file}).\\
 Plot and results can be exported after the models have been built.
 
 \begin{center}
