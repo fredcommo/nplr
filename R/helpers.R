@@ -291,7 +291,7 @@
     xpos <- max(newx, na.rm = TRUE)
     xpos <- ifelse(xpos < 0, xpos*1.1, xpos*.9)
     ypos <- ifelse(newy[length(newy)] < newy[1], max(newy, na.rm = TRUE), min(newy, na.rm = TRUE))
-    legend(xpos, ypos, legend = paste('Goodness of fit:', gof), bty = 'n', cex = 1.25, xjust = 1)
+    legend(xpos, ypos, legend = paste('Goodness of fit:', gof), bty = 'n', cex = 1.25, xjust = 1, yjust = .5)
 }
 .addPoints <- function(object, pcol, ...){
     x <- getX(object)
