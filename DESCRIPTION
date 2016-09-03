@@ -10,7 +10,7 @@ Depends: methods
 Imports: stats,graphics,utils
 Suggests: RUnit,knitr
 VignetteBuilder: knitr
-Description: Performing drug response analyses and IC50 estimations using n-Parameter logistic regression. nplr can also be applied to proliferation analyses.
+Description: Performing drug response analyses and IC50 estimations using n-Parameter logistic regression. Can also be applied to proliferation analyses.
 License: GPL
 URL: https://github.com/fredcommo/nplr
 NeedsCompilation: no
