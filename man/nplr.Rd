@@ -17,12 +17,12 @@ nplr(x, y, useLog = TRUE, LPweight = 0.25, npars = "all",
 
 \arguments{
   \item{x}{ : a vector of numeric values, e.g. a vector of drug concentrations.}
-  \item{y}{ : a vector of numeric values, e.g. a vector of responses, provided as proportions of control.}
-  \item{useLog}{ : Logical. Should x-values be transformed to \eqn{log10(x)}. Default is \code{TRUE}.}
+  \item{y}{ : a vector of numeric values, e.g. a vector of responses, typicaly provided as proportions of control.}
+  \item{useLog}{ : Logical. Should x-values be Log10-transformed. Default to \code{TRUE}, set to \code{FALSE} if x is already in Log10.}
   \item{LPweight}{ : a coefficient to adjust the weights. \eqn{LPweight = 0} will compute a non-weighted np-logistic regression.}
   \item{npars}{ : a numeric value (or \code{"all"}) to specify the number of parameters to use in the model. If \code{"all"} the logistic model will be tested with 2 to 5 parameters, and the best option will be returned. See \code{Details}}
-  \item{method}{ : a character string to specify what weighted method to use. Options are \code{"res"(Default), "sdw", "gw"}. See \code{Details}}
-  \item{silent}{ : Logical. Specify whether \code{warnings} ad/or \code{messages} has to be silenced. Default is \code{FALSE}.}
+  \item{method}{ : a character string to specify what weight method to use. Options are \code{"res"(Default), "sdw", "gw"}. See \code{Details}}
+  \item{silent}{ : Logical. Specify whether \code{warnings} ad/or \code{messages} has to be silenced. Default to \code{FALSE}.}
 }
 
 \details{
@@ -34,7 +34,7 @@ where \code{B} and \code{T} are the bottom and top asymptotes, respectively, \co
 
 When specifying \code{npars = 4}, the \code{s} parameter is forced to be \code{1}, and the corresponding model is a 4-parameter logistic regression, symetrical around its inflexion point. When specifying \code{npars = 3 or npars = 2}, add 2 more constraints and force \code{B} and \code{T} to be \code{0} and \code{1}, respectively.
 
-Weighted methods:
+Weight methods:
 
 The model parameters are optimized, simultaneously, using \href{http://stat.ethz.ch/R-manual/R-devel/library/stats/html/nlm.html}{nlm}, given a sum of squared errors function, sse(Y), to minimize:
 
