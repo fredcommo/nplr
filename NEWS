@@ -3,7 +3,11 @@ R News
 nplr package 0.1-6
 -----------------------
 SIGNIFICANT USER-VISIBLE CHANGES
-    * A getWeights() function is added.
+    * A getWeights() function is added, which returns both the weighted and
+    non-weighted standard errors.
+
+BUG FIXES
+    * Error in std-error (weighted and non-weighted) computation, fixed.
 
 nplr package 0.1-5
 -----------------------
