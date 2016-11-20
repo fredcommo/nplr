@@ -1,21 +1,6 @@
-## METHODS FOR EXTRACTING INFORMATION FROM THE nplr CLASS
-setMethod("getX", "nplr", function(object) return(object@x))
-setMethod("getY", "nplr", function(object) return(object@y))
-setMethod("getW", "nplr", function(object) return(object@w))
-setMethod("getFitValues", "nplr", function(object) return(object@yFit))
-setMethod("getXcurve", "nplr", function(object) return(object@xCurve))
-setMethod("getYcurve", "nplr", function(object) return(object@yCurve))
-setMethod("getInflexion", "nplr", function(object) return(object@inflPoint))
-setMethod("getPar", "nplr", function(object){
-    return(list(npar=object@npars, params=object@pars))
-    })
-setMethod('getGoodness', 'nplr', function(object) return(object@goodness))
-setMethod('getStdErr', 'nplr', function(object) return(object@stdErr))
-#setMethod("getNlmErr", "nplr", function(object) return(object@nlmErr))
-setMethod("getAUC", "nplr", function(object) return(object@AUC))
-
-
+# -------------------------------------------------------
 ## MAIN nplr FUNCION
+# -------------------------------------------------------
 nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
                 npars="all", method=c("res", "sdw", "gw"),
                 silent=FALSE){
@@ -87,6 +72,7 @@ nplr <- function(x, y, useLog=TRUE, LPweight=0.25,
     if(useLog) x <- log10(x)
     object <- new("nplr", x=x, y=y, useLog=useLog, LPweight=LPweight)
     object@call <- match.call()
+    object@weightMethod <- method
   
     .weight <- .chooseWeight(method)
 

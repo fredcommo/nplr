@@ -34,7 +34,8 @@ exportMethods(
   getX,
   getXcurve,
   getY,
-  getYcurve
+  getYcurve,
+  getWeights
 )
 
 

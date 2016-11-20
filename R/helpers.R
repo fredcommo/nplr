@@ -1,10 +1,12 @@
-#################################################
+# -------------------------------------------------------
+# ///////////////////////////////////////////////////////
 ## HELPER FUNCTIONS (ALL INTERNAL TO THE PACKAGE)
-#################################################
+# ///////////////////////////////////////////////////////
+# -------------------------------------------------------
 
-##################
+# ///////////////////////////////////////////////////////
 # LOGISTIC MODELS
-##################
+# ///////////////////////////////////////////////////////
 
 .nPL2 <- function(bottom, top, xmid, scal, s,  X){
     yfit <- 1/(1+10^((xmid-X)*scal))
@@ -32,9 +34,9 @@
   return(nPL)
 }
 
-##################
+# ///////////////////////////////////////////////////////
 # WEIGHT MODELS
-##################
+# ///////////////////////////////////////////////////////
 
 .wsqRes <- function(x, yobs, yfit, LPweight) {
     residuals <- (yobs - yfit)^2
@@ -68,9 +70,9 @@
     return(.weight)
 }
 
-##################
+# ///////////////////////////////////////////////////////
 # PARS INIT
-##################
+# ///////////////////////////////////////////////////////
 
 .yTOz <- function(y){
     bottom <- as.numeric(quantile(y, .025, na.rm=TRUE))
@@ -103,9 +105,9 @@
     c(bottom, top, xmid, scal, s)
 }
 
-##################
+# ///////////////////////////////////////////////////////
 # FITTING
-##################
+# ///////////////////////////////////////////////////////
 
 .getPars <- function(model){
     bottom <- model$estimate[1]
@@ -127,9 +129,9 @@
     return(cbind.data.frame(x=x, y=y))
 }
 
-##################
+# ///////////////////////////////////////////////////////
 # PERFORMANCES
-##################
+# ///////////////////////////////////////////////////////
 
 .testAll <- function(.sce, x, y, .weight, LPweight, silent){
     if(!silent)
@@ -157,40 +159,22 @@
 }
 .getPerf <- function(x, y, w){
 
+    n <- length(x)
     w <- w/sum(w)
     lmSummary <- summary(lm(y ~ x, weights=w))
     fstat <- lmSummary$fstatistic
     p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
     goodness <- .gof(x, y, w)
-    stdErr <- sum((y - x)^2)
-    wStdErr <- sum(w*(y - x)^2)
+    stdErr <- sqrt(1/(n-2)*sum((y - x)^2))
+    wStdErr <- sqrt(sum(w*(y - x)^2))
 
     return(cbind.data.frame(goodness=goodness, stdErr=stdErr, wStdErr=wStdErr, p=p))
 
 }
 
-# .getPerf <- function(y, yfit, w){
-#     n <- length(y)
-#     w <- (y - yfit)^2
-#     lmSummary <- summary(lm(y ~ yfit, weights=w))
-#     fstat <- lmSummary$fstatistic
-#     p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
-
-#     goodness <- .gof(y, yfit, w)
-#     n <- sum(w!=0)
-#     W <- n/(n-1)*sum(w)
-#     wStdErr <- W*sum(w*(yfit-y)^2)
-
-#     return(cbind.data.frame(goodness=goodness, wStdErr=wStdErr, p=p))
-
-#     # goodness <- lmSummary$adj.r.squared
-#     # res <- lmSummary$residuals
-#     # stdErr <- sqrt(1/(n - 2)*sum(res^2))
-# }
-
-##################
+# ///////////////////////////////////////////////////////
 # AREAS
-##################
+# ///////////////////////////////////////////////////////
 
 .AUC <- function(x, y){
     auc <- lapply(2:length(x), function(i){
@@ -215,9 +199,9 @@
 }
 
 
-##################
+# ///////////////////////////////////////////////////////
 # ESTIMATE RESP
-##################
+# ///////////////////////////////////////////////////////
 
 .invModel <- function(pars, target){
     return(pars$xmid - 1/pars$scal*
@@ -245,30 +229,29 @@
         }
     return(as.numeric(c(xlower, xtarget, xupper)))
 }
-.confInt <- function(stdErr, yobs, yfit, newy){
+.confInt <- function(stdErr, yobs, newy){
     n <- length(yobs)
     ybar <- mean(yobs, na.rm = TRUE)
     t <- qt(.975, n-2)
-    ci <- t*stdErr*sqrt((1/n+(newy - ybar)^2/sum((newy - ybar)^2)))
+    ci <- t*stdErr*sqrt((1+1/n+(newy - ybar)^2/sum((newy - ybar)^2)))
     lo <- newy - ci
     hi <- newy + ci
     return(list(lo = lo, hi = hi))
 }
 
-######################
+# ///////////////////////////////////////////////////////
 # PLOT FUNCTIONS
-######################
+# ///////////////////////////////////////////////////////
 .plot <- function(object,...){
     x <- getX(object)
     y <- getY(object)
     gof <- format(getGoodness(object), digits=4, scientific = TRUE)
     plot(x, y, type = "n", bty = "n",...)
-    #las = 1, cex.axis = 1.25, cex.lab = 1.5, 
 }
 .addPolygon <- function(object){
     newx <- getXcurve(object)
     newy <- getYcurve(object)
-    bounds <- .confInt(getStdErr(object), getY(object), getFitValues(object), newy)
+    bounds <- .confInt(getStdErr(object)['stdErr'], getY(object), newy)
     xx <- c(newx, rev(newx))
     yy <- c(bounds$lo, rev(bounds$hi))
     polygon(xx, yy, border = NA, col = rgb(.8,.8,.8,.4))
@@ -326,7 +309,6 @@
     N <- length(modelList)
     Conc. <- do.call(c, lapply(modelList, function(tmp) getX(tmp) ))
     Resp <- do.call(c, lapply(modelList, function(tmp) getY(tmp) ))
-#    args <- as.list( match.call() )
 
     if(is.null(Cols))
         Cols <- grey(seq_len(N)/(N+1))
@@ -343,8 +325,5 @@
     if(showLegend)
         legend("top", legend = names(modelList), lwd = 2, pch = 19,
             col = Cols, ncol = length(modelList), bty = "n")
-
-            #lwd = ifelse("lwd" %in% names(args), args$lwd, 2),
-            #            pch = ifelse("pch" %in% names(args), args$pch, 19),        }
 }
 

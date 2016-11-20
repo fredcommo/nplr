@@ -35,6 +35,7 @@ summary.nplr <- function(object, ...){
     )
     
     out <- data.frame(summary = t(out))
+    colnames(out) <- 'value'
     print(out)
 }
 

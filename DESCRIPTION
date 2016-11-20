@@ -1,8 +1,8 @@
 Package: nplr
 Type: Package
 Title: N-Parameter Logistic Regression
-Version: 0.1-5
-Date: 2016-8-30
+Version: 0.1-6
+Date: 2016-11-5
 Authors@R: c(person(given="Frederic", family="Commo", role=c("aut", "cre"), email="fredcommo@gmail.com"),
 	      person(given="Brian M.", family="Bot", role="aut"))
 Maintainer: Frederic Commo <fredcommo@gmail.com>

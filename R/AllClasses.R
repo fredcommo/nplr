@@ -1,7 +1,10 @@
+# -------------------------------------------------------
 ## DEFINE nplr CLASS
+# -------------------------------------------------------
 setClass(
   Class='nplr', 
   representation(
+    weightMethod='ANY',
     x='numeric', 
     y='numeric',
     w='numeric',
@@ -20,6 +23,7 @@ setClass(
     call='ANY'),
   
   prototype = prototype(
+    weightMethod = NULL,
     useLog = TRUE,
     npars = 0,
     LPweight = 0,
@@ -32,11 +36,13 @@ setClass(
 #    nlmErr = 0,
     pars = data.frame(),
     AUC = data.frame(),
-    call=NULL
+    call = NULL
     )
 )
 
+# -------------------------------------------------------
 ## SHOW METHOD FOR THIS CLASS
+# -------------------------------------------------------
 setMethod(
   f = 'show', 
   signature = 'nplr',
@@ -45,6 +51,13 @@ setMethod(
     cat("\n")
     cat("Call:\n")
     print(object@call)
+    weightMethod <- NULL
+    if(object@weightMethod == "res")
+        weightMethod <- "residuals"
+        else if(object@weightMethod == "sdw")
+            weightMethod <- "standard weights"
+            else weightMethod <- "general weights"
+    message("weights method: ", weightMethod)
     cat("\n")
     cat(sprintf("%s-P logistic model\n", object@npars))
     cat("Bottom asymptote:", getPar(object)$params$bottom, "\n")

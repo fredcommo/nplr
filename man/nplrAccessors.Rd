@@ -30,6 +30,9 @@
 \alias{getStdErr}
 \alias{getStdErr-methods}
 \alias{getStdErr,nplr-method}
+\alias{getWeights}
+\alias{getWeights-methods}
+\alias{getWeights,nplr-method}
 \alias{nplrAccessors}
 \alias{nplrAccessors-methods}
 \alias{nplrAccessors,nplr-method}
@@ -54,6 +57,7 @@
       \item getAUC(object)
       \item getGoodness(object)  
       \item getStdErr(object)
+      \item getWeights(object)
       }
     }
   }
