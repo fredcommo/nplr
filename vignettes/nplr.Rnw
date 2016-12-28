@@ -142,12 +142,16 @@ where $p$ is a tuning parameter. The \texttt{standard weights} and the \texttt{g
 \texttt{nplr} provides several options in order to compute flexible weighted n-parameter logistic regression: \texttt{npars="all"} can be explicitly specified, from 2 to 5, or set to \texttt{all}. In that case, all the possible models are evaluated, and the optimal one is retunred, with respect to the minimal error returned by \texttt{nlm}.
 \par
 
-The final model performance is estimated by a weighted standard error, and a weighted goodness-of-fit \cite{Willet1988}:
+The final model performance is estimated by a weighted and non-weighted
+standard error, as well as the weighted and non-weighted
+goodness-of-fit:
 
 \begin{itemize}
   \renewcommand\labelitemi{--}
-  \item{weighted standard error:} $ wStdErr = \frac{n}{(n-1).\Sigma_i{w_i}}.\Sigma_i{w_i.(\hat{y}_i - y_i)^2}, i=1,...,n $
-  \item{weighted goodness-of-fit:} $ GOF = 1 - \frac{\Sigma_i{w_i}}{(n - 1).S_y^2}, i=1,...,n $ 
+  \item{standard error:} $ \frac{1}{(n-2)}.\Sigma_i{(\hat{y}_i - y_i)^2}, i=1,...,n $
+  \item{weighted standard error:} $ \frac{1}{(n-2)}.\Sigma_i{w_i.(\hat{y}_i - y_i)^2}, i=1,...,n $
+  \item{goodness-of-fit:} $ 1 - \frac{SS_{res}}{SS_{tot}} $ 
+  \item{weighted goodness-of-fit:} $ 1 - \frac{\Sigma_i{w_i(\hat{y}_i - y_i)^2}}{\Sigma_i{(y_i - \overline{y})^2}} $ 
 \end{itemize}
 
 
@@ -317,17 +321,17 @@ plot(np3, showInfl=TRUE, xlab="Time (hrs)", cex.main=1.5, cex.lab=1.2,
 \subsubsection{Evaluating the number of parameters}
 When a 5-p logistic regression is used, and because of the asymetric parameter, the curve is no longer symetrical around its inflexion point. Here is an illustration of the impact of the number of parameters on the fitting.
 <<npar>>=
-plot(x, yp , cex.main=1.5, cex.lab=1.2,
+plot(x, yp, pch=19, col="grey" , cex.main=1.5, cex.lab=1.2,
      main="The n-parameter effect", xlab="Time", ylab="Progression")
 le <- c()
 for(i in 2:5){
-  test <- nplr(x, yp, npars=i, useLog=FALSE)
-  lines(getXcurve(test), getYcurve(test), lwd=2, col=i)
-  points(getInflexion(test), pch=19, cex=1.25, col=i)
-  gof <- getGoodness(test)
+  test <- nplr(x, yp, npars = i, useLog = FALSE)
+  lines(getXcurve(test), getYcurve(test), lwd = 2, col = i)
+  goodness <- getGoodness(test)
+  gof <- goodness$gof
   le <- c(le, sprintf("%s-P: GOF=%s", i, round(gof, 4)))
 }
-legend("bottomright", legend=le, lwd=2, pch=19, col=2:5, bty="n")
+legend("bottomright", legend=le, lwd=2, col=2:5, bty="n")
 @
 Note that the 5-P model may not be always the best choice.
 
@@ -339,7 +343,7 @@ When multiple cell lines, or multiple compounds are compared, it can be useful t
 path <- system.file("extdata", "multicell.tsv", package="nplr")
 multicell <- read.delim(path)
 
-# Computing models (to store in a list)
+# Computing models (to be stored in a list)
 cellsList <- split(multicell, multicell$cell)
 Models <- lapply(cellsList, function(tmp){
   nplr(tmp$conc, tmp$resp, silent = TRUE)

@@ -100,7 +100,7 @@
     if(npars<5) s <- 1 else s <- 1
     if(npars<4) bottom <- 0 else bottom <- quantile(y, .05, na.rm=TRUE)
     if(npars<3) top <-1 else top <- quantile(y, .95, na.rm=TRUE)
-    xmid <- (max(x)+min(x))/2 #.estimMid(x, y) #(max(x)+min(x))/2
+    xmid <- (max(x, na.rm = TRUE) + min(x, na.rm = TRUE))/2
     scal <- .estimScal(x, y)
     c(bottom, top, xmid, scal, s)
 }
@@ -154,21 +154,29 @@
 .gof <- function(y, yfit, w){
     n <- length(y)
     S2y <- var(y, na.rm = TRUE)
-    gof <- 1 - sum(w^2)/((n-1)*S2y)
-    return(gof)
-}
-.getPerf <- function(x, y, w){
+    SSres <- sum((yfit - y)^2, na.rm = TRUE)
+    wSSres <- sum(w*(yfit - y)^2, na.rm = TRUE) 
+    SStot <- sum((y - mean(y, na.rm = TRUE))^2, na.rm = TRUE)
 
-    n <- length(x)
-    w <- w/sum(w)
-    lmSummary <- summary(lm(y ~ x, weights=w))
+    return(list(gof = 1 - SSres/SStot, wgof = 1 - wSSres/SStot))
+}
+.getPerf <- function(y, yfit, w){
+
+    n <- length(y)
+    lmSummary <- summary(lm(yfit ~ y, weights = w))
     fstat <- lmSummary$fstatistic
     p <- pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
-    goodness <- .gof(x, y, w)
-    stdErr <- sqrt(1/(n-2)*sum((y - x)^2))
-    wStdErr <- sqrt(sum(w*(y - x)^2))
+    goodness <- .gof(y, yfit, w)
+    stdErr <- sqrt(1/(n-2)*sum((yfit - y)^2))
+    wStdErr <- sqrt(sum(w*(yfit - y)^2))
 
-    return(cbind.data.frame(goodness=goodness, stdErr=stdErr, wStdErr=wStdErr, p=p))
+    return(
+        cbind.data.frame(goodness = goodness$gof,
+            weightedGoodness = goodness$wgof,
+            stdErr = stdErr,
+            wStdErr = wStdErr,
+            p = p)
+        )
 
 }
 
@@ -210,7 +218,6 @@
 .estimateRange <- function(target, stdErr, pars, B, useLog, conf.level){
     a1 <- (1-conf.level)/2
     a2 <- 1-(1-conf.level)/2
-    #  xtarget = .invModel(pars, target)
     if(target<=pars$bottom || target>=pars$top){
         xlower <- xtarget <- xupper <- NA
     } else{
@@ -245,7 +252,6 @@
 .plot <- function(object,...){
     x <- getX(object)
     y <- getY(object)
-    gof <- format(getGoodness(object), digits=4, scientific = TRUE)
     plot(x, y, type = "n", bty = "n",...)
 }
 .addPolygon <- function(object){
@@ -263,18 +269,24 @@
     newy <- getYcurve(object)
     legend1 <- sprintf("IC%d : %s%s", showEstim*100, format(estim[2], scientific=TRUE, digits=2), unit)
     legend2 <- sprintf("[%s, %s]", format(estim[1], scientific=TRUE, digits=2), format(estim[3], scientific=TRUE, digits=2))
+
     legend(ifelse(newy[length(newy)]<newy[1], 'bottomleft', 'topleft'),
            legend = c(legend1, legend2), cex = 1.5, text.col = 'steelblue4', bty = 'n')
     
 }
 .addGOF <- function(object){
-    gof <- format(getGoodness(object), digits = 4, scientific = TRUE)
+    goodness <- getGoodness(object)
+    gof <- format(goodness$gof, digits = 4, scientific = TRUE)
+    gof <- sprintf('GOF: %s', gof)
+    wgof <- format(goodness$wgof, digits = 4, scientific = TRUE)
+    wgof <- sprintf('Weighted GOF: %s', wgof)
     newx <- getXcurve(object)
     newy <- getYcurve(object)
     xpos <- max(newx, na.rm = TRUE)
     xpos <- ifelse(xpos < 0, xpos*1.1, xpos*.9)
     ypos <- ifelse(newy[length(newy)] < newy[1], max(newy, na.rm = TRUE), min(newy, na.rm = TRUE))
-    legend(xpos, ypos, legend = paste('Goodness of fit:', gof), bty = 'n', cex = 1.25, xjust = 1, yjust = .5)
+
+    legend(xpos, ypos, legend = c(gof, wgof), bty = 'n', cex = 1, xjust = 1, yjust = .5)
 }
 .addPoints <- function(object, pcol, ...){
     x <- getX(object)

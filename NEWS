@@ -1,5 +1,11 @@
 R News
 
+nplr package 0.1-7
+-----------------------
+SIGNIFICANT USER-VISIBLE CHANGES
+    * Both GOF and weighted GOF are computed. They are returned in the model summary 
+    and can be displayed in the plot. See vignette for details.
+
 nplr package 0.1-6
 -----------------------
 SIGNIFICANT USER-VISIBLE CHANGES

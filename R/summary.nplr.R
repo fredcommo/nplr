@@ -3,7 +3,9 @@ summary.nplr <- function(object, ...){
     pars <- unlist(getPar(object))
     pars[-1] <- format(pars[-1], digits = 6, scientific = TRUE)
     
-    gof <- format(getGoodness(object), digits = 6, scientific = TRUE)
+    goodness <- getGoodness(object)
+    gof <- format(goodness$gof, digits = 6, scientific = TRUE)
+    wgof <- format(goodness$wgof, digits = 6, scientific = TRUE)
     errors <- t(getStdErr(object))
     auc <- format(getAUC(object), digits = 6)
     infl <- as.numeric(getInflexion(object))
@@ -24,6 +26,7 @@ summary.nplr <- function(object, ...){
     
     out <- cbind.data.frame(t(pars),
                             GOF = gof,
+                            weightedGOF = wgof,
                             errors,
                             auc,
                             inflpt,

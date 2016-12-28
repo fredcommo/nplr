@@ -15,7 +15,7 @@ setClass(
     xCurve='numeric', 
     yCurve='numeric',
     inflPoint='data.frame', 
-    goodness='numeric', 
+    goodness='ANY', 
     stdErr='numeric',
 #    nlmErr='vector',
     pars='data.frame',
@@ -31,7 +31,7 @@ setClass(
     xCurve = numeric(), 
     yCurve = numeric(), 
     inflPoint = data.frame(), 
-    goodness = 0, 
+#    goodness = list(),
     stdErr = 0,
 #    nlmErr = 0,
     pars = data.frame(),
@@ -52,6 +52,7 @@ setMethod(
     cat("Call:\n")
     print(object@call)
     weightMethod <- NULL
+    goodness <- getGoodness(object)
     if(object@weightMethod == "res")
         weightMethod <- "residuals"
         else if(object@weightMethod == "sdw")
@@ -63,7 +64,8 @@ setMethod(
     cat("Bottom asymptote:", getPar(object)$params$bottom, "\n")
     cat("Top asymptote:", getPar(object)$params$top, "\n")
     cat("Inflexion point at (x, y):", as.numeric(getInflexion(object)), "\n")
-    cat("Goodness of fit:", getGoodness(object), "\n")
+    cat("Goodness of fit:", goodness$gof, "\n")
+    cat("Weighted Goodness of fit:", goodness$wgof, "\n")
     cat("Standard error:", getStdErr(object), "\n")
 #    cat("nlm error(s):", object@nlmErr, "\n")
     cat("\n")
